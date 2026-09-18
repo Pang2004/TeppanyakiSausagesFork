@@ -1,0 +1,130 @@
+[
+  {
+    "file_id": "test01.csv",
+    "prediction": 0.033471039064599056,
+    "cycle_count": 178792.5,
+    "equivalent_stress_amplitude": 2.658067683851866,
+    "maximum_cycle_range": 48.457835,
+    "estimated_percentage_error": 0.06708951966928761
+  },
+  {
+    "file_id": "test02.csv",
+    "prediction": 0.8215767676685596,
+    "cycle_count": 167599.0,
+    "equivalent_stress_amplitude": 5.144980886563693,
+    "maximum_cycle_range": 92.999754,
+    "estimated_percentage_error": 0.06708951966928761
+  },
+  {
+    "file_id": "test03.csv",
+    "prediction": 0.456263301702137,
+    "cycle_count": 163651.0,
+    "equivalent_stress_amplitude": 4.554889659652353,
+    "maximum_cycle_range": 96.201359,
+    "estimated_percentage_error": 0.06708951966928761
+  },
+  {
+    "file_id": "test04.csv",
+    "prediction": 0.027940782911307176,
+    "cycle_count": 180528.0,
+    "equivalent_stress_amplitude": 2.5978779047066163,
+    "maximum_cycle_range": 43.717068,
+    "estimated_percentage_error": 0.06708951966928761
+  },
+  {
+    "file_id": "test05.csv",
+    "prediction": 0.035455244317422564,
+    "cycle_count": 183151.0,
+    "equivalent_stress_amplitude": 2.7000557872181252,
+    "maximum_cycle_range": 41.739978,
+    "estimated_percentage_error": 0.06708951966928761
+  },
+  {
+    "file_id": "test06.csv",
+    "prediction": 0.43182089230633003,
+    "cycle_count": 158237.0,
+    "equivalent_stress_amplitude": 4.594888500121896,
+    "maximum_cycle_range": 82.221425,
+    "estimated_percentage_error": 0.06708951966928761
+  },
+  {
+    "file_id": "test07.csv",
+    "prediction": 0.15965554795536033,
+    "cycle_count": 168925.0,
+    "equivalent_stress_amplitude": 3.7070822983888867,
+    "maximum_cycle_range": 67.714264,
+    "estimated_percentage_error": 0.06708951966928761
+  },
+  {
+    "file_id": "test08.csv",
+    "prediction": 0.058720030997144936,
+    "cycle_count": 174621.0,
+    "equivalent_stress_amplitude": 2.9591677450844505,
+    "maximum_cycle_range": 58.020144,
+    "estimated_percentage_error": 0.06708951966928761
+  },
+  {
+    "file_id": "test09.csv",
+    "prediction": 0.0640285297634086,
+    "cycle_count": 179091.5,
+    "equivalent_stress_amplitude": 3.0479490019063586,
+    "maximum_cycle_range": 58.891763999999995,
+    "estimated_percentage_error": 0.06708951966928761
+  },
+  {
+    "file_id": "test10.csv",
+    "prediction": 0.05748395502707013,
+    "cycle_count": 177709.5,
+    "equivalent_stress_amplitude": 2.9917196865859443,
+    "maximum_cycle_range": 52.828688,
+    "estimated_percentage_error": 0.06708951966928761
+  },
+  {
+    "file_id": "test11.csv",
+    "prediction": 0.048851394495702465,
+    "cycle_count": 178307.5,
+    "equivalent_stress_amplitude": 2.907754980614815,
+    "maximum_cycle_range": 46.259647,
+    "estimated_percentage_error": 0.06708951966928761
+  },
+  {
+    "file_id": "test12.csv",
+    "prediction": 0.19133687576017355,
+    "cycle_count": 165616.0,
+    "equivalent_stress_amplitude": 3.8615997196237495,
+    "maximum_cycle_range": 70.099526,
+    "estimated_percentage_error": 0.06708951966928761
+  },
+  {
+    "file_id": "test13.csv",
+    "prediction": 0.43506848998495695,
+    "cycle_count": 167096.5,
+    "equivalent_stress_amplitude": 4.535687284498185,
+    "maximum_cycle_range": 77.90159,
+    "estimated_percentage_error": 0.06708951966928761
+  },
+  {
+    "file_id": "test14.csv",
+    "prediction": 0.48023466381115326,
+    "cycle_count": 162115.0,
+    "equivalent_stress_amplitude": 4.67825735027081,
+    "maximum_cycle_range": 79.62357399999999,
+    "estimated_percentage_error": 0.06708951966928761
+  },
+  {
+    "file_id": "test15.csv",
+    "prediction": 0.0547970581265824,
+    "cycle_count": 166073.0,
+    "equivalent_stress_amplitude": 2.997261718613182,
+    "maximum_cycle_range": 54.635706,
+    "estimated_percentage_error": 0.06708951966928761
+  },
+  {
+    "file_id": "test16.csv",
+    "prediction": 0.06538394036438998,
+    "cycle_count": 182169.5,
+    "equivalent_stress_amplitude": 3.05692722030319,
+    "maximum_cycle_range": 52.288711000000006,
+    "estimated_percentage_error": 0.06708951966928761
+  }
+]

@@ -1,0 +1,23 @@
+{
+  "weighted_constant_mape": 0.583121024803424,
+  "range_power_mape": 0.27646804720649376,
+  "physics_loo_mape": 0.025443728337129178,
+  "physics_loo_score": 0.9745562716628708,
+  "physics_p95_absolute_percentage_error": 0.08945750517167259,
+  "residual_loo_mape": 0.022694042688490845,
+  "residual_loo_score": 0.9773059573115092,
+  "residual_p95_absolute_percentage_error": 0.06708951966928761,
+  "selected_model": "physics_plus_ridge_residual",
+  "selected_loo_mape": 0.022694042688490845,
+  "selected_loo_score": 0.9773059573115092,
+  "p95_absolute_percentage_error": 0.06708951966928761,
+  "selected_exponent": 5,
+  "outer_exponent_counts": {
+    "5": 64
+  },
+  "outer_alpha_counts": {
+    "1.0": 62,
+    "10.0": 2
+  },
+  "selected_alpha": 1.0
+}
