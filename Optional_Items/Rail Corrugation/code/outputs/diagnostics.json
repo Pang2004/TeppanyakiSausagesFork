@@ -1,0 +1,1974 @@
+[
+  {
+    "file_id": "Test1.csv",
+    "prediction": "Normal",
+    "scores": {
+      "Normal": 0.9928546448342109,
+      "Side I": 0.0016375419014610976,
+      "Side II": 0.005507813264328016
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.4147179840712255,
+        "shock": 1.215626219887454
+      },
+      "Side II": {
+        "vibration": 0.4239249586755641,
+        "shock": 1.3725928463792472
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 58.89892578125,
+        "shock": 57.220458984375
+      },
+      "Side II": {
+        "vibration": 57.373046875,
+        "shock": 59.967041015625
+      }
+    }
+  },
+  {
+    "file_id": "Test2.csv",
+    "prediction": "Normal",
+    "scores": {
+      "Normal": 0.9993903834352219,
+      "Side I": 0.00020809350834439635,
+      "Side II": 0.0004015230564334644
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.07099867929746775,
+        "shock": 1.3812495987660278
+      },
+      "Side II": {
+        "vibration": 0.05541049521116388,
+        "shock": 1.5424441288006205
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 1079.40673828125,
+        "shock": 76.2939453125
+      },
+      "Side II": {
+        "vibration": 484.771728515625,
+        "shock": 70.80078125
+      }
+    }
+  },
+  {
+    "file_id": "Test3.csv",
+    "prediction": "Normal",
+    "scores": {
+      "Normal": 0.9962282627225931,
+      "Side I": 0.001434004484797295,
+      "Side II": 0.002337732792609691
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.16955811761748835,
+        "shock": 1.2213887992859802
+      },
+      "Side II": {
+        "vibration": 0.159822275859848,
+        "shock": 1.384037292034399
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 66.83349609375,
+        "shock": 67.291259765625
+      },
+      "Side II": {
+        "vibration": 59.661865234375,
+        "shock": 67.44384765625
+      }
+    }
+  },
+  {
+    "file_id": "Test4.csv",
+    "prediction": "Normal",
+    "scores": {
+      "Normal": 0.9542807936821045,
+      "Side I": 0.0044630750572684985,
+      "Side II": 0.04125613126062704
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.20710098674510852,
+        "shock": 1.261532575344415
+      },
+      "Side II": {
+        "vibration": 0.2385594560985684,
+        "shock": 1.3552411056991112
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 131.378173828125,
+        "shock": 78.43017578125
+      },
+      "Side II": {
+        "vibration": 167.083740234375,
+        "shock": 65.3076171875
+      }
+    }
+  },
+  {
+    "file_id": "Test5.csv",
+    "prediction": "Side I",
+    "scores": {
+      "Normal": 0.472731784492626,
+      "Side I": 0.5061390996188095,
+      "Side II": 0.021129115888564472
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.38191336154182104,
+        "shock": 1.2813360919513879
+      },
+      "Side II": {
+        "vibration": 0.31159791936682113,
+        "shock": 1.4357515387651003
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 274.0478515625,
+        "shock": 65.91796875
+      },
+      "Side II": {
+        "vibration": 142.822265625,
+        "shock": 65.3076171875
+      }
+    }
+  },
+  {
+    "file_id": "Test6.csv",
+    "prediction": "Normal",
+    "scores": {
+      "Normal": 0.936186193384326,
+      "Side I": 0.05694158048554252,
+      "Side II": 0.006872226130131378
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.3524340929316553,
+        "shock": 1.1593081842227364
+      },
+      "Side II": {
+        "vibration": 0.31938339336791055,
+        "shock": 1.2691651566518158
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 101.62353515625,
+        "shock": 49.13330078125
+      },
+      "Side II": {
+        "vibration": 99.945068359375,
+        "shock": 46.08154296875
+      }
+    }
+  },
+  {
+    "file_id": "Test7.csv",
+    "prediction": "Normal",
+    "scores": {
+      "Normal": 0.9714541265410693,
+      "Side I": 0.011232700150458248,
+      "Side II": 0.017313173308472277
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.28831702704520873,
+        "shock": 1.26257128864611
+      },
+      "Side II": {
+        "vibration": 0.33665017065439223,
+        "shock": 1.3621249739899035
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 160.980224609375,
+        "shock": 84.53369140625
+      },
+      "Side II": {
+        "vibration": 135.80322265625,
+        "shock": 64.544677734375
+      }
+    }
+  },
+  {
+    "file_id": "Test8.csv",
+    "prediction": "Side II",
+    "scores": {
+      "Normal": 0.1847802220650718,
+      "Side I": 0.013428273721511057,
+      "Side II": 0.8017915042134173
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.43455522467747565,
+        "shock": 1.304246878995138
+      },
+      "Side II": {
+        "vibration": 0.467983062092251,
+        "shock": 1.5338294458346642
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 69.580078125,
+        "shock": 57.830810546875
+      },
+      "Side II": {
+        "vibration": 65.00244140625,
+        "shock": 79.803466796875
+      }
+    }
+  },
+  {
+    "file_id": "Test9.csv",
+    "prediction": "Side II",
+    "scores": {
+      "Normal": 0.3705100706935501,
+      "Side I": 0.0019931640178454443,
+      "Side II": 0.6274967652886045
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.2512019808528366,
+        "shock": 1.283188829471931
+      },
+      "Side II": {
+        "vibration": 0.3305476583561586,
+        "shock": 1.3636837957523382
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 125.274658203125,
+        "shock": 62.103271484375
+      },
+      "Side II": {
+        "vibration": 133.6669921875,
+        "shock": 54.3212890625
+      }
+    }
+  },
+  {
+    "file_id": "Test10.csv",
+    "prediction": "Side I",
+    "scores": {
+      "Normal": 0.38519374613595203,
+      "Side I": 0.5876892946926385,
+      "Side II": 0.027116959171409376
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.7499079793280821,
+        "shock": 1.6177347573098046
+      },
+      "Side II": {
+        "vibration": 0.7090625278170984,
+        "shock": 1.655363396909495
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 53.1005859375,
+        "shock": 62.56103515625
+      },
+      "Side II": {
+        "vibration": 78.7353515625,
+        "shock": 57.06787109375
+      }
+    }
+  },
+  {
+    "file_id": "Test11.csv",
+    "prediction": "Side II",
+    "scores": {
+      "Normal": 0.16951415140554119,
+      "Side I": 0.004922486473334262,
+      "Side II": 0.8255633621211245
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.3135037680559277,
+        "shock": 1.4424210290015778
+      },
+      "Side II": {
+        "vibration": 0.3720184855867039,
+        "shock": 1.5144386956655111
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 318.145751953125,
+        "shock": 73.394775390625
+      },
+      "Side II": {
+        "vibration": 310.36376953125,
+        "shock": 70.49560546875
+      }
+    }
+  },
+  {
+    "file_id": "Test12.csv",
+    "prediction": "Normal",
+    "scores": {
+      "Normal": 0.947421113946189,
+      "Side I": 0.013471691518636503,
+      "Side II": 0.039107194535174486
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.4260598357847336,
+        "shock": 1.4821384745677761
+      },
+      "Side II": {
+        "vibration": 0.5076384184284888,
+        "shock": 1.5800647927348628
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 65.765380859375,
+        "shock": 57.373046875
+      },
+      "Side II": {
+        "vibration": 69.732666015625,
+        "shock": 55.389404296875
+      }
+    }
+  },
+  {
+    "file_id": "Test13.csv",
+    "prediction": "Side I",
+    "scores": {
+      "Normal": 0.4560923873581914,
+      "Side I": 0.5123966253532907,
+      "Side II": 0.03151098728851778
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.5046379155631618,
+        "shock": 1.437382586481787
+      },
+      "Side II": {
+        "vibration": 0.4670286984122374,
+        "shock": 1.5267349853539758
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 77.056884765625,
+        "shock": 65.460205078125
+      },
+      "Side II": {
+        "vibration": 69.88525390625,
+        "shock": 70.953369140625
+      }
+    }
+  },
+  {
+    "file_id": "Test14.csv",
+    "prediction": "Side II",
+    "scores": {
+      "Normal": 0.44861923696009864,
+      "Side I": 0.012719220452715225,
+      "Side II": 0.5386615425871861
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.7769848449513562,
+        "shock": 1.4003902333390186
+      },
+      "Side II": {
+        "vibration": 0.7929401882168176,
+        "shock": 1.6664898350033681
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 98.724365234375,
+        "shock": 76.751708984375
+      },
+      "Side II": {
+        "vibration": 93.3837890625,
+        "shock": 90.9423828125
+      }
+    }
+  },
+  {
+    "file_id": "Test15.csv",
+    "prediction": "Normal",
+    "scores": {
+      "Normal": 0.999409545891847,
+      "Side I": 0.0002594398851956035,
+      "Side II": 0.0003310142229573542
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.07064370937009043,
+        "shock": 1.2910786943473709
+      },
+      "Side II": {
+        "vibration": 0.05417855978733205,
+        "shock": 1.4448943100661973
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 387.87841796875,
+        "shock": 104.827880859375
+      },
+      "Side II": {
+        "vibration": 993.194580078125,
+        "shock": 75.836181640625
+      }
+    }
+  },
+  {
+    "file_id": "Test16.csv",
+    "prediction": "Normal",
+    "scores": {
+      "Normal": 0.9344125158539089,
+      "Side I": 0.057306769298902945,
+      "Side II": 0.008280714847188175
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.28686648381527236,
+        "shock": 1.2844486786366227
+      },
+      "Side II": {
+        "vibration": 0.22913035687029354,
+        "shock": 1.37941413724639
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 98.876953125,
+        "shock": 56.610107421875
+      },
+      "Side II": {
+        "vibration": 68.511962890625,
+        "shock": 57.06787109375
+      }
+    }
+  },
+  {
+    "file_id": "Test17.csv",
+    "prediction": "Normal",
+    "scores": {
+      "Normal": 0.9217998661317712,
+      "Side I": 0.07450378944567736,
+      "Side II": 0.003696344422551382
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.37698911130817014,
+        "shock": 1.3414237270334306
+      },
+      "Side II": {
+        "vibration": 0.35326691582734204,
+        "shock": 1.4240598070180195
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 96.588134765625,
+        "shock": 65.3076171875
+      },
+      "Side II": {
+        "vibration": 95.062255859375,
+        "shock": 68.206787109375
+      }
+    }
+  },
+  {
+    "file_id": "Test18.csv",
+    "prediction": "Side II",
+    "scores": {
+      "Normal": 0.185929960579595,
+      "Side I": 0.002682471966380276,
+      "Side II": 0.8113875674540247
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.22355099311898707,
+        "shock": 1.4043881158914062
+      },
+      "Side II": {
+        "vibration": 0.2723447241922503,
+        "shock": 1.4784701051341649
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 339.05029296875,
+        "shock": 100.09765625
+      },
+      "Side II": {
+        "vibration": 205.230712890625,
+        "shock": 68.05419921875
+      }
+    }
+  },
+  {
+    "file_id": "Test19.csv",
+    "prediction": "Normal",
+    "scores": {
+      "Normal": 0.9115979558006825,
+      "Side I": 0.0089897180171143,
+      "Side II": 0.07941232618220335
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.26971089512992125,
+        "shock": 1.3552397146920359
+      },
+      "Side II": {
+        "vibration": 0.30221776622885377,
+        "shock": 1.4991384656312727
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 120.086669921875,
+        "shock": 72.784423828125
+      },
+      "Side II": {
+        "vibration": 141.6015625,
+        "shock": 67.901611328125
+      }
+    }
+  },
+  {
+    "file_id": "Test20.csv",
+    "prediction": "Normal",
+    "scores": {
+      "Normal": 0.99980875469977,
+      "Side I": 4.872351422764398e-05,
+      "Side II": 0.00014252178600218112
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.0712828820965724,
+        "shock": 1.2298103595065801
+      },
+      "Side II": {
+        "vibration": 0.05361145598368411,
+        "shock": 1.3685108170748543
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 745.086669921875,
+        "shock": 65.3076171875
+      },
+      "Side II": {
+        "vibration": 931.854248046875,
+        "shock": 65.3076171875
+      }
+    }
+  },
+  {
+    "file_id": "Test21.csv",
+    "prediction": "Side II",
+    "scores": {
+      "Normal": 0.4387489096217347,
+      "Side I": 0.009422842047493253,
+      "Side II": 0.5518282483307722
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.2810490710147314,
+        "shock": 1.2675779751489347
+      },
+      "Side II": {
+        "vibration": 0.30762512407980463,
+        "shock": 1.3441836777373073
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 300.59814453125,
+        "shock": 52.79541015625
+      },
+      "Side II": {
+        "vibration": 273.895263671875,
+        "shock": 48.980712890625
+      }
+    }
+  },
+  {
+    "file_id": "Test22.csv",
+    "prediction": "Side I",
+    "scores": {
+      "Normal": 0.45159401802534194,
+      "Side I": 0.5283271481017672,
+      "Side II": 0.020078833872890747
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.341248861449315,
+        "shock": 1.3686884345273236
+      },
+      "Side II": {
+        "vibration": 0.27144107670386375,
+        "shock": 1.4746474310659852
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 166.93115234375,
+        "shock": 91.094970703125
+      },
+      "Side II": {
+        "vibration": 145.56884765625,
+        "shock": 81.1767578125
+      }
+    }
+  },
+  {
+    "file_id": "Test23.csv",
+    "prediction": "Normal",
+    "scores": {
+      "Normal": 0.9209796538934761,
+      "Side I": 0.040489308971060865,
+      "Side II": 0.03853103713546303
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.41636957302209265,
+        "shock": 1.2227266717219707
+      },
+      "Side II": {
+        "vibration": 0.41877388308584607,
+        "shock": 1.3799349605949154
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 57.220458984375,
+        "shock": 48.980712890625
+      },
+      "Side II": {
+        "vibration": 65.3076171875,
+        "shock": 48.828125
+      }
+    }
+  },
+  {
+    "file_id": "Test24.csv",
+    "prediction": "Side I",
+    "scores": {
+      "Normal": 0.36501444915744724,
+      "Side I": 0.6215678640132558,
+      "Side II": 0.01341768682929696
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.425153216658509,
+        "shock": 1.3455707793675526
+      },
+      "Side II": {
+        "vibration": 0.4621773994069257,
+        "shock": 1.4575349877749821
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 58.746337890625,
+        "shock": 65.460205078125
+      },
+      "Side II": {
+        "vibration": 62.408447265625,
+        "shock": 72.784423828125
+      }
+    }
+  },
+  {
+    "file_id": "Test25.csv",
+    "prediction": "Normal",
+    "scores": {
+      "Normal": 0.9985150432277508,
+      "Side I": 7.610385481457905e-05,
+      "Side II": 0.0014088529174347412
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.26657431299531564,
+        "shock": 1.238827583229308
+      },
+      "Side II": {
+        "vibration": 0.30102323679266585,
+        "shock": 1.3425912147636891
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 65.91796875,
+        "shock": 84.991455078125
+      },
+      "Side II": {
+        "vibration": 64.39208984375,
+        "shock": 76.59912109375
+      }
+    }
+  },
+  {
+    "file_id": "Test26.csv",
+    "prediction": "Side II",
+    "scores": {
+      "Normal": 0.020195454446419073,
+      "Side I": 0.0005496033311108479,
+      "Side II": 0.97925494222247
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.4638641627622598,
+        "shock": 1.36453801083131
+      },
+      "Side II": {
+        "vibration": 0.6552233625638471,
+        "shock": 1.4723977259545915
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 325.164794921875,
+        "shock": 62.713623046875
+      },
+      "Side II": {
+        "vibration": 252.685546875,
+        "shock": 49.4384765625
+      }
+    }
+  },
+  {
+    "file_id": "Test27.csv",
+    "prediction": "Side I",
+    "scores": {
+      "Normal": 0.12580527146484904,
+      "Side I": 0.8255063004690866,
+      "Side II": 0.048688428066064486
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.30610969726079834,
+        "shock": 1.3338625711472978
+      },
+      "Side II": {
+        "vibration": 0.28315385180143554,
+        "shock": 1.497785466967219
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 257.110595703125,
+        "shock": 84.075927734375
+      },
+      "Side II": {
+        "vibration": 224.456787109375,
+        "shock": 71.4111328125
+      }
+    }
+  },
+  {
+    "file_id": "Test28.csv",
+    "prediction": "Normal",
+    "scores": {
+      "Normal": 0.9278152352489978,
+      "Side I": 0.042619000152803094,
+      "Side II": 0.029565764598199276
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.5861962739958675,
+        "shock": 1.483259301308904
+      },
+      "Side II": {
+        "vibration": 0.5888044633994896,
+        "shock": 1.59770208377306
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 61.492919921875,
+        "shock": 73.2421875
+      },
+      "Side II": {
+        "vibration": 59.50927734375,
+        "shock": 68.05419921875
+      }
+    }
+  },
+  {
+    "file_id": "Test29.csv",
+    "prediction": "Normal",
+    "scores": {
+      "Normal": 0.888660070329154,
+      "Side I": 0.020067355023622245,
+      "Side II": 0.09127257464722373
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.21922695653041918,
+        "shock": 1.4707611811185037
+      },
+      "Side II": {
+        "vibration": 0.2854049239095152,
+        "shock": 1.581874697406232
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 81.939697265625,
+        "shock": 87.58544921875
+      },
+      "Side II": {
+        "vibration": 77.972412109375,
+        "shock": 81.939697265625
+      }
+    }
+  },
+  {
+    "file_id": "Test30.csv",
+    "prediction": "Normal",
+    "scores": {
+      "Normal": 0.999913391247005,
+      "Side I": 3.4773589271638017e-05,
+      "Side II": 5.183516372335061e-05
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.22429343804588764,
+        "shock": 1.3577577033326131
+      },
+      "Side II": {
+        "vibration": 0.22755029131941729,
+        "shock": 1.4770652254939838
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 65.765380859375,
+        "shock": 81.48193359375
+      },
+      "Side II": {
+        "vibration": 69.88525390625,
+        "shock": 73.2421875
+      }
+    }
+  },
+  {
+    "file_id": "Test31.csv",
+    "prediction": "Normal",
+    "scores": {
+      "Normal": 0.9992985280308451,
+      "Side I": 0.0005978514320558933,
+      "Side II": 0.00010362053709912716
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.06985797740212189,
+        "shock": 1.286616443214776
+      },
+      "Side II": {
+        "vibration": 0.05349070923353464,
+        "shock": 1.3943299539879201
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 1291.961669921875,
+        "shock": 115.05126953125
+      },
+      "Side II": {
+        "vibration": 1012.115478515625,
+        "shock": 66.986083984375
+      }
+    }
+  },
+  {
+    "file_id": "Test32.csv",
+    "prediction": "Side I",
+    "scores": {
+      "Normal": 0.47594324361341783,
+      "Side I": 0.46345640011792716,
+      "Side II": 0.060600356268654884
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.27278901780548415,
+        "shock": 1.1440256303248786
+      },
+      "Side II": {
+        "vibration": 0.27526295943316303,
+        "shock": 1.303949761450244
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 249.481201171875,
+        "shock": 59.814453125
+      },
+      "Side II": {
+        "vibration": 263.36669921875,
+        "shock": 59.967041015625
+      }
+    }
+  },
+  {
+    "file_id": "Test33.csv",
+    "prediction": "Side I",
+    "scores": {
+      "Normal": 0.06442002864141265,
+      "Side I": 0.9186363512904274,
+      "Side II": 0.016943620068160043
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.5619312829149615,
+        "shock": 1.29929036598559
+      },
+      "Side II": {
+        "vibration": 0.5422225238285474,
+        "shock": 1.422941189055086
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 63.17138671875,
+        "shock": 68.359375
+      },
+      "Side II": {
+        "vibration": 64.697265625,
+        "shock": 90.63720703125
+      }
+    }
+  },
+  {
+    "file_id": "Test34.csv",
+    "prediction": "Normal",
+    "scores": {
+      "Normal": 0.9897717268389881,
+      "Side I": 0.0009423765453446933,
+      "Side II": 0.00928589661566719
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.4360871872362505,
+        "shock": 1.4709047401694537
+      },
+      "Side II": {
+        "vibration": 0.45257380919070744,
+        "shock": 1.615110211379305
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 61.6455078125,
+        "shock": 72.784423828125
+      },
+      "Side II": {
+        "vibration": 59.967041015625,
+        "shock": 62.56103515625
+      }
+    }
+  },
+  {
+    "file_id": "Test35.csv",
+    "prediction": "Normal",
+    "scores": {
+      "Normal": 0.9943385888378836,
+      "Side I": 0.001140268184252329,
+      "Side II": 0.004521142977864024
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.42024038026408317,
+        "shock": 1.3355080272295552
+      },
+      "Side II": {
+        "vibration": 0.4011518245493517,
+        "shock": 1.4901890062957377
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 60.882568359375,
+        "shock": 62.56103515625
+      },
+      "Side II": {
+        "vibration": 58.89892578125,
+        "shock": 62.408447265625
+      }
+    }
+  },
+  {
+    "file_id": "Test36.csv",
+    "prediction": "Normal",
+    "scores": {
+      "Normal": 0.8927455301954074,
+      "Side I": 0.0025059478534769724,
+      "Side II": 0.1047485219511156
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.3053498017088417,
+        "shock": 1.274005043010215
+      },
+      "Side II": {
+        "vibration": 0.35539283144481115,
+        "shock": 1.4377107588518059
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 131.072998046875,
+        "shock": 66.070556640625
+      },
+      "Side II": {
+        "vibration": 142.364501953125,
+        "shock": 59.814453125
+      }
+    }
+  },
+  {
+    "file_id": "Test37.csv",
+    "prediction": "Normal",
+    "scores": {
+      "Normal": 0.5381937954050562,
+      "Side I": 0.036503094358135944,
+      "Side II": 0.4253031102368079
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.45219746528121113,
+        "shock": 1.3481324881972356
+      },
+      "Side II": {
+        "vibration": 0.49739164065380825,
+        "shock": 1.517068124657837
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 150.45166015625,
+        "shock": 79.498291015625
+      },
+      "Side II": {
+        "vibration": 113.22021484375,
+        "shock": 105.28564453125
+      }
+    }
+  },
+  {
+    "file_id": "Test38.csv",
+    "prediction": "Normal",
+    "scores": {
+      "Normal": 0.9825772957712567,
+      "Side I": 0.0026391943756404737,
+      "Side II": 0.014783509853102759
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.30772410670815037,
+        "shock": 1.194709642898617
+      },
+      "Side II": {
+        "vibration": 0.3138781390225716,
+        "shock": 1.2814639385156528
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 67.44384765625,
+        "shock": 69.27490234375
+      },
+      "Side II": {
+        "vibration": 65.61279296875,
+        "shock": 62.408447265625
+      }
+    }
+  },
+  {
+    "file_id": "Test39.csv",
+    "prediction": "Normal",
+    "scores": {
+      "Normal": 0.9993471588112153,
+      "Side I": 0.0003113391808678231,
+      "Side II": 0.0003415020079166955
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.07054681592103602,
+        "shock": 1.3431949398533791
+      },
+      "Side II": {
+        "vibration": 0.05389173539888315,
+        "shock": 1.4754136511368219
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 734.2529296875,
+        "shock": 92.926025390625
+      },
+      "Side II": {
+        "vibration": 856.62841796875,
+        "shock": 67.138671875
+      }
+    }
+  },
+  {
+    "file_id": "Test40.csv",
+    "prediction": "Normal",
+    "scores": {
+      "Normal": 0.964582925500892,
+      "Side I": 0.01997396066685611,
+      "Side II": 0.015443113832251987
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.3594111542049707,
+        "shock": 1.4122163465234252
+      },
+      "Side II": {
+        "vibration": 0.33719146481844553,
+        "shock": 1.5305323987203887
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 81.024169921875,
+        "shock": 84.228515625
+      },
+      "Side II": {
+        "vibration": 93.68896484375,
+        "shock": 79.193115234375
+      }
+    }
+  },
+  {
+    "file_id": "Test41.csv",
+    "prediction": "Normal",
+    "scores": {
+      "Normal": 0.9989598821440115,
+      "Side I": 0.00018345557992901763,
+      "Side II": 0.0008566622760594189
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.145161565065696,
+        "shock": 1.1835536162407263
+      },
+      "Side II": {
+        "vibration": 0.12496578561879271,
+        "shock": 1.3103113392934795
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 373.077392578125,
+        "shock": 104.827880859375
+      },
+      "Side II": {
+        "vibration": 431.5185546875,
+        "shock": 70.953369140625
+      }
+    }
+  },
+  {
+    "file_id": "Test42.csv",
+    "prediction": "Normal",
+    "scores": {
+      "Normal": 0.9188377818884131,
+      "Side I": 0.016164407478553244,
+      "Side II": 0.06499781063303377
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.4286336976156985,
+        "shock": 1.3765192021889554
+      },
+      "Side II": {
+        "vibration": 0.4877597805797591,
+        "shock": 1.4254624483351208
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 72.021484375,
+        "shock": 57.67822265625
+      },
+      "Side II": {
+        "vibration": 87.432861328125,
+        "shock": 50.811767578125
+      }
+    }
+  },
+  {
+    "file_id": "Test43.csv",
+    "prediction": "Side II",
+    "scores": {
+      "Normal": 0.24960164845927643,
+      "Side I": 0.08891253073821027,
+      "Side II": 0.6614858208025133
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.4787190187908844,
+        "shock": 1.4273022495713983
+      },
+      "Side II": {
+        "vibration": 0.5866108240373379,
+        "shock": 1.4618657341241712
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 216.97998046875,
+        "shock": 55.5419921875
+      },
+      "Side II": {
+        "vibration": 166.168212890625,
+        "shock": 48.828125
+      }
+    }
+  },
+  {
+    "file_id": "Test44.csv",
+    "prediction": "Normal",
+    "scores": {
+      "Normal": 0.9934931092149147,
+      "Side I": 0.0038954603729522844,
+      "Side II": 0.002611430412132906
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.16511826575896454,
+        "shock": 1.3790412726211874
+      },
+      "Side II": {
+        "vibration": 0.1527194181083058,
+        "shock": 1.4793286554223442
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 236.2060546875,
+        "shock": 70.80078125
+      },
+      "Side II": {
+        "vibration": 266.571044921875,
+        "shock": 70.80078125
+      }
+    }
+  },
+  {
+    "file_id": "Test45.csv",
+    "prediction": "Normal",
+    "scores": {
+      "Normal": 0.8521680334836506,
+      "Side I": 0.14544249346769408,
+      "Side II": 0.0023894730486554543
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.4783588877688974,
+        "shock": 1.4678713322744144
+      },
+      "Side II": {
+        "vibration": 0.4480742934333919,
+        "shock": 1.562169704421295
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 114.898681640625,
+        "shock": 65.3076171875
+      },
+      "Side II": {
+        "vibration": 166.473388671875,
+        "shock": 65.3076171875
+      }
+    }
+  },
+  {
+    "file_id": "Test46.csv",
+    "prediction": "Side I",
+    "scores": {
+      "Normal": 0.48940409112360467,
+      "Side I": 0.4975875813512338,
+      "Side II": 0.013008327525161487
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.7542852661083898,
+        "shock": 1.5761941568022662
+      },
+      "Side II": {
+        "vibration": 0.6870986680746295,
+        "shock": 1.589571639568814
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 56.915283203125,
+        "shock": 51.8798828125
+      },
+      "Side II": {
+        "vibration": 56.7626953125,
+        "shock": 43.3349609375
+      }
+    }
+  },
+  {
+    "file_id": "Test47.csv",
+    "prediction": "Normal",
+    "scores": {
+      "Normal": 0.99187521263571,
+      "Side I": 0.00017571794706986742,
+      "Side II": 0.00794906941722031
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.19248594057752094,
+        "shock": 1.390827282651958
+      },
+      "Side II": {
+        "vibration": 0.1856369086942019,
+        "shock": 1.4885113457898598
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 76.141357421875,
+        "shock": 78.277587890625
+      },
+      "Side II": {
+        "vibration": 66.070556640625,
+        "shock": 76.2939453125
+      }
+    }
+  },
+  {
+    "file_id": "Test48.csv",
+    "prediction": "Normal",
+    "scores": {
+      "Normal": 0.9989458280920032,
+      "Side I": 0.0007743186730998137,
+      "Side II": 0.0002798532348969068
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.0855294674000478,
+        "shock": 1.2874670487950044
+      },
+      "Side II": {
+        "vibration": 0.07358847075392694,
+        "shock": 1.3936556961212225
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 362.396240234375,
+        "shock": 92.46826171875
+      },
+      "Side II": {
+        "vibration": 367.12646484375,
+        "shock": 65.3076171875
+      }
+    }
+  },
+  {
+    "file_id": "Test49.csv",
+    "prediction": "Normal",
+    "scores": {
+      "Normal": 0.9949395123554781,
+      "Side I": 0.00020078674246191072,
+      "Side II": 0.004859700902060221
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.22395483932688023,
+        "shock": 1.206172778270137
+      },
+      "Side II": {
+        "vibration": 0.2554672169472786,
+        "shock": 1.3591638622136577
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 72.784423828125,
+        "shock": 75.836181640625
+      },
+      "Side II": {
+        "vibration": 112.60986328125,
+        "shock": 61.6455078125
+      }
+    }
+  },
+  {
+    "file_id": "Test50.csv",
+    "prediction": "Normal",
+    "scores": {
+      "Normal": 0.9997766104011166,
+      "Side I": 4.5433587312008234e-05,
+      "Side II": 0.00017795601157141006
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.07151203354003335,
+        "shock": 1.2904137246614487
+      },
+      "Side II": {
+        "vibration": 0.05464057594803955,
+        "shock": 1.4246186985915192
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 462.799072265625,
+        "shock": 70.80078125
+      },
+      "Side II": {
+        "vibration": 1387.786865234375,
+        "shock": 70.80078125
+      }
+    }
+  },
+  {
+    "file_id": "Test51.csv",
+    "prediction": "Normal",
+    "scores": {
+      "Normal": 0.9993210805240933,
+      "Side I": 0.0004008969641769845,
+      "Side II": 0.0002780225117297234
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.07070291418045012,
+        "shock": 1.3083541481201397
+      },
+      "Side II": {
+        "vibration": 0.05392393753364805,
+        "shock": 1.4572127467652782
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 606.99462890625,
+        "shock": 81.634521484375
+      },
+      "Side II": {
+        "vibration": 980.224609375,
+        "shock": 75.836181640625
+      }
+    }
+  },
+  {
+    "file_id": "Test52.csv",
+    "prediction": "Normal",
+    "scores": {
+      "Normal": 0.9721445324167957,
+      "Side I": 0.027117053633069564,
+      "Side II": 0.0007384139501347576
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.42601099606616444,
+        "shock": 1.2496728158563568
+      },
+      "Side II": {
+        "vibration": 0.4121430279093432,
+        "shock": 1.3790026218955904
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 59.051513671875,
+        "shock": 51.8798828125
+      },
+      "Side II": {
+        "vibration": 56.610107421875,
+        "shock": 71.10595703125
+      }
+    }
+  },
+  {
+    "file_id": "Test53.csv",
+    "prediction": "Normal",
+    "scores": {
+      "Normal": 0.9979485382380747,
+      "Side I": 5.988673040984895e-05,
+      "Side II": 0.0019915750315154723
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.30089300769413885,
+        "shock": 1.2556622764440424
+      },
+      "Side II": {
+        "vibration": 0.32963887547949255,
+        "shock": 1.382284914044637
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 63.934326171875,
+        "shock": 67.901611328125
+      },
+      "Side II": {
+        "vibration": 66.83349609375,
+        "shock": 68.66455078125
+      }
+    }
+  },
+  {
+    "file_id": "Test54.csv",
+    "prediction": "Normal",
+    "scores": {
+      "Normal": 0.9809841975206387,
+      "Side I": 0.008645923294469879,
+      "Side II": 0.010369879184891346
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.44796787106729913,
+        "shock": 1.2574541760168643
+      },
+      "Side II": {
+        "vibration": 0.4558211299997489,
+        "shock": 1.3978034346085868
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 61.03515625,
+        "shock": 54.3212890625
+      },
+      "Side II": {
+        "vibration": 60.4248046875,
+        "shock": 49.13330078125
+      }
+    }
+  },
+  {
+    "file_id": "Test55.csv",
+    "prediction": "Normal",
+    "scores": {
+      "Normal": 0.9990893424036152,
+      "Side I": 0.00039114266320459614,
+      "Side II": 0.0005195149331803808
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.1269760999529502,
+        "shock": 1.2441251402322178
+      },
+      "Side II": {
+        "vibration": 0.12527684711878923,
+        "shock": 1.4142662710230272
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 186.1572265625,
+        "shock": 70.49560546875
+      },
+      "Side II": {
+        "vibration": 165.863037109375,
+        "shock": 75.68359375
+      }
+    }
+  },
+  {
+    "file_id": "Test56.csv",
+    "prediction": "Side I",
+    "scores": {
+      "Normal": 0.43460285716822633,
+      "Side I": 0.19333768420225175,
+      "Side II": 0.3720594586295219
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.5051641433946347,
+        "shock": 1.3660584792722577
+      },
+      "Side II": {
+        "vibration": 0.5519869325893398,
+        "shock": 1.530236854885882
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 239.2578125,
+        "shock": 65.3076171875
+      },
+      "Side II": {
+        "vibration": 208.587646484375,
+        "shock": 62.8662109375
+      }
+    }
+  },
+  {
+    "file_id": "Test57.csv",
+    "prediction": "Normal",
+    "scores": {
+      "Normal": 0.9130885668987141,
+      "Side I": 0.005928928697406949,
+      "Side II": 0.08098250440387889
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.298846908526451,
+        "shock": 1.3106106704632337
+      },
+      "Side II": {
+        "vibration": 0.3340085542843605,
+        "shock": 1.440437603075095
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 136.871337890625,
+        "shock": 82.09228515625
+      },
+      "Side II": {
+        "vibration": 98.724365234375,
+        "shock": 70.953369140625
+      }
+    }
+  },
+  {
+    "file_id": "Test58.csv",
+    "prediction": "Normal",
+    "scores": {
+      "Normal": 0.9991583434576723,
+      "Side I": 0.0004392665173667772,
+      "Side II": 0.0004023900249609698
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.070845470890845,
+        "shock": 1.3489731822373594
+      },
+      "Side II": {
+        "vibration": 0.05442674047463615,
+        "shock": 1.4997239664656985
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 981.597900390625,
+        "shock": 107.421875
+      },
+      "Side II": {
+        "vibration": 1201.47705078125,
+        "shock": 86.36474609375
+      }
+    }
+  },
+  {
+    "file_id": "Test59.csv",
+    "prediction": "Normal",
+    "scores": {
+      "Normal": 0.9838496870113489,
+      "Side I": 0.014113924895799245,
+      "Side II": 0.0020363880928518144
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.4378334005181898,
+        "shock": 1.2590679319764637
+      },
+      "Side II": {
+        "vibration": 0.4229017943946086,
+        "shock": 1.3950972083042683
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 79.04052734375,
+        "shock": 62.8662109375
+      },
+      "Side II": {
+        "vibration": 72.021484375,
+        "shock": 68.206787109375
+      }
+    }
+  },
+  {
+    "file_id": "Test60.csv",
+    "prediction": "Normal",
+    "scores": {
+      "Normal": 0.9966447669669528,
+      "Side I": 0.0003114542865820893,
+      "Side II": 0.0030437787464651415
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.2391867002001721,
+        "shock": 1.220033950383745
+      },
+      "Side II": {
+        "vibration": 0.24542533081323706,
+        "shock": 1.3584240336779303
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 194.7021484375,
+        "shock": 81.329345703125
+      },
+      "Side II": {
+        "vibration": 337.82958984375,
+        "shock": 57.06787109375
+      }
+    }
+  },
+  {
+    "file_id": "Test61.csv",
+    "prediction": "Normal",
+    "scores": {
+      "Normal": 0.9941035798920349,
+      "Side I": 0.00521432962820218,
+      "Side II": 0.0006820904797627018
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.19480749257115515,
+        "shock": 1.259178920346216
+      },
+      "Side II": {
+        "vibration": 0.17842579335469078,
+        "shock": 1.377573759540636
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 74.462890625,
+        "shock": 78.7353515625
+      },
+      "Side II": {
+        "vibration": 71.71630859375,
+        "shock": 72.93701171875
+      }
+    }
+  },
+  {
+    "file_id": "Test62.csv",
+    "prediction": "Normal",
+    "scores": {
+      "Normal": 0.9954344921113217,
+      "Side I": 0.0016584153826562484,
+      "Side II": 0.0029070925060222614
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.1874227374662853,
+        "shock": 1.3521185324966463
+      },
+      "Side II": {
+        "vibration": 0.17444240083054374,
+        "shock": 1.5301202123269615
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 73.8525390625,
+        "shock": 72.93701171875
+      },
+      "Side II": {
+        "vibration": 65.3076171875,
+        "shock": 70.80078125
+      }
+    }
+  },
+  {
+    "file_id": "Test63.csv",
+    "prediction": "Normal",
+    "scores": {
+      "Normal": 0.9932912754557994,
+      "Side I": 0.005043261331336599,
+      "Side II": 0.0016654632128639863
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.1450467567411088,
+        "shock": 1.2195921329460584
+      },
+      "Side II": {
+        "vibration": 0.13900198831447705,
+        "shock": 1.3557003885633006
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 79.04052734375,
+        "shock": 64.0869140625
+      },
+      "Side II": {
+        "vibration": 70.343017578125,
+        "shock": 66.986083984375
+      }
+    }
+  },
+  {
+    "file_id": "Test64.csv",
+    "prediction": "Side I",
+    "scores": {
+      "Normal": 0.6226963917526612,
+      "Side I": 0.3705234641402482,
+      "Side II": 0.006780144107090443
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.3035099091831336,
+        "shock": 1.3684242253887113
+      },
+      "Side II": {
+        "vibration": 0.2544560878624087,
+        "shock": 1.4832489538302458
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 213.623046875,
+        "shock": 84.075927734375
+      },
+      "Side II": {
+        "vibration": 263.97705078125,
+        "shock": 76.446533203125
+      }
+    }
+  },
+  {
+    "file_id": "Test65.csv",
+    "prediction": "Normal",
+    "scores": {
+      "Normal": 0.9959401490200201,
+      "Side I": 0.0013439786551979228,
+      "Side II": 0.002715872324781761
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.16874674673707796,
+        "shock": 1.283439541913642
+      },
+      "Side II": {
+        "vibration": 0.16046551169312812,
+        "shock": 1.3816490756074704
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 66.070556640625,
+        "shock": 84.075927734375
+      },
+      "Side II": {
+        "vibration": 62.8662109375,
+        "shock": 77.5146484375
+      }
+    }
+  },
+  {
+    "file_id": "Test66.csv",
+    "prediction": "Side II",
+    "scores": {
+      "Normal": 0.005456935744707509,
+      "Side I": 0.010587771365561731,
+      "Side II": 0.9839552928897308
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.801783500449402,
+        "shock": 1.565876676554887
+      },
+      "Side II": {
+        "vibration": 0.9135439803991442,
+        "shock": 1.8020463588340982
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 77.5146484375,
+        "shock": 68.206787109375
+      },
+      "Side II": {
+        "vibration": 77.056884765625,
+        "shock": 68.05419921875
+      }
+    }
+  },
+  {
+    "file_id": "Test67.csv",
+    "prediction": "Normal",
+    "scores": {
+      "Normal": 0.988996535972308,
+      "Side I": 0.005506287025957091,
+      "Side II": 0.005497177001734864
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.2048567049489669,
+        "shock": 1.2444195633373583
+      },
+      "Side II": {
+        "vibration": 0.20491452827627563,
+        "shock": 1.3943637444714505
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 289.61181640625,
+        "shock": 76.2939453125
+      },
+      "Side II": {
+        "vibration": 239.105224609375,
+        "shock": 87.58544921875
+      }
+    }
+  },
+  {
+    "file_id": "Test68.csv",
+    "prediction": "Normal",
+    "scores": {
+      "Normal": 0.9996009048594858,
+      "Side I": 0.00017331602607724683,
+      "Side II": 0.0002257791144370489
+    },
+    "side_energy": {
+      "Side I": {
+        "vibration": 0.07004273289997259,
+        "shock": 1.1547084112104935
+      },
+      "Side II": {
+        "vibration": 0.0538894366021359,
+        "shock": 1.341594341661922
+      }
+    },
+    "dominant_frequency": {
+      "Side I": {
+        "vibration": 511.932373046875,
+        "shock": 51.422119140625
+      },
+      "Side II": {
+        "vibration": 1204.071044921875,
+        "shock": 56.915283203125
+      }
+    }
+  }
+]

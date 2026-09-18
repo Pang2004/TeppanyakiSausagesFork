@@ -9,6 +9,12 @@ __pycache__/
 # Frontend dependencies and builds
 frontend/node_modules/
 frontend/dist/
+app/frontend/node_modules/
+app/frontend/dist/
+app/frontend/test-results/
+app/frontend/playwright-report/
+app/frontend/*.tsbuildinfo
+submission/
 
 # Secrets and local configuration
 .env

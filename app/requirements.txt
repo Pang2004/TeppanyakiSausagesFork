@@ -1,0 +1,15 @@
+# Numerical and machine-learning stack. Keep these versions aligned with saved models.
+numpy==2.5.3
+pandas==3.0.5
+scipy==1.18.1
+scikit-learn==1.9.0
+joblib==1.5.2
+rainflow==3.2.0
+
+# Spreadsheet ingestion for the ACV subsystem.
+openpyxl==3.1.5
+
+# Prediction API and file uploads.
+fastapi==0.141.1
+uvicorn[standard]==0.53.0
+python-multipart==0.0.32

@@ -1,0 +1,600 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<title>MRT Door Cycle Diagnostics</title>
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Retro Transit, Pixel & Monospace Typography: Chakra Petch, Space Mono, DotGothic16, Silkscreen -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700;800&amp;family=DotGothic16&amp;family=Silkscreen:wght@400;700&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            mrt: {
+              amber: '#FFB300',
+              amberDark: '#D97706',
+              amberBg: '#FFFBEB',
+              green: '#00E676',
+              greenDark: '#00A854',
+              greenBg: '#ECFDF5',
+              yellow: '#FFCD00',
+              red: '#FF1744',
+              metal: '#D2DAE2',
+              metalDark: '#8F9CA8',
+              doorDark: '#1E2530',
+              pixelOutline: '#151A21'
+            }
+          },
+          fontFamily: {
+            sans: ['"Chakra Petch"', 'sans-serif'],
+            mono: ['"Space Mono"', 'monospace'],
+            pixel: ['"Silkscreen"', '"DotGothic16"', 'monospace']
+          },
+          boxShadow: {
+            'pixel-sm': '2px 2px 0px #151A21',
+            'pixel': '3px 3px 0px #151A21',
+            'pixel-lg': '4px 4px 0px #151A21',
+            'pixel-inset': 'inset 3px 3px 0px rgba(255,255,255,0.4), inset -3px -3px 0px rgba(0,0,0,0.25)'
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="base-setup">
+    body {
+      background-color: #E2E8F0;
+      /* Retro pixel grid background */
+      background-image: 
+        linear-gradient(to right, rgba(148, 163, 184, 0.28) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(148, 163, 184, 0.28) 1px, transparent 1px);
+      background-size: 16px 16px;
+      -webkit-font-smoothing: antialiased;
+      font-family: 'Chakra Petch', sans-serif;
+    }
+    /* Authentic retro MRT pixel scrollbar */
+    .door-scrollbar::-webkit-scrollbar {
+      width: 8px;
+    }
+    .door-scrollbar::-webkit-scrollbar-track {
+      background: #CBD5E1;
+      border-left: 2px solid #151A21;
+    }
+    .door-scrollbar::-webkit-scrollbar-thumb {
+      background: #334155;
+      border: 1px solid #151A21;
+      border-radius: 0px;
+    }
+    .door-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: #151A21;
+    }
+    /* Pixelated diagonal glass sheen */
+    .pixel-sheen {
+      background: linear-gradient(135deg, 
+        rgba(255,255,255,0.16) 0%, 
+        rgba(255,255,255,0.16) 18%, 
+        transparent 18%, 
+        transparent 32%, 
+        rgba(255,255,255,0.08) 32%, 
+        rgba(255,255,255,0.08) 38%, 
+        transparent 38%
+      );
+    }
+  </style>
+</head>
+<body class="text-slate-900 min-h-screen pb-6 flex flex-col items-center select-none">
+<!-- Main Mobile Container -->
+<div class="w-full max-w-md mx-auto flex flex-col items-stretch">
+<!-- BEGIN: Top Navigation with proper safe-area spacing -->
+<header class="pt-5 px-3 pb-3 flex flex-col gap-3">
+<!-- Singapore MRT Exit sign button (LTA Style) -->
+<a aria-label="Exit to Train Overview" class="group inline-flex items-center gap-2.5 transition-transform active:translate-y-0.5 select-none w-fit" href="javascript:void(0)" onclick="alert('Navigating back to MRT Train Overview...')">
+<div class="h-9 px-3 bg-[#FFCD00] text-slate-900 font-extrabold text-sm tracking-tight border-[3px] border-[#151A21] shadow-pixel flex items-center justify-center gap-2 active:shadow-none font-mono">
+<span class="text-base font-black leading-none">←</span>
+<span class="font-black text-sm tracking-wider font-pixel">EXIT</span>
+</div>
+<span class="text-base font-extrabold text-slate-900 tracking-tight font-sans uppercase">Exit to Train Overview</span>
+</a>
+<!-- Telemetry File & Anomaly Badge Banner (Enlarged fonts, punchy & legible) -->
+<section class="bg-white border-[3px] border-[#151A21] shadow-pixel p-3.5 flex flex-col gap-3"><div class="flex items-center justify-between gap-2">
+<div class="flex items-center gap-2.5 text-sm sm:text-base text-slate-900 font-extrabold truncate tracking-wide font-mono flex-1 min-w-0">
+<span class="inline-block w-3 h-3 bg-slate-900 shrink-0"></span>
+<span class="truncate" id="hdr-filename">door_cycles_telemetry.csv</span>
+</div>
+<div class="flex items-center gap-1.5 shrink-0">
+
+<span class="text-xs sm:text-sm bg-slate-200 text-slate-900 font-black px-2.5 py-1 border-2 border-slate-900 font-mono shrink-0" id="hdr-badge">SHM-2.4</span>
+</div>
+</div>
+<div class="flex flex-wrap items-center justify-between gap-2 bg-rose-50 border-2 border-[#FF1744] px-3 py-2" id="hdr-status-loaded">
+<div class="flex items-center gap-2 min-w-0 flex-1"><span class="w-3 h-3 bg-[#FF1744] shrink-0 inline-block animate-pulse"></span><span class="font-black text-[#FF1744] text-xs sm:text-sm tracking-wide uppercase font-sans leading-tight">3 Abnormal Resistance Cycles</span></div>
+<span class="font-black text-xs sm:text-sm text-white bg-[#FF1744] px-2.5 py-1 border border-[#151A21] tracking-wide font-mono shrink-0 whitespace-nowrap shadow-pixel-sm">37.5% Rate</span>
+</div>
+<div class="hidden flex-wrap items-center justify-between gap-2 bg-[#FFFBEB] border-2 border-[#FFB300] px-3 py-2" id="hdr-status-empty">
+<div class="flex items-center gap-2 min-w-0 flex-1"><span class="w-3 h-3 bg-[#FFB300] shrink-0 inline-block animate-pulse"></span><span class="font-black text-[#D97706] text-xs sm:text-sm tracking-wide uppercase font-sans leading-tight">Awaiting CSV Telemetry Ingestion</span></div>
+<span class="font-black text-xs sm:text-sm text-slate-900 bg-[#FFCD00] px-2.5 py-1 border border-[#151A21] tracking-wide font-mono shrink-0 whitespace-nowrap shadow-pixel-sm">0 Cycles • --%</span>
+</div></section>
+</header>
+<!-- END: Top Navigation -->
+<!-- BEGIN: PIXEL ART TRAIN BODY & BIPARTING DOORS -->
+<main class="w-full relative flex flex-col bg-[#151A21] border-y-[4px] border-[#151A21] shadow-pixel-lg overflow-hidden" data-purpose="pixel-train-doors">
+<!-- Train Roof / Cantrail Pixel Header -->
+<div class="w-full h-7 bg-[#64748B] border-b-[3px] border-[#151A21] flex items-center justify-between px-3 z-30">
+<!-- Pixel roof ribs -->
+<div class="flex gap-1.5 items-center">
+<span class="w-4 h-2.5 bg-[#94A3B8] border border-[#151A21]"></span>
+<span class="w-8 h-2.5 bg-[#475569] border border-[#151A21]"></span>
+</div>
+<!-- Overhead Warning/Normal Signal Indicator Bulb -->
+<div class="flex items-center gap-1.5 bg-[#151A21] p-1 border border-[#334155]">
+<div class="w-1.5 h-1.5 bg-slate-600"></div>
+<div class="w-8 h-3 bg-[#00E676] border border-white flex items-center justify-center shadow-[0_0_10px_#00E676] transition-colors duration-200" id="pixel-overhead-lamp">
+<span class="w-3 h-0.5 bg-white"></span>
+</div>
+<div class="w-1.5 h-1.5 bg-slate-600"></div>
+</div>
+<!-- Right roof ribs -->
+<div class="flex gap-1.5 items-center">
+<span class="w-8 h-2.5 bg-[#475569] border border-[#151A21]"></span>
+<span class="w-4 h-2.5 bg-[#94A3B8] border border-[#151A21]"></span>
+</div>
+</div>
+<!-- Main Train Exterior Body with Flanking Pixel Panels & Biparting Doors -->
+<div class="relative w-full flex items-stretch bg-[#C4CCD6]">
+<!-- ================= LEFT EXTERIOR TRAIN WALL (Kawasaki C151 Stripe Livery) ================= -->
+<div class="w-7 sm:w-9 shrink-0 bg-[#CBD5E1] border-r-[3px] border-[#151A21] relative z-10 flex flex-col justify-between items-center py-2">
+<!-- Iconic Transit Pixel Stripe Band -->
+<div class="w-full h-12 bg-[#FF1744] border-y-[3px] border-[#151A21] relative flex flex-col justify-center gap-1">
+<div class="w-full h-1.5 bg-white/70"></div>
+<div class="w-full h-1.5 bg-[#881337]"></div>
+</div>
+<!-- Pixel Rivets & Mechanical Slits -->
+<div class="flex flex-col items-center gap-8 my-auto">
+<div class="w-2.5 h-2.5 bg-[#94A3B8] border border-[#151A21] shadow-pixel-sm"></div>
+<div class="w-3.5 h-36 bg-[#475569] border-2 border-[#151A21] flex flex-col justify-evenly items-center p-0.5">
+<span class="w-full h-1 bg-[#151A21]"></span>
+<span class="w-full h-1 bg-[#151A21]"></span>
+<span class="w-full h-1 bg-[#151A21]"></span>
+<span class="w-full h-1 bg-[#151A21]"></span>
+</div>
+<div class="w-2.5 h-2.5 bg-[#94A3B8] border border-[#151A21] shadow-pixel-sm"></div>
+</div>
+<div class="w-full h-3.5 bg-[#64748B] border-t-2 border-[#151A21]"></div>
+</div>
+<!-- ================= BIPARTING MRT DOORS SECTION ================= -->
+<div class="flex-1 relative flex flex-col bg-[#DCE4EC] border-x border-[#151A21]">
+<!-- SECTION 1: TOP DOOR PIXEL WINDOWS (SYNCHRONIZED LIGHTING HUD - LARGER FONTS & METRICS) -->
+<div class="relative w-full p-2 bg-[#CBD5E1] border-b-[3px] border-[#151A21] flex flex-col items-center">
+<!-- Central Door Seam Split (Pixelated Heavy Gasket) -->
+<div class="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-2.5 bg-[#151A21] z-20 flex flex-col justify-between py-2 pointer-events-none">
+<div class="w-1.5 h-4 bg-slate-500 mx-auto"></div>
+<div class="w-1.5 h-4 bg-slate-500 mx-auto"></div>
+<div class="w-1.5 h-4 bg-slate-500 mx-auto"></div>
+</div>
+<!-- The Two Synchronized Windows (Initial State: Cycle #1 Normal) -->
+<div class="w-full grid grid-cols-2 gap-2 relative z-10">
+<!-- LEFT WINDOW: Hero Cycle & Big Timings -->
+<div class="h-64 bg-[#061A10] border-[3px] border-[#00E676] shadow-[0_0_16px_rgba(0,230,118,0.35)] p-2.5 sm:p-3 flex flex-col justify-between relative overflow-hidden text-left transition-all duration-200" id="win-timing-card">
+<div class="absolute inset-0 pixel-sheen pointer-events-none"></div>
+<div class="relative z-10 flex items-center justify-between border-b-2 border-[#00E676]/50 pb-1.5" id="win-timing-header">
+<span class="text-base sm:text-lg font-black text-[#00E676] tracking-wider uppercase font-mono" id="win-cycle-id">CYCLE #2</span>
+<span class="w-2.5 h-2.5 bg-[#00E676] shadow-[0_0_8px_#00E676]" id="win-timing-bullet"></span>
+</div>
+<div class="relative z-10 flex flex-col justify-center gap-2.5 my-auto">
+<div>
+<div class="text-[10px] sm:text-[11px] font-black text-emerald-300/90 tracking-widest uppercase font-mono" id="win-label-start">START TIME</div>
+<div class="font-black text-white text-2xl sm:text-3xl tracking-tight leading-none mt-1 font-mono" id="win-cycle-start">00:00:23<span class="text-sm font-bold font-mono text-emerald-300 ml-0.5" id="win-ms-start">.999</span></div>
+</div>
+<div class="w-full h-0.5 bg-[#00E676]/40" id="win-timing-divider"></div>
+<div>
+<div class="text-[10px] sm:text-[11px] font-black text-emerald-300/90 tracking-widest uppercase font-mono" id="win-label-end">END TIME</div>
+<div class="font-black text-white text-2xl sm:text-3xl tracking-tight leading-none mt-1 font-mono" id="win-cycle-end">00:00:26<span class="text-sm font-bold font-mono text-emerald-300 ml-0.5" id="win-ms-end">.839</span></div>
+</div>
+</div>
+<div class="relative z-10 pt-1.5 border-t-2 border-[#00E676]/50 flex items-center justify-between font-bold font-mono" id="win-timing-footer">
+<span class="tracking-wider uppercase font-mono text-[10px] sm:text-[11px] text-emerald-200" id="win-duration-label">DURATION</span>
+<span class="text-[#00E676] font-black text-sm sm:text-base tracking-wide font-mono" id="win-cycle-delta-left">Δ 2.84s</span>
+</div>
+</div>
+<!-- RIGHT WINDOW: Big Prediction Status & Bold Icon -->
+<div class="h-64 bg-[#061A10] border-[3px] border-[#00E676] shadow-[0_0_16px_rgba(0,230,118,0.35)] p-2 sm:p-2.5 flex flex-col justify-between relative overflow-hidden text-center transition-all duration-200" id="win-status-card">
+<div class="absolute inset-0 pixel-sheen pointer-events-none"></div>
+<div class="relative z-10 flex items-center justify-between border-b-2 border-[#00E676]/50 pb-1.5" id="win-status-top-bar"><span class="text-[9px] sm:text-[10px] font-black tracking-normal text-[#00E676] uppercase font-mono truncate leading-none" id="win-status-label">PREDICTION STATUS</span><span class="w-2 h-2 bg-[#00E676] shadow-[0_0_8px_#00E676] shrink-0 ml-1" id="win-status-top-bullet"></span></div>
+<div class="relative z-10 flex flex-col items-center justify-center my-auto px-0.5 py-1">
+<div class="mb-2" id="win-icon-container">
+<div class="w-13 h-13 sm:w-14 sm:h-14 bg-[#FF1744] border-[3px] border-white items-center justify-center shadow-[0_0_16px_#FF1744] hidden" id="pixel-icon-warn">
+<span class="text-3xl sm:text-4xl font-black text-white leading-none font-mono">!</span>
+</div>
+<div class="w-13 h-13 sm:w-14 sm:h-14 bg-[#00E676] border-[3px] border-white items-center justify-center shadow-[0_0_16px_#00E676] flex" id="pixel-icon-ok">
+<span class="text-2xl sm:text-3xl font-black text-slate-950 leading-none">✓</span>
+</div>
+</div>
+<span class="font-black text-base sm:text-lg tracking-tight text-[#00E676] uppercase leading-tight drop-shadow-md font-sans" id="win-status-title">NORMAL</span>
+<span class="text-[11px] sm:text-xs font-bold text-emerald-200 tracking-wide mt-1 leading-tight font-sans" id="win-status-subtitle">Nominal Door Resistance</span>
+</div>
+<div class="relative z-10 pt-1.5 border-t-2 border-[#00E676]/50 flex items-center justify-between font-mono gap-1" id="win-status-footer"><span class="text-slate-950 bg-[#00E676] px-1.5 py-0.5 border border-[#151A21] font-black uppercase font-pixel text-[9px] sm:text-[10px] leading-none shrink-0" id="win-badge-state">PASS</span><span class="tracking-normal uppercase font-mono text-[9px] sm:text-[10px] font-extrabold leading-none text-emerald-200 truncate" id="win-status-footer-label">DIAGNOSTIC</span></div>
+</div>
+</div>
+</div>
+<!-- SECTION 2: INTEGRATED METALLIC DOOR CYCLE LIST (Large Numbers, Timestamps & Metrics) -->
+<div class="w-full flex flex-col relative bg-[#DCE4EC]">
+<!-- Central Door Split Continued -->
+<div class="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-2.5 bg-[#151A21] z-20 pointer-events-none flex flex-col justify-around">
+<span class="w-1.5 h-14 bg-slate-600 mx-auto"></span>
+<span class="w-1.5 h-14 bg-slate-600 mx-auto"></span>
+<span class="w-1.5 h-14 bg-slate-600 mx-auto"></span>
+</div>
+<!-- Scrollable Table container: height 252px (sized for ~3 rows at 84px each) -->
+<div class="w-full h-[252px] overflow-y-auto door-scrollbar divide-y-[3px] divide-[#151A21] relative z-10" id="cycle-table-container">
+<!-- CYCLE #1 (Normal - Initial Selected) -->
+<div class="cycle-row w-full flex items-stretch cursor-pointer transition-colors bg-white/80 hover:bg-white active:bg-green-50" data-cycle="1" data-delta="Δ 3.70s" data-end-fmt="00:00:03" data-end-ms=".700" data-start-fmt="00:00:00" data-start-ms=".000" data-status="NORMAL" onclick="selectCycle(this)">
+<div class="w-1/2 p-2.5 sm:p-3 pr-3 flex flex-col justify-center">
+<div class="flex items-baseline justify-between mb-1">
+<span class="text-xl sm:text-2xl font-black text-slate-950 font-mono leading-none">#1</span>
+<span class="text-sm sm:text-base font-extrabold text-slate-800 font-mono">Δ 3.70s</span>
+</div>
+<div class="text-sm sm:text-[15px] text-slate-950 font-bold leading-tight font-mono">
+<span class="text-slate-600 font-extrabold text-[10px] tracking-wider uppercase">START</span> 00:00:00
+</div>
+<div class="text-sm sm:text-[15px] text-slate-950 font-bold leading-tight mt-0.5 font-mono">
+<span class="text-slate-600 font-extrabold text-[10px] tracking-wider uppercase">END</span> 00:00:03
+</div>
+</div>
+<div class="w-1/2 p-2.5 sm:p-3 pl-3.5 flex items-center justify-between">
+<span class="text-sm sm:text-base font-black text-[#00A854] tracking-tight flex items-center gap-2 font-sans truncate">
+<span class="w-5 h-5 bg-[#00E676] border-2 border-[#151A21] shrink-0 flex items-center justify-center text-slate-950 font-black text-xs">✓</span>
+<span class="truncate">Normal</span>
+</span>
+<span class="select-indicator text-slate-400 font-black text-base font-mono shrink-0 ml-1">›</span>
+</div>
+</div>
+<!-- CYCLE #2 (Normal) -->
+<div class="cycle-row active-row border-l-[8px] bg-emerald-100 border-l-[#00E676] w-full flex items-stretch cursor-pointer transition-colors" data-cycle="2" data-delta="Δ 2.84s" data-end-fmt="00:00:26" data-end-ms=".839" data-start-fmt="00:00:23" data-start-ms=".999" data-status="NORMAL" onclick="selectCycle(this)">
+<div class="w-1/2 p-2.5 sm:p-3 pr-3 flex flex-col justify-center">
+<div class="flex items-baseline justify-between mb-1">
+<span class="text-xl sm:text-2xl font-black text-slate-950 font-mono leading-none">#2</span>
+<span class="text-sm sm:text-base font-extrabold text-slate-800 font-mono">Δ 2.84s</span>
+</div>
+<div class="text-sm sm:text-[15px] text-slate-950 font-bold leading-tight font-mono">
+<span class="text-slate-600 font-extrabold text-[10px] tracking-wider uppercase">START</span> 00:00:23
+</div>
+<div class="text-sm sm:text-[15px] text-slate-950 font-bold leading-tight mt-0.5 font-mono">
+<span class="text-slate-600 font-extrabold text-[10px] tracking-wider uppercase">END</span> 00:00:26
+</div>
+</div>
+<div class="w-1/2 p-2.5 sm:p-3 pl-3.5 flex items-center justify-between">
+<span class="text-sm sm:text-base font-black text-[#00A854] tracking-tight flex items-center gap-2 font-sans truncate">
+<span class="w-5 h-5 bg-[#00E676] border-2 border-[#151A21] shrink-0 flex items-center justify-center text-slate-950 font-black text-xs">✓</span>
+<span class="truncate">Normal</span>
+</span>
+<span class="select-indicator text-[#00A854] font-black text-base font-mono shrink-0 ml-1">■</span>
+</div>
+</div>
+<!-- CYCLE #3 (Abnormal Resistance) -->
+<div class="cycle-row w-full flex items-stretch cursor-pointer transition-colors bg-white/80 hover:bg-white active:bg-green-50" data-cycle="3" data-delta="Δ 2.72s" data-end-fmt="00:00:53" data-end-ms=".986" data-start-fmt="00:00:51" data-start-ms=".266" data-status="ABNORMAL RESISTANCE" onclick="selectCycle(this)">
+<div class="w-1/2 p-2.5 sm:p-3 pr-3 flex flex-col justify-center">
+<div class="flex items-baseline justify-between mb-1">
+<span class="text-xl sm:text-2xl font-black text-slate-950 font-mono leading-none">#3</span>
+<span class="text-sm sm:text-base font-black text-[#FF1744] font-mono">Δ 2.72s</span>
+</div>
+<div class="text-sm sm:text-[15px] text-slate-950 font-bold leading-tight font-mono">
+<span class="text-slate-600 font-extrabold text-[10px] tracking-wider uppercase">START</span> 00:00:51
+</div>
+<div class="text-sm sm:text-[15px] text-slate-950 font-bold leading-tight mt-0.5 font-mono">
+<span class="text-slate-600 font-extrabold text-[10px] tracking-wider uppercase">END</span> 00:00:53
+</div>
+</div>
+<div class="w-1/2 p-2.5 sm:p-3 pl-3.5 flex items-center justify-between"><span class="text-xs sm:text-sm font-black text-[#FF1744] tracking-tight flex items-center gap-1.5 font-sans"><span class="w-5 h-5 bg-[#FF1744] border-2 border-[#151A21] shrink-0 flex items-center justify-center text-white font-black text-xs font-mono">!</span><span class="leading-tight font-bold">Abnormal<br>Resistance</span></span><span class="select-indicator text-slate-400 font-black text-base font-mono shrink-0 ml-1">›</span></div>
+</div>
+<!-- CYCLE #4 (Abnormal Resistance) -->
+<div class="cycle-row w-full flex items-stretch cursor-pointer transition-colors bg-white/80 hover:bg-white active:bg-green-50" data-cycle="4" data-delta="Δ 3.72s" data-end-fmt="00:01:37" data-end-ms=".709" data-start-fmt="00:01:33" data-start-ms=".989" data-status="ABNORMAL RESISTANCE" onclick="selectCycle(this)">
+<div class="w-1/2 p-2.5 sm:p-3 pr-3 flex flex-col justify-center">
+<div class="flex items-baseline justify-between mb-1">
+<span class="text-xl sm:text-2xl font-black text-slate-950 font-mono leading-none">#4</span>
+<span class="text-sm sm:text-base font-black text-[#FF1744] font-mono">Δ 3.72s</span>
+</div>
+<div class="text-sm sm:text-[15px] text-slate-950 font-bold leading-tight font-mono">
+<span class="text-slate-600 font-extrabold text-[10px] tracking-wider uppercase">START</span> 00:01:33
+</div>
+<div class="text-sm sm:text-[15px] text-slate-950 font-bold leading-tight mt-0.5 font-mono">
+<span class="text-slate-600 font-extrabold text-[10px] tracking-wider uppercase">END</span> 00:01:37
+</div>
+</div>
+<div class="w-1/2 p-2.5 sm:p-3 pl-3.5 flex items-center justify-between"><span class="text-xs sm:text-sm font-black text-[#FF1744] tracking-tight flex items-center gap-1.5 font-sans"><span class="w-5 h-5 bg-[#FF1744] border-2 border-[#151A21] shrink-0 flex items-center justify-center text-white font-black text-xs font-mono">!</span><span class="leading-tight font-bold">Abnormal<br>Resistance</span></span><span class="select-indicator text-slate-400 font-black text-base font-mono shrink-0 ml-1">›</span></div>
+</div>
+<!-- CYCLE #5 (Abnormal Resistance) -->
+<div class="cycle-row w-full flex items-stretch cursor-pointer transition-colors bg-white/80 hover:bg-white active:bg-green-50" data-cycle="5" data-delta="Δ 3.70s" data-end-fmt="00:02:28" data-end-ms=".308" data-start-fmt="00:02:24" data-start-ms=".608" data-status="ABNORMAL RESISTANCE" onclick="selectCycle(this)">
+<div class="w-1/2 p-2.5 sm:p-3 pr-3 flex flex-col justify-center">
+<div class="flex items-baseline justify-between mb-1">
+<span class="text-xl sm:text-2xl font-black text-slate-950 font-mono leading-none">#5</span>
+<span class="text-sm sm:text-base font-black text-[#FF1744] font-mono">Δ 3.70s</span>
+</div>
+<div class="text-sm sm:text-[15px] text-slate-950 font-bold leading-tight font-mono">
+<span class="text-slate-600 font-extrabold text-[10px] tracking-wider uppercase">START</span> 00:02:24
+</div>
+<div class="text-sm sm:text-[15px] text-slate-950 font-bold leading-tight mt-0.5 font-mono">
+<span class="text-slate-600 font-extrabold text-[10px] tracking-wider uppercase">END</span> 00:02:28
+</div>
+</div>
+<div class="w-1/2 p-2.5 sm:p-3 pl-3.5 flex items-center justify-between"><span class="text-xs sm:text-sm font-black text-[#FF1744] tracking-tight flex items-center gap-1.5 font-sans"><span class="w-5 h-5 bg-[#FF1744] border-2 border-[#151A21] shrink-0 flex items-center justify-center text-white font-black text-xs font-mono">!</span><span class="leading-tight font-bold">Abnormal<br>Resistance</span></span><span class="select-indicator text-slate-400 font-black text-base font-mono shrink-0 ml-1">›</span></div>
+</div>
+<!-- CYCLE #6 (Normal) -->
+<div class="cycle-row w-full flex items-stretch cursor-pointer transition-colors bg-white/80 hover:bg-white active:bg-green-50" data-cycle="6" data-delta="Δ 2.86s" data-end-fmt="00:03:01" data-end-ms=".937" data-start-fmt="00:02:59" data-start-ms=".077" data-status="NORMAL" onclick="selectCycle(this)">
+<div class="w-1/2 p-2.5 sm:p-3 pr-3 flex flex-col justify-center">
+<div class="flex items-baseline justify-between mb-1">
+<span class="text-xl sm:text-2xl font-black text-slate-950 font-mono leading-none">#6</span>
+<span class="text-sm sm:text-base font-extrabold text-slate-800 font-mono">Δ 2.86s</span>
+</div>
+<div class="text-sm sm:text-[15px] text-slate-950 font-bold leading-tight font-mono">
+<span class="text-slate-600 font-extrabold text-[10px] tracking-wider uppercase">START</span> 00:02:59
+</div>
+<div class="text-sm sm:text-[15px] text-slate-950 font-bold leading-tight mt-0.5 font-mono">
+<span class="text-slate-600 font-extrabold text-[10px] tracking-wider uppercase">END</span> 00:03:01
+</div>
+</div>
+<div class="w-1/2 p-2.5 sm:p-3 pl-3.5 flex items-center justify-between">
+<span class="text-sm sm:text-base font-black text-[#00A854] tracking-tight flex items-center gap-2 font-sans truncate">
+<span class="w-5 h-5 bg-[#00E676] border-2 border-[#151A21] shrink-0 flex items-center justify-center text-slate-950 font-black text-xs">✓</span>
+<span class="truncate">Normal</span>
+</span>
+<span class="select-indicator text-slate-400 font-black text-base font-mono shrink-0 ml-1">›</span>
+</div>
+</div>
+<!-- CYCLE #7 (Normal) -->
+<div class="cycle-row w-full flex items-stretch cursor-pointer transition-colors bg-white/80 hover:bg-white active:bg-green-50" data-cycle="7" data-delta="Δ 2.78s" data-end-fmt="00:03:59" data-end-ms=".503" data-start-fmt="00:03:56" data-start-ms=".723" data-status="NORMAL" onclick="selectCycle(this)">
+<div class="w-1/2 p-2.5 sm:p-3 pr-3 flex flex-col justify-center">
+<div class="flex items-baseline justify-between mb-1">
+<span class="text-xl sm:text-2xl font-black text-slate-950 font-mono leading-none">#7</span>
+<span class="text-sm sm:text-base font-extrabold text-slate-800 font-mono">Δ 2.78s</span>
+</div>
+<div class="text-sm sm:text-[15px] text-slate-950 font-bold leading-tight font-mono">
+<span class="text-slate-600 font-extrabold text-[10px] tracking-wider uppercase">START</span> 00:03:56
+</div>
+<div class="text-sm sm:text-[15px] text-slate-950 font-bold leading-tight mt-0.5 font-mono">
+<span class="text-slate-600 font-extrabold text-[10px] tracking-wider uppercase">END</span> 00:03:59
+</div>
+</div>
+<div class="w-1/2 p-2.5 sm:p-3 pl-3.5 flex items-center justify-between">
+<span class="text-sm sm:text-base font-black text-[#00A854] tracking-tight flex items-center gap-2 font-sans truncate">
+<span class="w-5 h-5 bg-[#00E676] border-2 border-[#151A21] shrink-0 flex items-center justify-center text-slate-950 font-black text-xs">✓</span>
+<span class="truncate">Normal</span>
+</span>
+<span class="select-indicator text-slate-400 font-black text-base font-mono shrink-0 ml-1">›</span>
+</div>
+</div>
+<!-- CYCLE #8 (Normal) -->
+<div class="cycle-row w-full flex items-stretch cursor-pointer transition-colors bg-white/80 hover:bg-white active:bg-green-50" data-cycle="8" data-delta="Δ 2.88s" data-end-fmt="00:04:40" data-end-ms=".680" data-start-fmt="00:04:37" data-start-ms=".800" data-status="NORMAL" onclick="selectCycle(this)">
+<div class="w-1/2 p-2.5 sm:p-3 pr-3 flex flex-col justify-center">
+<div class="flex items-baseline justify-between mb-1">
+<span class="text-xl sm:text-2xl font-black text-slate-950 font-mono leading-none">#8</span>
+<span class="text-sm sm:text-base font-extrabold text-slate-800 font-mono">Δ 2.88s</span>
+</div>
+<div class="text-sm sm:text-[15px] text-slate-950 font-bold leading-tight font-mono">
+<span class="text-slate-600 font-extrabold text-[10px] tracking-wider uppercase">START</span> 00:04:37
+</div>
+<div class="text-sm sm:text-[15px] text-slate-950 font-bold leading-tight mt-0.5 font-mono">
+<span class="text-slate-600 font-extrabold text-[10px] tracking-wider uppercase">END</span> 00:04:40
+</div>
+</div>
+<div class="w-1/2 p-2.5 sm:p-3 pl-3.5 flex items-center justify-between">
+<span class="text-sm sm:text-base font-black text-[#00A854] tracking-tight flex items-center gap-2 font-sans truncate">
+<span class="w-5 h-5 bg-[#00E676] border-2 border-[#151A21] shrink-0 flex items-center justify-center text-slate-950 font-black text-xs">✓</span>
+<span class="truncate">Normal</span>
+</span>
+<span class="select-indicator text-slate-400 font-black text-base font-mono shrink-0 ml-1">›</span>
+</div>
+</div>
+</div><div class="hidden w-full h-[252px] relative z-10 flex flex-col items-center justify-center p-4 text-center bg-[#DCE4EC]" id="empty-door-state">
+<div class="w-12 h-12 bg-[#151A21] border-2 border-slate-700 flex items-center justify-center mb-2 shadow-pixel-sm">
+<span class="text-[#FFCD00] text-2xl font-mono animate-pulse">◬</span>
+</div>
+<span class="font-black text-slate-900 text-sm sm:text-base font-sans tracking-wide uppercase leading-tight mb-1">NO CYCLES RECORDED</span>
+<p class="text-xs font-bold text-slate-600 font-sans max-w-xs leading-tight mb-3">Awaiting door_cycles_telemetry.csv input to analyze door resistance &amp; cycle anomalies.</p>
+<button class="h-8 px-3 bg-[#FFCD00] text-slate-950 font-black text-xs border-2 border-[#151A21] shadow-pixel-sm active:shadow-none flex items-center gap-1.5 font-mono cursor-pointer transition-all" onclick="toggleTelemetryState()">
+<span class="">▶</span>
+<span class="font-pixel tracking-wider">SIMULATE LOAD DATA</span>
+</button>
+</div>
+</div>
+</div>
+<!-- ================= RIGHT EXTERIOR TRAIN WALL (Pixel Art) ================= -->
+<div class="w-7 sm:w-9 shrink-0 bg-[#CBD5E1] border-l-[3px] border-[#151A21] relative z-10 flex flex-col justify-between items-center py-2">
+<!-- Iconic Transit Pixel Stripe Band -->
+<div class="w-full h-12 bg-[#FF1744] border-y-[3px] border-[#151A21] relative flex flex-col justify-center gap-1">
+<div class="w-full h-1.5 bg-white/70"></div>
+<div class="w-full h-1.5 bg-[#881337]"></div>
+</div>
+<!-- Pixel Rivets & Mechanical Slits -->
+<div class="flex flex-col items-center gap-8 my-auto">
+<div class="w-2.5 h-2.5 bg-[#94A3B8] border border-[#151A21] shadow-pixel-sm"></div>
+<div class="w-3.5 h-36 bg-[#475569] border-2 border-[#151A21] flex flex-col justify-evenly items-center p-0.5">
+<span class="w-full h-1 bg-[#151A21]"></span>
+<span class="w-full h-1 bg-[#151A21]"></span>
+<span class="w-full h-1 bg-[#151A21]"></span>
+<span class="w-full h-1 bg-[#151A21]"></span>
+</div>
+<div class="w-2.5 h-2.5 bg-[#94A3B8] border border-[#151A21] shadow-pixel-sm"></div>
+</div>
+<div class="w-full h-3.5 bg-[#64748B] border-t-2 border-[#151A21]"></div>
+</div>
+</div>
+<!-- Door Sill / Caution Threshold Floor Strip -->
+<div class="h-4 bg-[#151A21] flex items-center justify-center gap-1.5 px-4 z-20 border-t-2 border-[#151A21]">
+<div class="h-2 flex-1 bg-[#FFCD00] border border-[#151A21]"></div>
+<div class="w-3 h-2 bg-slate-700"></div>
+<div class="h-2 flex-1 bg-[#FFCD00] border border-[#151A21]"></div>
+</div>
+<!-- Train Track & Underframe Pixel Blocks -->
+<div class="h-5 bg-[#0F141C] flex items-center justify-between px-6 z-20 border-t border-slate-800">
+<div class="w-14 h-2 bg-[#334155] border border-[#151A21]"></div>
+<div class="w-20 h-1.5 bg-[#1E293B]"></div>
+<div class="w-14 h-2 bg-[#334155] border border-[#151A21]"></div>
+</div>
+</main>
+<!-- END: PIXEL ART TRAIN BODY -->
+</div>
+<!-- Interactive Selection Script -->
+<script>
+function selectCycle(element) {
+  // Reset all cycle rows
+  const allRows = document.querySelectorAll('.cycle-row');
+  allRows.forEach(row => {
+    row.classList.remove('active-row', 'bg-emerald-100', 'bg-rose-100', 'border-l-[8px]', 'border-l-[#00E676]', 'border-l-[#FF1744]');
+    row.className = 'cycle-row w-full flex items-stretch cursor-pointer transition-colors bg-white/80 hover:bg-white active:bg-green-50';
+    const indicator = row.querySelector('.select-indicator');
+    if (indicator) {
+      indicator.textContent = '›';
+      indicator.className = 'select-indicator text-slate-400 font-black text-base font-mono shrink-0 ml-1';
+    }
+  });
+
+  const cycle = element.getAttribute('data-cycle');
+  const delta = element.getAttribute('data-delta');
+  const status = element.getAttribute('data-status');
+  const startFmt = element.getAttribute('data-start-fmt') || '00:00:00';
+  const startMs = element.getAttribute('data-start-ms') || '';
+  const endFmt = element.getAttribute('data-end-fmt') || '00:00:00';
+  const endMs = element.getAttribute('data-end-ms') || '';
+  const isAbnormal = (status === 'ABNORMAL RESISTANCE');
+
+  // Highlight active row in table with thick border and clear font
+  element.classList.add('active-row', 'border-l-[8px]');
+  const activeIndicator = element.querySelector('.select-indicator');
+  if (isAbnormal) {
+    element.className = 'cycle-row active-row border-l-[8px] bg-rose-100 border-l-[#FF1744] w-full flex items-stretch cursor-pointer transition-colors';
+    if (activeIndicator) {
+      activeIndicator.textContent = '■';
+      activeIndicator.className = 'select-indicator text-[#FF1744] font-black text-base font-mono shrink-0 ml-1';
+    }
+  } else {
+    element.className = 'cycle-row active-row border-l-[8px] bg-emerald-100 border-l-[#00E676] w-full flex items-stretch cursor-pointer transition-colors';
+    if (activeIndicator) {
+      activeIndicator.textContent = '■';
+      activeIndicator.className = 'select-indicator text-[#00A854] font-black text-base font-mono shrink-0 ml-1';
+    }
+  }
+
+  // Left Window DOM elements
+  const timingCard = document.getElementById('win-timing-card');
+  const timingHeader = document.getElementById('win-timing-header');
+  const timingBullet = document.getElementById('win-timing-bullet');
+  const timingDivider = document.getElementById('win-timing-divider');
+  const timingFooter = document.getElementById('win-timing-footer');
+  const labelStart = document.getElementById('win-label-start');
+  const labelEnd = document.getElementById('win-label-end');
+  const cycleId = document.getElementById('win-cycle-id');
+  const cycleDeltaLeft = document.getElementById('win-cycle-delta-left');
+  const durationLabel = document.getElementById('win-duration-label');
+
+  // Right Window DOM elements
+  const statusCard = document.getElementById('win-status-card');
+  const statusTopBar = document.getElementById('win-status-top-bar');
+  const statusLabel = document.getElementById('win-status-label');
+  const statusTopBullet = document.getElementById('win-status-top-bullet');
+  const statusTitle = document.getElementById('win-status-title');
+  const statusSubtitle = document.getElementById('win-status-subtitle');
+  const statusFooter = document.getElementById('win-status-footer');
+  const statusFooterLabel = document.getElementById('win-status-footer-label');
+  const iconWarn = document.getElementById('pixel-icon-warn');
+  const iconOk = document.getElementById('pixel-icon-ok');
+  const badgeState = document.getElementById('win-badge-state');
+  const overheadLamp = document.getElementById('pixel-overhead-lamp');
+
+  // Set Timings & Cycle Number (Much larger, punchier text)
+  cycleId.textContent = 'CYCLE #' + cycle;
+  document.getElementById('win-cycle-start').innerHTML = `${startFmt}<span class="text-sm font-bold font-mono ml-0.5" id="win-ms-start">${startMs}</span>`;
+  document.getElementById('win-cycle-end').innerHTML = `${endFmt}<span class="text-sm font-bold font-mono ml-0.5" id="win-ms-end">${endMs}</span>`;
+  cycleDeltaLeft.textContent = delta;
+
+  if (isAbnormal) {
+    // ================= ABNORMAL RESISTANCE: VIVID SAFETY RED LIGHTING =================
+    // Left Window
+    timingCard.className = 'h-64 bg-[#1A0A0E] border-[3px] border-[#FF1744] shadow-[0_0_18px_rgba(255,23,68,0.6)] p-2.5 sm:p-3 flex flex-col justify-between relative overflow-hidden text-left transition-all duration-200';
+    timingHeader.className = 'relative z-10 flex items-center justify-between border-b-2 border-[#FF1744]/50 pb-1.5';
+    cycleId.className = 'text-base sm:text-lg font-black text-[#FF1744] tracking-wider uppercase font-mono';
+    timingBullet.className = 'w-2.5 h-2.5 bg-[#FF1744] shadow-[0_0_8px_#FF1744]';
+    timingDivider.className = 'w-full h-0.5 bg-[#FF1744]/40';
+    timingFooter.className = 'relative z-10 pt-1.5 border-t-2 border-[#FF1744]/50 flex items-center justify-between text-xs font-bold text-rose-200 font-mono';
+    cycleDeltaLeft.className = 'text-[#FF1744] font-black text-sm sm:text-base tracking-wide font-mono';
+    if (durationLabel) durationLabel.className = 'tracking-wider uppercase font-mono text-[10px] sm:text-[11px] text-rose-300';
+    labelStart.className = 'text-[10px] sm:text-[11px] font-black text-rose-300 tracking-widest uppercase font-mono';
+    labelEnd.className = 'text-[10px] sm:text-[11px] font-black text-rose-300 tracking-widest uppercase font-mono';
+    const msStart = document.getElementById('win-ms-start');
+    const msEnd = document.getElementById('win-ms-end');
+    if (msStart) msStart.className = 'text-sm font-bold font-mono text-rose-300 ml-0.5';
+    if (msEnd) msEnd.className = 'text-sm font-bold font-mono text-rose-300 ml-0.5';
+
+    // Right Window
+    statusCard.className = 'h-64 bg-[#1A0A0E] border-[3px] border-[#FF1744] shadow-[0_0_18px_rgba(255,23,68,0.6)] p-2 sm:p-2.5 flex flex-col justify-between relative overflow-hidden text-center transition-all duration-200';
+    statusTopBar.className = 'relative z-10 flex items-center justify-between border-b-2 border-[#FF1744]/50 pb-1.5';
+    statusLabel.className = 'text-[9px] sm:text-[10px] font-black tracking-normal text-[#FF1744] uppercase font-mono truncate leading-none';
+    if (statusTopBullet) statusTopBullet.className = 'w-2 h-2 bg-[#FF1744] shadow-[0_0_8px_#FF1744] shrink-0 ml-1';
+
+    statusTitle.textContent = 'ABNORMAL RESISTANCE';
+    statusTitle.className = 'font-black text-xs sm:text-sm tracking-tight text-[#FF1744] uppercase leading-tight drop-shadow-md font-sans';
+    if (statusSubtitle) {
+      statusSubtitle.textContent = 'Excess Friction / Strain Alert';
+      statusSubtitle.className = 'text-[11px] sm:text-xs font-bold text-rose-300 tracking-wide mt-1 leading-tight font-sans';
+    }
+
+    badgeState.className = 'text-white bg-[#FF1744] px-1.5 py-0.5 border border-[#151A21] font-black uppercase font-pixel text-[9px] sm:text-[10px] leading-none shrink-0';
+    badgeState.textContent = 'FLAG';
+    statusFooter.className = 'relative z-10 pt-1.5 border-t-2 border-[#FF1744]/50 flex items-center justify-between font-mono gap-1';
+    if (statusFooterLabel) statusFooterLabel.className = 'tracking-normal uppercase font-mono text-[9px] sm:text-[10px] font-extrabold leading-none text-rose-200 truncate';
+
+    iconWarn.classList.remove('hidden');
+    iconWarn.classList.add('flex');
+    iconOk.classList.add('hidden');
+    iconOk.classList.remove('flex');
+
+    overheadLamp.className = 'w-8 h-3 bg-[#FF1744] border border-white flex items-center justify-center shadow-[0_0_14px_#FF1744] animate-pulse transition-colors duration-200';
+  } else {
+    // ================= NORMAL: VIBRANT NEON/EMERALD GREEN LIGHTING =================
+    // Left Window
+    timingCard.className = 'h-64 bg-[#061A10] border-[3px] border-[#00E676] shadow-[0_0_16px_rgba(0,230,118,0.35)] p-2.5 sm:p-3 flex flex-col justify-between relative overflow-hidden text-left transition-all duration-200';
+    timingHeader.className = 'relative z-10 flex items-center justify-between border-b-2 border-[#00E676]/50 pb-1.5';
+    cycleId.className = 'text-base sm:text-lg font-black text-[#00E676] tracking-wider uppercase font-mono';
+    timingBullet.className = 'w-2.5 h-2.5 bg-[#00E676] shadow-[0_0_8px_#00E676]';
+    timingDivider.className = 'w-full h-0.5 bg-[#00E676]/40';
+    timingFooter.className = 'relative z-10 pt-1.5 border-t-2 border-[#00E676]/50 flex items-center justify-between font-bold font-mono';
+    cycleDeltaLeft.className = 'text-[#00E676] font-black text-sm sm:text-base tracking-wide font-mono';
+    if (durationLabel) durationLabel.className = 'tracking-wider uppercase font-mono text-[10px] sm:text-[11px] text-emerald-200';
+    labelStart.className = 'text-[10px] sm:text-[11px] font-black text-emerald-300/90 tracking-widest uppercase font-mono';
+    labelEnd.className = 'text-[10px] sm:text-[11px] font-black text-emerald-300/90 tracking-widest uppercase font-mono';
+    const msStart = document.getElementById('win-ms-start');
+    const msEnd = document.getElementById('win-ms-end');
+    if (msStart) msStart.className = 'text-sm font-bold font-mono text-emerald-300 ml-0.5';
+    if (msEnd) msEnd.className = 'text-sm font-bold font-mono text-emerald-300 ml-0.5';
+
+    // Right Window
+    statusCard.className = 'h-64 bg-[#061A10] border-[3px] border-[#00E676] shadow-[0_0_16px_rgba(0,230,118,0.35)] p-2 sm:p-2.5 flex flex-col justify-between relative overflow-hidden text-center transition-all duration-200';
+    statusTopBar.className = 'relative z-10 flex items-center justify-between border-b-2 border-[#00E676]/50 pb-1.5';
+    statusLabel.className = 'text-[9px] sm:text-[10px] font-black tracking-normal text-[#00E676] uppercase font-mono truncate leading-none';
+    if (statusTopBullet) statusTopBullet.className = 'w-2 h-2 bg-[#00E676] shadow-[0_0_8px_#00E676] shrink-0 ml-1';
+
+    statusTitle.textContent = 'NORMAL';
+    statusTitle.className = 'font-black text-base sm:text-lg tracking-tight text-[#00E676] uppercase leading-tight drop-shadow-md font-sans';
+    if (statusSubtitle) {
+      statusSubtitle.textContent = 'Nominal Door Resistance';
+      statusSubtitle.className = 'text-[11px] sm:text-xs font-bold text-emerald-200 tracking-wide mt-1 leading-tight font-sans';
+    }
+
+    badgeState.className = 'text-slate-950 bg-[#00E676] px-1.5 py-0.5 border border-[#151A21] font-black uppercase font-pixel text-[9px] sm:text-[10px] leading-none shrink-0';
+    badgeState.textContent = 'PASS';
+    statusFooter.className = 'relative z-10 pt-1.5 border-t-2 border-[#00E676]/50 flex items-center justify-between font-mono gap-1';
+    if (statusFooterLabel) statusFooterLabel.className = 'tracking-normal uppercase font-mono text-[9px] sm:text-[10px] font-extrabold leading-none text-emerald-200 truncate';
+
+    iconWarn.classList.add('hidden');
+    iconWarn.classList.remove('flex');
+    iconOk.classList.remove('hidden');
+    iconOk.classList.add('flex');
+
+    overheadLamp.className = 'w-8 h-3 bg-[#00E676] border border-white flex items-center justify-center shadow-[0_0_10px_#00E676] transition-colors duration-200';
+  }
+}
+</script>
+
+
+</body></html>

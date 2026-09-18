@@ -1,126 +1,90 @@
-# TeppanyakiSausages — PS3 Train Condition Monitoring
+# TeppanyakiSausages — PS3 Fleet Diagnostic
 
-This repository contains our NebulaX 2026 Hackathon solution for Problem Statement 3 (PS3). It implements all four independent train-condition tasks, each contributing 25% to the overall score:
+A responsive React application for train-condition monitoring, backed by the validated Python models. **Home, Rail, Door, ACV and SHM are implemented**, with real model inference, independent upload batches and CSV exports.
 
-| Subsystem | Task | Scoring metric | Submission file |
-| --- | --- | --- | --- |
-| Door | Detect door cycles and classify abnormal resistance | IoU-weighted F1 | `door_predictions.csv` |
-| ACV | Rank cars by likelihood of refrigerant leakage | Linear rank-decay | `acv_predictions.csv` |
-| Rail Corrugation | Classify `Normal`, `Side I`, or `Side II` | Macro F1 | `rail_predictions.csv` |
-| SHM | Estimate cumulative fatigue damage | `max(0, 1 - MAPE)` | `shm_predictions.csv` |
+## Start locally
 
-Start with the [official PS3 specification](PS3/01_Problem_Statement_3_Specifications.md), then read the relevant subsystem information kit in [`PS3/03_References/`](PS3/03_References/) before modelling.
+Use the existing Python environment, or create Python 3.12 `.venv` and install `requirements-dev.txt`. Node.js 24 is used for the frontend build.
 
-## Supplied Resources
+```bash
+npm ci --prefix app/frontend
+npm run build --prefix app/frontend
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python -m uvicorn backend.api:app --app-dir app --host 0.0.0.0 --port 8000
+```
+
+Open **http://localhost:8000**. A phone on the same Wi-Fi can use **http://<computer-LAN-IP>:8000** while the server runs. The frontend and API are served from the same address; no public hosting is configured.
+
+See [app/README.md](app/README.md) for first-time setup, Windows notes, phone access, uploads, configuration and browser tests.
+
+## Repository layout
 
 ```text
-PS3/
-├── 01_Problem_Statement_3_Specifications.md
-├── 02_Datasets/              # Door, ACV, Rail_Corrugation, and SHM data
-├── 03_References/            # Authoritative subsystem information kits
-└── 04_Example_Submission/    # Required prediction CSV schemas
+app/
+  frontend/                 React source, build configuration and browser tests
+  backend/
+    api.py                  Upload API and built frontend hosting
+    models/                 Runtime parsing, feature extraction and prediction
+    artifacts/              Active trusted model artifacts
+  exports/                  Predictions downloaded through the app
+  requirements.txt          Pinned runtime dependencies
+Optional_Items/
+  Door/
+  ACV/
+  Rail Corrugation/
+  SHM/                      Each has methodology, code/<subsystem>_dev and reports
+  UI_References/            Original HTML designs and screenshots
+  write_up.md
+PS3/                        Original supplied data/reference material; development only
+scripts/                    Development launcher and submission packager
+tests/                      API and packaging checks
 ```
 
-Do not rename, reformat, or duplicate the supplied datasets. They remain tracked for this sprint. Generated prediction files, validation reports, diagnostics, and feature tables under `outputs/` are committed so every teammate and the final packaging workflow use the same results. Temporary uploads, caches, and checkpoints remain untracked.
-
-## Python Environment
-
-Use Python 3.12 and create a separate local `.venv` in each clone. Teammates share the committed dependency files, not the virtual-environment directory itself. The environment is already excluded by `.gitignore`.
-
-On macOS or Linux:
+Runtime modules remain importable as `backend.models.<subsystem>` with `app/` on the Python path. Training and evaluation live in optional packages named `rail_dev`, `door_dev`, `acv_dev`, and `shm_dev`. The launcher handles both paths and runs from the repository root:
 
 ```bash
-python3.12 -m venv .venv
-source .venv/bin/activate
-python -m pip install --upgrade pip
-python -m pip install -r requirements-dev.txt
-python -m pip check
+.venv/bin/python scripts/model.py rail predict --input PS3/02_Datasets/Rail_Corrugation/Test --output /tmp/rail_predictions.csv
+.venv/bin/python scripts/model.py rail train --help
+.venv/bin/python scripts/model.py door validation --help
+.venv/bin/python scripts/model.py shm validation --help
+.venv/bin/python -m pytest -q
 ```
 
-On Windows PowerShell:
+ACV validation is part of its `train` command. Training defaults save artifacts in `app/backend/artifacts` and reports in the corresponding optional subsystem's `code/outputs`. Shell-quote paths containing `Rail Corrugation`.
 
-```powershell
-py -3.12 -m venv .venv
-.venv\Scripts\Activate.ps1
-python -m pip install --upgrade pip
-python -m pip install -r requirements-dev.txt
-python -m pip check
-```
+### Model methodologies
 
-Run `deactivate` to leave the environment. If dependency versions change, delete and recreate your own `.venv` instead of installing undocumented packages manually. Use `python -m pip`, and add every new direct dependency to `requirements.txt` or `requirements-dev.txt` in the same pull request as the code that imports it.
+- [Rail Corrugation](Optional_Items/Rail%20Corrugation/METHODOLOGY.md)
+- [Door](Optional_Items/Door/METHODOLOGY.md)
+- [ACV](Optional_Items/ACV/METHODOLOGY.md)
+- [SHM](Optional_Items/SHM/METHODOLOGY.md)
 
-The pinned NumPy, SciPy, pandas, scikit-learn, and joblib versions are part of the trained-model format. Save these library versions in model metadata and use the same environment for training and serving. The React frontend has a separate `package.json`, lockfile, and ignored `frontend/node_modules/` directory.
+Artifacts alone are insufficient: the app also needs inference/feature code and compatible Python dependencies. It does not need training data or development reports. Door, ACV and SHM retain their existing trained parameters. Rail now uses the validated local-spectrum v3 integration; the previous v2 artifact is retained for rollback.
 
-After installation, verify the environment with:
+## PS3 packaging
+
+The working repository retains the supplied `PS3/` materials for development; they are **never included in the submission package**. Do not submit a zip of the entire repository.
 
 ```bash
-python -c "import numpy, pandas, scipy, sklearn, joblib, openpyxl, fastapi; print('Python environment ready')"
-python -m pytest
+.venv/bin/python scripts/package_submission.py
+# With the finished demo:
+.venv/bin/python scripts/package_submission.py --output submission-final --demo-video /path/to/demo.mp4
 ```
 
-## Solution Architecture
-
-The implemented model layer, saved artifacts, tests, and generated deliverables use this structure:
+The packager creates:
 
 ```text
-backend/
-├── artifacts/                # Versioned trained model files
-└── models/
-    ├── door/
-    ├── acv/
-    ├── rail/
-    └── shm/
-tests/                        # Model and submission-contract tests
-outputs/                      # Generated model deliverables; committed and kept current
+TeppanyakiSausages/
+  app/                      Self-contained source and built app
+  Optional_Items/
+    write_up.md
+    Door/code/ and model/
+    ACV/code/ and model/
+    Rail Corrugation/code/ and model/
+    SHM/code/ and model/
+  predictions.zip           Existing app exports, flat CSV entries
+  demo_video.mp4            Only when supplied
 ```
 
-Every subsystem will expose the same batch interface:
+Use `--team-name` if the registered spelling differs. Existing output folders are not overwritten. Only app exports are packaged by default; old CLI-generated predictions remain development evidence. The packaging status explicitly reports missing predictions/video. A package made now is an incremental Rail demo, **not the final four-subsystem submission**: Door, ACV and SHM must be connected to this same app, their test predictions exported through it, and an end-to-end demo of at most three minutes recorded.
 
-```bash
-python -m backend.models.<subsystem>.predict \
-  --input <file-or-directory> \
-  --output <prediction.csv>
-```
-
-The app will call `POST /api/predict/{subsystem}` with one uploaded file. The response contract contains `subsystem`, `output_filename`, `columns`, `rows`, `csv_text`, and a short `summary`. The React dashboard will provide subsystem selection, upload feedback, a result-specific visualization, a table, and CSV download.
-
-## Subsystem Ownership
-
-| Owner | Primary work | Integration responsibility |
-| --- | --- | --- |
-| Rail owner / ML coordinator | Streaming statistical and frequency features; class-balanced classifier | Rail label/confidence view |
-| Door owner | Cycle segmentation and balanced status classifier | Segment timeline/table |
-| SHM owner | Stress features and MAPE-focused regression | Damage result card |
-| ACV owner / integration lead | Per-car anomaly ranking | FastAPI/React shell and ranked-car view |
-
-The completed [`Rail`](backend/models/rail/METHODOLOGY.md), [`Door`](backend/models/door/METHODOLOGY.md), [`SHM`](backend/models/shm/METHODOLOGY.md), and [`ACV`](backend/models/acv/METHODOLOGY.md) methodology reports explain each model's data interpretation, feature engineering, validation, estimated results, limitations, and prediction interface.
-
-Each owner remains responsible for keeping their artifact, validation report, prediction adapter, result component, and tracked outputs consistent. Coordinate changes to shared API schemas with the integration lead.
-
-Remaining integration sequence:
-
-1. Scaffold the backend, frontend, and shared response schemas.
-2. Connect the four completed prediction adapters and subsystem visualizations.
-3. Re-run held-out inference and validate every output schema.
-4. Package `predictions.zip`, then record the app demo in under three minutes.
-
-## Submission Gate
-
-A subsystem is ready only when its CLI and app path both complete successfully and its CSV matches [`PS3/04_Example_Submission/`](PS3/04_Example_Submission/). Place the attempted `*_predictions.csv` files directly at the root of `predictions.zip`; do not include subfolders or raw datasets. The final submission also requires one app covering every attempted subsystem and a short end-to-end demo video.
-
-## Optional LTA DataMall Enrichment
-
-[`LTA_DataMall_API_User_Guide.pdf`](LTA_DataMall_API_User_Guide.pdf) remains available for optional operational context, such as route metadata, service incidents, or dashboard overlays. DataMall is not required for the four sensor-model pipelines and should not block the compulsory app or prediction outputs. External data should influence a model only when a reliable join key to the supplied PS3 observations can be demonstrated and documented.
-
-Example request:
-
-```bash
-curl "https://datamall2.mytransport.sg/ltaodataservice/v3/BusArrival?BusStopCode=83139" \
-  -H "AccountKey: ${LTA_ACCOUNT_KEY}"
-```
-
-Keep API keys in environment variables; never commit credentials or local `.env` files.
-
-## Collaboration Rules
-
-Use focused branches such as `model/door`, `model/rail`, or `app/frontend`, and keep commits small and imperative. Coordinate changes to shared API schemas with the integration lead. Record the validation split, metric, score, assumptions, and output-schema check in each pull request. Contributor-specific commands and conventions will live in `AGENTS.md` when the implementation scaffold is added.
+The original [PS3 specification](PS3/01_Problem_Statement_3_Specifications.md) is authoritative.
