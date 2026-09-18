@@ -15,6 +15,10 @@ The labelled development set contains 272 files: 234 Normal, 14 Side I, and 24 S
 5. Select the highest mean cross-validation macro F1, inspect per-class F1 and confusion matrices, then retrain on all 272 labelled files.
 6. Run the final pipeline on all 68 test files and write `rail_predictions.csv` with `file_id,prediction`.
 
+## Current Benchmark
+
+The implemented pipeline was evaluated with the split above. Balanced logistic regression was selected with mean macro F1 `0.691` (`Normal: 0.955`, `Side I: 0.438`, `Side II: 0.680`). The dummy, calibrated RBF SVM, and ExtraTrees candidates scored `0.308`, `0.582`, and `0.480`, respectively. Retraining on all 272 labelled files produced `backend/artifacts/rail_pipeline.joblib`.
+
 ## Signal and Feature Strategy
 
 Each CSV has 10,000 samples and 129 columns: rotating speed followed by vibration/shock pairs from 64 axle boxes. Preserve the physical mapping:
@@ -43,7 +47,7 @@ python -m backend.models.rail.predict \
   --output outputs/rail_predictions.csv
 ```
 
-The app adapter for `POST /api/predict/rail` will return the predicted class, three model scores, Side I/Side II energy summaries, and dominant-frequency diagnostics. Only `file_id` and the official class label belong in the submitted CSV.
+This branch provides a callable Python adapter that returns the predicted class, three model scores, Side I/Side II energy summaries, and dominant-frequency diagnostics. The integration lead owns the `POST /api/predict/rail` route and can call `backend.models.rail.predict_file`. Only `file_id` and the official class label belong in the submitted CSV.
 
 ## Acceptance Checklist
 
