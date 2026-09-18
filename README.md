@@ -23,6 +23,41 @@ PS3/
 
 Do not rename, reformat, or duplicate the supplied datasets. They remain tracked for this sprint. Generated features, temporary uploads, caches, checkpoints, and local prediction outputs should not be committed.
 
+## Python Environment
+
+Use Python 3.12 and create a separate local `.venv` in each clone. Teammates share the committed dependency files, not the virtual-environment directory itself. The environment is already excluded by `.gitignore`.
+
+On macOS or Linux:
+
+```bash
+python3.12 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install -r requirements-dev.txt
+python -m pip check
+```
+
+On Windows PowerShell:
+
+```powershell
+py -3.12 -m venv .venv
+.venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
+python -m pip install -r requirements-dev.txt
+python -m pip check
+```
+
+Run `deactivate` to leave the environment. If dependency versions change, delete and recreate your own `.venv` instead of installing undocumented packages manually. Use `python -m pip`, and add every new direct dependency to `requirements.txt` or `requirements-dev.txt` in the same pull request as the code that imports it.
+
+The pinned NumPy, SciPy, pandas, scikit-learn, and joblib versions are part of the trained-model format. Save these library versions in model metadata and use the same environment for training and serving. The React frontend has a separate `package.json`, lockfile, and ignored `frontend/node_modules/` directory.
+
+After installation, verify the environment with:
+
+```bash
+python -c "import numpy, pandas, scipy, sklearn, joblib, openpyxl, fastapi; print('Python environment ready')"
+python -m pytest
+```
+
 ## Planned Solution Architecture
 
 The following structure is the implementation target and may not exist until its owning branch is merged:
