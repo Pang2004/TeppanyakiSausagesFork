@@ -94,6 +94,8 @@ The app will call `POST /api/predict/{subsystem}` with one uploaded file. The re
 | SHM owner | Stress features and MAPE-focused regression | Damage result card |
 | ACV owner / integration lead | Per-car anomaly ranking | FastAPI/React shell and ranked-car view |
 
+The Rail Corrugation owner should follow the detailed [`backend/models/rail/PLAN.md`](backend/models/rail/PLAN.md), which defines the data split, side-aware feature extraction, model comparison, interfaces, and submission checks.
+
 Work in parallel, but freeze the shared request/response contract before model development. Each owner is responsible for training, validation, the prediction adapter, and their result component. Prioritize a complete baseline over prolonged tuning.
 
 Suggested sequence:
