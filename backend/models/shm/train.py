@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import platform
 from datetime import datetime, timezone
@@ -17,20 +18,18 @@ import scipy
 import sklearn
 from joblib import Parallel, delayed
 from sklearn.linear_model import Ridge
-from sklearn.model_selection import KFold
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
 
+from . import features as feature_module
 from .features import SHMFeatureConfig, extract_features, residual_feature_names
 from .metrics import (
     calibrate_miner_scale,
     mean_absolute_percentage_error,
-    official_shm_score,
     weighted_median,
 )
 from .predict import ARTIFACT_VERSION
-
-RIDGE_ALPHAS = (0.1, 1.0, 10.0, 100.0)
+from .validation import evaluate_nested
 
 
 def _load_index(data_dir: Path) -> tuple[list[Path], np.ndarray]:
@@ -57,12 +56,36 @@ def _load_or_extract_features(
     refresh: bool,
 ) -> pd.DataFrame:
     expected_ids = [path.name for path in paths]
-    if cache_path.is_file() and not refresh:
-        cached = pd.read_csv(cache_path)
-        if cached.get("file_id", pd.Series(dtype=str)).tolist() == expected_ids:
-            print(f"Using cached features from {cache_path}")
-            return cached
-        print("SHM feature cache does not match the training index; rebuilding it.")
+    manifest_path = cache_path.with_suffix(".manifest.json")
+    identity = {
+        "feature_config": json.loads(json.dumps(config.to_dict())),
+        "raw_sha256": {
+            path.name: hashlib.sha256(path.read_bytes()).hexdigest() for path in paths
+        },
+        "extractor_sha256": hashlib.sha256(
+            Path(feature_module.__file__).read_bytes()
+        ).hexdigest(),
+        "numpy": np.__version__,
+        "scipy": scipy.__version__,
+        "rainflow": rainflow.__version__,
+    }
+    hashes = list(identity["raw_sha256"].values())
+    if len(set(hashes)) != len(hashes):
+        raise ValueError(
+            "Duplicate SHM histories require grouped validation before training."
+        )
+    if cache_path.is_file() and manifest_path.is_file() and not refresh:
+        try:
+            manifest = json.loads(manifest_path.read_text())
+            cache_hash = hashlib.sha256(cache_path.read_bytes()).hexdigest()
+            if manifest == {**identity, "cache_sha256": cache_hash}:
+                cached = pd.read_csv(cache_path)
+                if cached.get("file_id", pd.Series(dtype=str)).tolist() == expected_ids:
+                    print(f"Using verified cached features from {cache_path}")
+                    return cached
+        except (ValueError, OSError):
+            pass
+    print("SHM feature cache requires extraction or provenance verification.")
     print(f"Extracting rainflow features from {len(paths)} SHM files...")
     rows = Parallel(n_jobs=jobs, verbose=5)(
         delayed(extract_features)(path, config) for path in paths
@@ -70,106 +93,17 @@ def _load_or_extract_features(
     frame = pd.DataFrame(rows)
     cache_path.parent.mkdir(parents=True, exist_ok=True)
     frame.to_csv(cache_path, index=False)
-    return frame
-
-
-def _mape_errors(actual: np.ndarray, predicted: np.ndarray) -> np.ndarray:
-    return np.abs(actual - predicted) / actual
-
-
-def _proxy(frame: pd.DataFrame, exponent: int) -> np.ndarray:
-    return frame[f"rainflow__miner_proxy_m{exponent}"].to_numpy(dtype=np.float64)
-
-
-def _select_exponent(
-    frame: pd.DataFrame,
-    damage: np.ndarray,
-    indices: np.ndarray,
-    config: SHMFeatureConfig,
-) -> int:
-    splitter = KFold(n_splits=5, shuffle=True, random_state=42)
-    candidates: list[tuple[float, int]] = []
-    for exponent in config.candidate_exponents:
-        proxies = _proxy(frame, exponent)
-        errors: list[float] = []
-        for inner_train, inner_validation in splitter.split(indices):
-            train_indices = indices[inner_train]
-            validation_indices = indices[inner_validation]
-            scale = calibrate_miner_scale(damage[train_indices], proxies[train_indices])
-            errors.extend(
-                _mape_errors(
-                    damage[validation_indices], scale * proxies[validation_indices]
-                )
-            )
-        candidates.append((float(np.mean(errors)), exponent))
-    return min(candidates)[1]
-
-
-def _select_residual_alpha(
-    matrix: np.ndarray,
-    damage: np.ndarray,
-    proxies: np.ndarray,
-    indices: np.ndarray,
-) -> float:
-    splitter = KFold(n_splits=5, shuffle=True, random_state=42)
-    candidates: list[tuple[float, float]] = []
-    for alpha in RIDGE_ALPHAS:
-        errors: list[float] = []
-        for inner_train, inner_validation in splitter.split(indices):
-            train_indices = indices[inner_train]
-            validation_indices = indices[inner_validation]
-            scale = calibrate_miner_scale(damage[train_indices], proxies[train_indices])
-            target = np.log(damage[train_indices] / (scale * proxies[train_indices]))
-            estimator = make_pipeline(StandardScaler(), Ridge(alpha=alpha)).fit(
-                matrix[train_indices], target
-            )
-            predicted = (
-                scale
-                * proxies[validation_indices]
-                * np.exp(estimator.predict(matrix[validation_indices]))
-            )
-            errors.extend(_mape_errors(damage[validation_indices], predicted))
-        candidates.append((float(np.mean(errors)), alpha))
-    return min(candidates)[1]
-
-
-def _loo_predictions(
-    features: pd.DataFrame,
-    damage: np.ndarray,
-    residual_names: list[str],
-    config: SHMFeatureConfig,
-) -> tuple[np.ndarray, np.ndarray, list[int], list[float]]:
-    count = len(damage)
-    all_indices = np.arange(count)
-    matrix = features[residual_names].to_numpy(dtype=np.float64)
-    physics_predictions = np.empty(count, dtype=np.float64)
-    residual_predictions = np.empty(count, dtype=np.float64)
-    selected_exponents: list[int] = []
-    selected_alphas: list[float] = []
-    for validation_index in all_indices:
-        train_indices = all_indices[all_indices != validation_index]
-        exponent = _select_exponent(features, damage, train_indices, config)
-        proxies = _proxy(features, exponent)
-        scale = calibrate_miner_scale(damage[train_indices], proxies[train_indices])
-        physics_predictions[validation_index] = scale * proxies[validation_index]
-        alpha = _select_residual_alpha(matrix, damage, proxies, train_indices)
-        target = np.log(damage[train_indices] / (scale * proxies[train_indices]))
-        estimator = make_pipeline(StandardScaler(), Ridge(alpha=alpha)).fit(
-            matrix[train_indices], target
+    manifest_path.write_text(
+        json.dumps(
+            {
+                **identity,
+                "cache_sha256": hashlib.sha256(cache_path.read_bytes()).hexdigest(),
+            },
+            indent=2,
         )
-        residual_predictions[validation_index] = (
-            scale
-            * proxies[validation_index]
-            * np.exp(estimator.predict(matrix[[validation_index]])[0])
-        )
-        selected_exponents.append(exponent)
-        selected_alphas.append(alpha)
-    return (
-        physics_predictions,
-        residual_predictions,
-        selected_exponents,
-        selected_alphas,
+        + "\n"
     )
+    return frame
 
 
 def _baseline_results(features: pd.DataFrame, damage: np.ndarray) -> dict[str, float]:
@@ -223,64 +157,71 @@ def main() -> None:
     if not np.isfinite(matrix).all():
         raise ValueError("SHM training features contain non-finite values.")
 
-    physics, residual, exponents, alphas = _loo_predictions(
-        features, damage, names, config
-    )
-    physics_errors = _mape_errors(damage, physics)
-    residual_errors = _mape_errors(damage, residual)
-    physics_mape = float(np.mean(physics_errors))
-    residual_mape = float(np.mean(residual_errors))
-    use_residual = residual_mape <= physics_mape - 0.002 and np.quantile(
-        residual_errors, 0.95
-    ) <= np.quantile(physics_errors, 0.95)
-    selected_errors = residual_errors if use_residual else physics_errors
-    baselines = _baseline_results(features, damage)
-
-    all_indices = np.arange(len(damage))
-    exponent = _select_exponent(features, damage, all_indices, config)
-    proxies = _proxy(features, exponent)
+    nested = evaluate_nested(features, damage, names, config)
+    final_selection = nested["final_selection"]
+    use_residual = final_selection["family"] == "physics_plus_ridge_residual"
+    exponent = final_selection["exponent"]
+    proxies = features[f"rainflow__miner_proxy_m{exponent}"].to_numpy(dtype=float)
     scale = calibrate_miner_scale(damage, proxies)
     residual_estimator: Any | None = None
     selected_alpha: float | None = None
     if use_residual:
-        selected_alpha = _select_residual_alpha(matrix, damage, proxies, all_indices)
+        selected_alpha = final_selection["alpha"]
         target = np.log(damage / (scale * proxies))
         residual_estimator = make_pipeline(
             StandardScaler(), Ridge(alpha=selected_alpha)
         ).fit(matrix, target)
 
+    physics = nested["summary"]["calibrated_miner"]
+    residual = nested["summary"]["physics_plus_ridge_residual"]
+    selected = nested["summary"]["nested_selection"]
     results = {
-        **baselines,
-        "physics_loo_mape": physics_mape,
-        "physics_loo_score": official_shm_score(damage, physics),
-        "physics_p95_absolute_percentage_error": float(
-            np.quantile(physics_errors, 0.95)
-        ),
-        "residual_loo_mape": residual_mape,
-        "residual_loo_score": official_shm_score(damage, residual),
-        "residual_p95_absolute_percentage_error": float(
-            np.quantile(residual_errors, 0.95)
-        ),
-        "selected_model": "physics_plus_ridge_residual"
-        if use_residual
-        else "calibrated_miner",
-        "selected_loo_mape": float(np.mean(selected_errors)),
-        "selected_loo_score": max(0.0, 1.0 - float(np.mean(selected_errors))),
-        "p95_absolute_percentage_error": float(np.quantile(selected_errors, 0.95)),
+        **_baseline_results(features, damage),
+        "physics_loo_mape": physics["mape"],
+        "physics_loo_score": physics["official_score"],
+        "physics_p95_absolute_percentage_error": physics[
+            "p95_absolute_percentage_error"
+        ],
+        "residual_loo_mape": residual["mape"],
+        "residual_loo_score": residual["official_score"],
+        "residual_p95_absolute_percentage_error": residual[
+            "p95_absolute_percentage_error"
+        ],
+        "selected_model": final_selection["family"],
+        "selected_loo_mape": selected["mape"],
+        "selected_loo_score": selected["official_score"],
+        "p95_absolute_percentage_error": selected["p95_absolute_percentage_error"],
+        "error_indicator_kind": "historical_outer_validation_p95_absolute_percentage_error",
+        "error_indicator_description": "Same historical error percentile for every file; not a per-file prediction interval or coverage guarantee.",
         "selected_exponent": exponent,
-        "outer_exponent_counts": {
-            str(value): exponents.count(value) for value in sorted(set(exponents))
-        },
-        "outer_alpha_counts": {
-            str(value): alphas.count(value) for value in sorted(set(alphas))
-        },
+        "outer_exponent_counts": nested["outer_exponent_counts"],
+        "outer_alpha_counts": nested["outer_alpha_counts"],
         "selected_alpha": selected_alpha,
+        "nested_validation": nested,
+        "input_provenance": {
+            "features": json.loads(
+                args.feature_cache.with_suffix(".manifest.json").read_text()
+            ),
+            "labels_sha256": hashlib.sha256(
+                (args.data_dir / "Train_Labels.csv").read_bytes()
+            ).hexdigest(),
+        },
     }
-    print(json.dumps(results, indent=2))
+    print(
+        json.dumps(
+            {
+                key: value
+                for key, value in results.items()
+                if key not in ("nested_validation", "input_provenance")
+            },
+            indent=2,
+        )
+    )
 
     metadata = {
         "trained_at_utc": datetime.now(timezone.utc).isoformat(),
         "training_files": len(paths),
+        "validation_protocol": nested["protocol"],
         "python": platform.python_version(),
         "numpy": np.__version__,
         "pandas": pd.__version__,

@@ -140,3 +140,7 @@ def test_saved_artifact_predicts_positive_damage(tmp_path: Path) -> None:
     assert result.prediction > 0
     assert result.cycle_count > 0
     assert result.estimated_percentage_error == 0.1
+    assert (
+        result.to_dict()["error_indicator_kind"]
+        == "historical_validation_p95_absolute_percentage_error"
+    )
