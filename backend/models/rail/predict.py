@@ -14,8 +14,10 @@ import numpy as np
 
 from .features import FeatureConfig, extract_features
 from .types import RailLabel, RailPrediction
+from .wavelength import FEATURE_SET, WAVELENGTH_CONFIG, extract_production_features
 
-ARTIFACT_VERSION = "rail-pipeline-v1"
+ARTIFACT_VERSION = "rail-pipeline-v2"
+LEGACY_ARTIFACT_VERSION = "rail-pipeline-v1"
 RAIL_LABELS: tuple[RailLabel, ...] = ("Normal", "Side I", "Side II")
 
 
@@ -30,7 +32,10 @@ class RailPredictor:
     """Load one fitted artifact and predict validated Rail CSV files."""
 
     def __init__(self, artifact: dict[str, Any]) -> None:
-        if artifact.get("artifact_version") != ARTIFACT_VERSION:
+        if artifact.get("artifact_version") not in (
+            ARTIFACT_VERSION,
+            LEGACY_ARTIFACT_VERSION,
+        ):
             raise ValueError(
                 f"Unsupported Rail artifact version: {artifact.get('artifact_version')!r}."
             )
@@ -41,6 +46,17 @@ class RailPredictor:
         if tuple(artifact["labels"]) != RAIL_LABELS:
             raise ValueError("Rail artifact contains an unexpected label schema.")
 
+        self.feature_set = artifact.get("feature_set", "base_v1")
+        if artifact["artifact_version"] == ARTIFACT_VERSION:
+            if (
+                self.feature_set != FEATURE_SET
+                or artifact.get("wavelength_config") != WAVELENGTH_CONFIG
+            ):
+                raise ValueError(
+                    "Unsupported or missing Rail wavelength feature configuration."
+                )
+        elif self.feature_set != "base_v1":
+            raise ValueError("Legacy Rail artifacts support only base features.")
         self.estimator = artifact["estimator"]
         self.feature_names = tuple(str(name) for name in artifact["feature_names"])
         self.config = FeatureConfig.from_dict(artifact["feature_config"])
@@ -62,7 +78,11 @@ class RailPredictor:
     def predict_file(self, path: str | Path) -> RailPrediction:
         """Predict one file and return class scores plus GUI diagnostics."""
 
-        feature_row = extract_features(path, self.config)
+        feature_row = (
+            extract_production_features(path, self.config)
+            if self.feature_set == FEATURE_SET
+            else extract_features(path, self.config)
+        )
         missing = [name for name in self.feature_names if name not in feature_row]
         if missing:
             raise ValueError(f"Extracted Rail features are missing {missing[0]!r}.")
@@ -151,7 +171,9 @@ def main() -> None:
     predictions = [predictor.predict_file(path) for path in _input_files(args.input)]
     args.output.parent.mkdir(parents=True, exist_ok=True)
     with args.output.open("w", newline="", encoding="utf-8") as stream:
-        writer = csv.DictWriter(stream, fieldnames=["file_id", "prediction"])
+        writer = csv.DictWriter(
+            stream, fieldnames=["file_id", "prediction"], lineterminator="\n"
+        )
         writer.writeheader()
         writer.writerows(
             {"file_id": result.file_id, "prediction": result.prediction}

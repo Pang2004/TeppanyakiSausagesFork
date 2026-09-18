@@ -1,6 +1,6 @@
 # TeppanyakiSausages — PS3 Train Condition Monitoring
 
-This repository contains our NebulaX 2026 Hackathon solution for Problem Statement 3 (PS3). We plan to attempt all four independent train-condition tasks because each contributes 25% to the overall score:
+This repository contains our NebulaX 2026 Hackathon solution for Problem Statement 3 (PS3). It implements all four independent train-condition tasks, each contributing 25% to the overall score:
 
 | Subsystem | Task | Scoring metric | Submission file |
 | --- | --- | --- | --- |
@@ -58,20 +58,19 @@ python -c "import numpy, pandas, scipy, sklearn, joblib, openpyxl, fastapi; prin
 python -m pytest
 ```
 
-## Planned Solution Architecture
+## Solution Architecture
 
-The following structure is the implementation target and may not exist until its owning branch is merged:
+The implemented model layer, saved artifacts, tests, and generated deliverables use this structure:
 
 ```text
 backend/
-├── app.py                    # FastAPI application
+├── artifacts/                # Versioned trained model files
 └── models/
     ├── door/
     ├── acv/
     ├── rail/
     └── shm/
-frontend/                     # Vite React + TypeScript dashboard
-tests/                        # Model, API, and submission-contract tests
+tests/                        # Model and submission-contract tests
 outputs/                      # Generated model deliverables; committed and kept current
 ```
 
@@ -85,7 +84,7 @@ python -m backend.models.<subsystem>.predict \
 
 The app will call `POST /api/predict/{subsystem}` with one uploaded file. The response contract contains `subsystem`, `output_filename`, `columns`, `rows`, `csv_text`, and a short `summary`. The React dashboard will provide subsystem selection, upload feedback, a result-specific visualization, a table, and CSV download.
 
-## One-Day Team Plan
+## Subsystem Ownership
 
 | Owner | Primary work | Integration responsibility |
 | --- | --- | --- |
@@ -94,17 +93,16 @@ The app will call `POST /api/predict/{subsystem}` with one uploaded file. The re
 | SHM owner | Stress features and MAPE-focused regression | Damage result card |
 | ACV owner / integration lead | Per-car anomaly ranking | FastAPI/React shell and ranked-car view |
 
-Subsystem owners should follow the detailed [`backend/models/rail/PLAN.md`](backend/models/rail/PLAN.md), [`backend/models/door/PLAN.md`](backend/models/door/PLAN.md), [`backend/models/shm/PLAN.md`](backend/models/shm/PLAN.md), and [`backend/models/acv/PLAN.md`](backend/models/acv/PLAN.md), which define their data interpretation, validation, model comparison, interfaces, and submission checks.
+The completed [`Rail`](backend/models/rail/METHODOLOGY.md), [`Door`](backend/models/door/METHODOLOGY.md), [`SHM`](backend/models/shm/METHODOLOGY.md), and [`ACV`](backend/models/acv/METHODOLOGY.md) methodology reports explain each model's data interpretation, feature engineering, validation, estimated results, limitations, and prediction interface.
 
-Work in parallel, but freeze the shared request/response contract before model development. Each owner is responsible for training, validation, the prediction adapter, and their result component. Prioritize a complete baseline over prolonged tuning.
+Each owner remains responsible for keeping their artifact, validation report, prediction adapter, result component, and tracked outputs consistent. Coordinate changes to shared API schemas with the integration lead.
 
-Suggested sequence:
+Remaining integration sequence:
 
-1. Scaffold the backend, frontend, shared schemas, and mock responses.
-2. Build four baselines in parallel and validate with each official metric.
-3. Connect prediction adapters and subsystem visualizations.
-4. Run the held-out inputs and validate every output schema.
-5. Package `predictions.zip`, then record the app demo in under three minutes.
+1. Scaffold the backend, frontend, and shared response schemas.
+2. Connect the four completed prediction adapters and subsystem visualizations.
+3. Re-run held-out inference and validate every output schema.
+4. Package `predictions.zip`, then record the app demo in under three minutes.
 
 ## Submission Gate
 

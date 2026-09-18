@@ -17,7 +17,11 @@ from backend.models.rail.features import (
     extract_features,
     parse_sensor_layout,
 )
-from backend.models.rail.predict import ARTIFACT_VERSION, RAIL_LABELS, RailPredictor
+from backend.models.rail.predict import (
+    LEGACY_ARTIFACT_VERSION,
+    RAIL_LABELS,
+    RailPredictor,
+)
 
 
 def _columns() -> list[str]:
@@ -90,7 +94,7 @@ def test_saved_artifact_predicts_and_exposes_diagnostics(
     artifact_path = tmp_path / "rail.joblib"
     joblib.dump(
         {
-            "artifact_version": ARTIFACT_VERSION,
+            "artifact_version": LEGACY_ARTIFACT_VERSION,
             "estimator": estimator,
             "feature_names": feature_names,
             "feature_config": FeatureConfig().to_dict(),
@@ -105,3 +109,69 @@ def test_saved_artifact_predicts_and_exposes_diagnostics(
     assert set(result.scores) == set(RAIL_LABELS)
     assert set(result.side_energy) == {"Side I", "Side II"}
     assert set(result.dominant_frequency) == {"Side I", "Side II"}
+
+
+def test_wavelength_artifact_roundtrip_and_configuration_guard(recording, tmp_path):
+    from backend.models.rail.predict import ARTIFACT_VERSION
+    from backend.models.rail.wavelength import (
+        FEATURE_SET,
+        WAVELENGTH_CONFIG,
+        extract_production_features,
+    )
+
+    row = extract_production_features(recording)
+    names = [name for name in row if name != "file_id"]
+    assert len(names) == 855
+    matrix = np.asarray([[row[name] for name in names]] * 3)
+    model = DummyClassifier(strategy="prior").fit(matrix, np.asarray(RAIL_LABELS))
+    artifact = {
+        "artifact_version": ARTIFACT_VERSION,
+        "feature_set": FEATURE_SET,
+        "wavelength_config": WAVELENGTH_CONFIG,
+        "feature_config": FeatureConfig().to_dict(),
+        "feature_names": names,
+        "labels": list(RAIL_LABELS),
+        "estimator": model,
+    }
+    path = tmp_path / "wavelength.joblib"
+    joblib.dump(artifact, path)
+    result = RailPredictor.from_artifact(path).predict_file(recording)
+    assert result.prediction == model.predict(matrix[:1])[0]
+    assert sum(result.scores.values()) == pytest.approx(1.0)
+    bad = {
+        **artifact,
+        "wavelength_config": {**WAVELENGTH_CONFIG, "edges_per_rotation": 90},
+    }
+    with pytest.raises(ValueError, match="wavelength feature configuration"):
+        RailPredictor(bad)
+    with pytest.raises(ValueError, match="wavelength feature configuration"):
+        RailPredictor(
+            {key: value for key, value in artifact.items() if key != "feature_set"}
+        )
+
+
+def test_production_cache_invalidates_with_raw_hash_and_feature_configuration(
+    tmp_path, monkeypatch
+):
+    from backend.models.rail import train
+
+    calls = []
+    path = tmp_path / "Train1.csv"
+    cache = tmp_path / "features.csv"
+
+    def extract(paths, config, jobs):
+        calls.append(paths)
+        return pd.DataFrame({"file_id": [p.name for p in paths], "value": [len(calls)]})
+
+    monkeypatch.setattr(train, "_extract_dataset", extract)
+    for digest in ("one", "one", "two"):
+        train._load_or_extract_features(
+            [path], cache, FeatureConfig(), 1, False, np.array([digest])
+        )
+    assert len(calls) == 2
+    # An old filename-only cache must never be reused for the upgraded feature set.
+    cache.with_suffix(".manifest.json").unlink()
+    train._load_or_extract_features(
+        [path], cache, FeatureConfig(), 1, False, np.array(["two"])
+    )
+    assert len(calls) == 3

@@ -16,19 +16,15 @@ import pandas as pd
 import scipy
 import sklearn
 from joblib import Parallel, delayed
-from sklearn.base import clone
-from sklearn.calibration import CalibratedClassifierCV
 from sklearn.dummy import DummyClassifier
-from sklearn.ensemble import ExtraTreesClassifier
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import confusion_matrix, f1_score
-from sklearn.model_selection import RepeatedStratifiedKFold
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
-from sklearn.svm import SVC
 
-from .features import FeatureConfig, extract_features
+from .features import FeatureConfig
 from .predict import ARTIFACT_VERSION, RAIL_LABELS
+from .validation import evaluate_nested, fit_grouped, recording_groups, select_candidate
+from .wavelength import FEATURE_SET, WAVELENGTH_CONFIG, extract_production_features
 
 
 def _natural_key(path: Path) -> list[object]:
@@ -76,16 +72,34 @@ def _extract_dataset(
     paths: list[Path], config: FeatureConfig, jobs: int
 ) -> pd.DataFrame:
     rows = Parallel(n_jobs=jobs, verbose=5)(
-        delayed(extract_features)(path, config) for path in paths
+        delayed(extract_production_features)(path, config) for path in paths
     )
     return pd.DataFrame(rows)
 
 
 def _load_or_extract_features(
-    paths: list[Path], cache_path: Path, config: FeatureConfig, jobs: int, refresh: bool
+    paths: list[Path],
+    cache_path: Path,
+    config: FeatureConfig,
+    jobs: int,
+    refresh: bool,
+    groups: np.ndarray,
 ) -> pd.DataFrame:
     expected_ids = [path.name for path in paths]
-    if cache_path.is_file() and not refresh:
+    manifest_path = cache_path.with_suffix(".manifest.json")
+    manifest = {
+        "feature_set": FEATURE_SET,
+        "base_config": config.to_dict(),
+        "wavelength_config": WAVELENGTH_CONFIG,
+        "recordings": dict(zip(expected_ids, groups.tolist(), strict=True)),
+    }
+    manifest = json.loads(json.dumps(manifest))
+    if (
+        cache_path.is_file()
+        and manifest_path.is_file()
+        and not refresh
+        and json.loads(manifest_path.read_text()) == manifest
+    ):
         cached = pd.read_csv(cache_path)
         if cached.get("file_id", pd.Series(dtype=str)).tolist() == expected_ids:
             print(f"Using cached features from {cache_path}")
@@ -96,91 +110,23 @@ def _load_or_extract_features(
     frame = _extract_dataset(paths, config, jobs)
     cache_path.parent.mkdir(parents=True, exist_ok=True)
     frame.to_csv(cache_path, index=False)
+    manifest_path.write_text(json.dumps(manifest, indent=2) + "\n")
     return frame
 
 
 def _candidate_models(jobs: int) -> dict[str, Any]:
-    return {
-        "dummy_normal": DummyClassifier(strategy="constant", constant="Normal"),
-        "balanced_logistic_regression": make_pipeline(
+    """Fixed selected feature family; tune only regularization within grouped folds."""
+    candidates = {
+        "dummy_normal": DummyClassifier(strategy="constant", constant="Normal")
+    }
+    for c in (0.01, 0.1, 1.0, 10.0):
+        candidates[f"balanced_logistic_C_{c}"] = make_pipeline(
             StandardScaler(),
             LogisticRegression(
-                class_weight="balanced", max_iter=5_000, random_state=42
+                C=c, class_weight="balanced", max_iter=5000, random_state=42
             ),
-        ),
-        "balanced_rbf_svm": CalibratedClassifierCV(
-            make_pipeline(
-                StandardScaler(),
-                SVC(
-                    class_weight="balanced",
-                    C=1.0,
-                    gamma="scale",
-                    random_state=42,
-                ),
-            ),
-            method="sigmoid",
-            cv=3,
-            ensemble=False,
-        ),
-        "balanced_extra_trees": ExtraTreesClassifier(
-            n_estimators=500,
-            class_weight="balanced",
-            max_features="sqrt",
-            random_state=42,
-            n_jobs=jobs,
-        ),
-    }
-
-
-def _evaluate_model(
-    name: str, estimator: Any, x: np.ndarray, y: np.ndarray
-) -> dict[str, Any]:
-    splitter = RepeatedStratifiedKFold(n_splits=5, n_repeats=3, random_state=42)
-    macro_scores: list[float] = []
-    per_class: dict[str, list[float]] = {label: [] for label in RAIL_LABELS}
-    total_confusion = np.zeros((len(RAIL_LABELS), len(RAIL_LABELS)), dtype=int)
-    for train_indices, validation_indices in splitter.split(x, y):
-        fold_model = clone(estimator)
-        fold_model.fit(x[train_indices], y[train_indices])
-        predicted = fold_model.predict(x[validation_indices])
-        macro_scores.append(
-            float(
-                f1_score(
-                    y[validation_indices],
-                    predicted,
-                    average="macro",
-                    labels=RAIL_LABELS,
-                )
-            )
         )
-        class_scores = f1_score(
-            y[validation_indices],
-            predicted,
-            average=None,
-            labels=RAIL_LABELS,
-            zero_division=0,
-        )
-        for label, score in zip(RAIL_LABELS, class_scores, strict=True):
-            per_class[label].append(float(score))
-        total_confusion += confusion_matrix(
-            y[validation_indices], predicted, labels=RAIL_LABELS
-        )
-
-    result = {
-        "name": name,
-        "macro_f1_mean": float(np.mean(macro_scores)),
-        "macro_f1_std": float(np.std(macro_scores)),
-        "per_class_f1_mean": {
-            label: float(np.mean(scores)) for label, scores in per_class.items()
-        },
-        "confusion_matrix": total_confusion.tolist(),
-        "labels": list(RAIL_LABELS),
-    }
-    print(
-        f"{name}: macro F1 {result['macro_f1_mean']:.4f} "
-        f"(+/- {result['macro_f1_std']:.4f})"
-    )
-    return result
+    return candidates
 
 
 def main() -> None:
@@ -190,10 +136,15 @@ def main() -> None:
         "--model-out", type=Path, default=Path("backend/artifacts/rail_pipeline.joblib")
     )
     parser.add_argument(
-        "--feature-cache", type=Path, default=Path("outputs/rail/train_features.csv")
+        "--feature-cache",
+        type=Path,
+        default=Path("outputs/rail/train_features_wavelength.csv"),
     )
     parser.add_argument(
         "--cv-results", type=Path, default=Path("outputs/rail/cv_results.json")
+    )
+    parser.add_argument(
+        "--oof-predictions", type=Path, default=Path("outputs/rail/oof_predictions.csv")
     )
     parser.add_argument("--jobs", type=int, default=4)
     parser.add_argument("--refresh-features", action="store_true")
@@ -203,28 +154,51 @@ def main() -> None:
 
     config = FeatureConfig()
     paths, labels = _load_training_index(args.data_dir)
+    y = np.asarray(labels)
+    groups = recording_groups(paths, y)
     features = _load_or_extract_features(
-        paths, args.feature_cache, config, args.jobs, args.refresh_features
+        paths, args.feature_cache, config, args.jobs, args.refresh_features, groups
     )
     feature_names = [column for column in features.columns if column != "file_id"]
     x = features[feature_names].to_numpy(dtype=np.float64)
-    y = np.asarray(labels)
     if not np.isfinite(x).all():
         raise ValueError("Training features contain non-finite values.")
 
     candidates = _candidate_models(args.jobs)
-    results = [
-        _evaluate_model(name, estimator, x, y) for name, estimator in candidates.items()
-    ]
-    eligible = [result for result in results if result["name"] != "dummy_normal"]
-    winner = max(eligible, key=lambda result: result["macro_f1_mean"])
-    selected_model = str(winner["name"])
-    estimator = candidates[selected_model]
-    estimator.fit(x, y)
+    results, predictions = evaluate_nested(
+        candidates, x, y, groups, [p.name for p in paths]
+    )
+    results["feature_set"] = FEATURE_SET
+    results["protocol"]["selection_scope"] = (
+        "Regularization only; original plus wavelength features fixed after exploratory comparison."
+    )
+    results["protocol"]["limitations"].append(
+        "This feature family was chosen after inspecting exploratory outer scores; nested C tuning does not remove that selection bias."
+    )
+    results["exploratory_context"] = {
+        "feature_selection_macro_f1": 0.6858587709826242,
+        "source": "backend/models/rail/METHODOLOGY.md#experiment-comparison",
+        "meaning": "Outer score of selecting among six feature sets within inner validation, distinct from this fixed-family result.",
+    }
+    nested = results["nested_selection"]
+    print(
+        f"Nested grouped macro F1: {nested['macro_f1_mean']:.4f} "
+        f"(fold standard deviation {nested['macro_f1_std']:.4f})"
+    )
+    selected_model, final_scores = select_candidate(candidates, x, y, groups)
+    results["final_selection"] = {
+        "selected_model": selected_model,
+        "inner_macro_f1": final_scores,
+        "note": "Full-data inner scores select the artifact; they are not its performance estimate.",
+    }
+    estimator = fit_grouped(candidates[selected_model], x, y, groups)
+    args.oof_predictions.parent.mkdir(parents=True, exist_ok=True)
+    predictions.to_csv(args.oof_predictions, index=False)
 
     metadata = {
         "trained_at_utc": datetime.now(timezone.utc).isoformat(),
         "training_samples": len(paths),
+        "unique_recording_groups": len(set(groups)),
         "class_counts": {label: labels.count(label) for label in RAIL_LABELS},
         "python": platform.python_version(),
         "numpy": np.__version__,
@@ -238,6 +212,8 @@ def main() -> None:
         "estimator": estimator,
         "feature_names": feature_names,
         "feature_config": config.to_dict(),
+        "feature_set": FEATURE_SET,
+        "wavelength_config": WAVELENGTH_CONFIG,
         "labels": list(RAIL_LABELS),
         "selected_model": selected_model,
         "cv_results": results,
