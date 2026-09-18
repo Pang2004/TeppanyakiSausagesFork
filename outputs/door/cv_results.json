@@ -1,0 +1,62 @@
+[
+  {
+    "name": "dummy_normal",
+    "official_score_mean": 0.7272727272727272,
+    "official_score_std": 0.07041787902195307,
+    "chronological_macro_f1_mean": 0.420136696388301,
+    "abnormal_recall_mean": 0.0,
+    "repeated_stratified_macro_f1_mean": 0.42105263157894723,
+    "chronological_fold_scores": [
+      0.6818181818181818,
+      0.8636363636363636,
+      0.6818181818181818,
+      0.7272727272727273,
+      0.6818181818181818
+    ]
+  },
+  {
+    "name": "balanced_logistic_regression",
+    "official_score_mean": 1.0,
+    "official_score_std": 0.0,
+    "chronological_macro_f1_mean": 1.0,
+    "abnormal_recall_mean": 1.0,
+    "repeated_stratified_macro_f1_mean": 0.9959595959595959,
+    "chronological_fold_scores": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "balanced_rbf_svm",
+    "official_score_mean": 1.0,
+    "official_score_std": 0.0,
+    "chronological_macro_f1_mean": 1.0,
+    "abnormal_recall_mean": 1.0,
+    "repeated_stratified_macro_f1_mean": 1.0,
+    "chronological_fold_scores": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "balanced_extra_trees",
+    "official_score_mean": 1.0,
+    "official_score_std": 0.0,
+    "chronological_macro_f1_mean": 1.0,
+    "abnormal_recall_mean": 1.0,
+    "repeated_stratified_macro_f1_mean": 1.0,
+    "chronological_fold_scores": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ]
+  }
+]
