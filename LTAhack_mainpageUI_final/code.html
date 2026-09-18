@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-
-<html lang="en" style=""><head></head><body class="min-h-screen flex flex-col justify-between select-none antialiased relative overflow-x-hidden font-mono text-slate-900" style="font-family: Cabin, 'Trebuchet MS', 'Segoe UI', system-ui, -apple-system, sans-serif; background-color: #f1f5f9; background-image: radial-gradient(circle at 10% 20%, rgba(0, 150, 69, 0.07) 0%, transparent 40%), radial-gradient(circle at 90% 15%, rgba(212, 46, 18, 0.07) 0%, transparent 45%), radial-gradient(circle at 80% 85%, rgba(0, 94, 196, 0.07) 0%, transparent 40%), repeating-linear-gradient(45deg, transparent, transparent 38px, rgba(0, 94, 196, 0.035) 38px, rgba(0, 94, 196, 0.035) 43px, transparent 43px, transparent 80px), repeating-linear-gradient(-45deg, transparent, transparent 48px, rgba(0, 150, 69, 0.035) 48px, rgba(0, 150, 69, 0.035) 53px, transparent 53px, transparent 100px), repeating-linear-gradient(0deg, transparent, transparent 58px, rgba(212, 46, 18, 0.03) 58px, rgba(212, 46, 18, 0.03) 63px, transparent 63px, transparent 120px);"><svg aria-hidden="true" class="inline-defs-container" style="position:absolute;width:0;height:0;overflow:hidden"></svg>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<!DOCTYPE html><html class="h-full bg-slate-900" lang="en" style=""><svg class="inline-defs-container" aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden"></svg><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport">
 <title>MRT Predictive Maintenance</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link class="" href="https://fonts.googleapis.com/css2?family=Cabin:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cabin:wght@500;600;700&amp;display=swap" rel="stylesheet">
 <script>
     tailwind.config = {
       theme: {
@@ -34,21 +33,6 @@
       image-rendering: -webkit-crisp-edges;
       image-rendering: pixelated;
       image-rendering: crisp-edges;
-    }
-
-    /* Pixel scanlines overlay */
-    .scanlines {
-      background: linear-gradient(
-        rgba(10, 15, 25, 0) 50%, 
-        rgba(0, 0, 0, 0.3) 50%
-      ), linear-gradient(
-        90deg,
-        rgba(255, 0, 0, 0.02),
-        rgba(0, 255, 0, 0.01),
-        rgba(0, 255, 0, 0.02)
-      );
-      background-size: 100% 3px, 6px 100%;
-      pointer-events: none;
     }
 
     /* Subsystem interactive styling */
@@ -106,40 +90,40 @@
     .subsystem-btn.btn-rail:hover,
     .subsystem-btn.btn-rail.is-hovered,
     .subsystem-btn.btn-rail.is-active {
-      transform: scale(1.06) translateY(-3px);
+      transform: scale(1.04) translateY(-2px);
       background: linear-gradient(145deg, #022c15, #001f0e);
       border-color: #009645;
-      box-shadow: 0 0 0 3px rgba(0, 150, 69, 0.4), 0 0 25px rgba(0, 150, 69, 0.8), 0 0 50px rgba(0, 150, 69, 0.4);
+      box-shadow: 0 0 0 2.5px rgba(0, 150, 69, 0.4), 0 0 20px rgba(0, 150, 69, 0.7);
       z-index: 20;
     }
 
     .subsystem-btn.btn-shm:hover,
     .subsystem-btn.btn-shm.is-hovered,
     .subsystem-btn.btn-shm.is-active {
-      transform: scale(1.06) translateY(-3px);
+      transform: scale(1.04) translateY(-2px);
       background: linear-gradient(145deg, #331f00, #221400);
       border-color: #FA9E0D;
-      box-shadow: 0 0 0 3px rgba(250, 158, 13, 0.45), 0 0 25px rgba(250, 158, 13, 0.85), 0 0 50px rgba(250, 158, 13, 0.45);
+      box-shadow: 0 0 0 2.5px rgba(250, 158, 13, 0.45), 0 0 20px rgba(250, 158, 13, 0.7);
       z-index: 20;
     }
 
     .subsystem-btn.btn-acv:hover,
     .subsystem-btn.btn-acv.is-hovered,
     .subsystem-btn.btn-acv.is-active {
-      transform: scale(1.06) translateY(-3px);
+      transform: scale(1.04) translateY(-2px);
       background: linear-gradient(145deg, #032047, #021430);
       border-color: #005EC4;
-      box-shadow: 0 0 0 3px rgba(0, 94, 196, 0.45), 0 0 25px rgba(0, 94, 196, 0.85), 0 0 50px rgba(0, 94, 196, 0.45);
+      box-shadow: 0 0 0 2.5px rgba(0, 94, 196, 0.45), 0 0 20px rgba(0, 94, 196, 0.7);
       z-index: 20;
     }
 
     .subsystem-btn.btn-door:hover,
     .subsystem-btn.btn-door.is-hovered,
     .subsystem-btn.btn-door.is-active {
-      transform: scale(1.06) translateY(-3px);
+      transform: scale(1.04) translateY(-2px);
       background: linear-gradient(145deg, #3d0c07, #260503);
       border-color: #D42E12;
-      box-shadow: 0 0 0 3px rgba(212, 46, 18, 0.45), 0 0 25px rgba(212, 46, 18, 0.85), 0 0 50px rgba(212, 46, 18, 0.45);
+      box-shadow: 0 0 0 2.5px rgba(212, 46, 18, 0.45), 0 0 20px rgba(212, 46, 18, 0.7);
       z-index: 20;
     }
 
@@ -158,32 +142,81 @@
     .twinkle-fast { animation: starTwinkle 1.8s infinite ease-in-out; }
     .twinkle-slow { animation: starTwinkle 3.2s infinite ease-in-out; }
   </style>
-<!-- Subtle CRT scanline feel -->
-<div class="scanlines fixed inset-0 z-40 pointer-events-none opacity-0 hidden"></div>
+</head>
+<body class="min-h-full flex items-center justify-center select-none antialiased bg-slate-950 font-mono text-slate-900 p-0 sm:p-4 md:p-6" style="font-family: Cabin, 'Trebuchet MS', 'Segoe UI', system-ui, -apple-system, sans-serif;">
 <!-- Direct File Picker for immediate import on click -->
-<input accept=".csv,.dat,.h5,.xlsx,.json,.txt" class="hidden" id="subsystemFileInput" multiple="" onchange="handleFileSelected(event)" type="file"/>
-<!-- Top Spacing container -->
-<!-- Main Viewport Frame: Responsive Mobile Container (390px - 430px optimal) -->
-<main class="w-full max-w-[430px] mx-auto px-3.5 flex-1 flex flex-col justify-center items-center relative z-10 pb-4">
-<!-- Active Telemetry Ingest & Subsystem Mode Banner -->
+<input accept=".csv,.dat,.h5,.xlsx,.json,.txt" class="hidden" id="subsystemFileInput" multiple="" onchange="handleFileSelected(event)" type="file">
+<!-- iPhone Container Shell (390px x 844px mobile viewport layout) -->
+<div class="w-full max-w-[390px] h-screen sm:h-[844px] max-h-screen sm:max-h-[844px] flex flex-col justify-between relative overflow-hidden bg-[#f1f5f9] sm:rounded-[48px] sm:shadow-[0_25px_70px_rgba(0,0,0,0.6),0_0_0_10px_#1e293b] sm:border border-slate-700/60" style="background-color: #f1f5f9; background-image: radial-gradient(circle at 10% 20%, rgba(0, 150, 69, 0.07) 0%, transparent 40%), radial-gradient(circle at 90% 15%, rgba(212, 46, 18, 0.07) 0%, transparent 45%), radial-gradient(circle at 80% 85%, rgba(0, 94, 196, 0.07) 0%, transparent 40%), repeating-linear-gradient(45deg, transparent, transparent 38px, rgba(0, 94, 196, 0.035) 38px, rgba(0, 94, 196, 0.035) 43px, transparent 43px, transparent 80px), repeating-linear-gradient(-45deg, transparent, transparent 48px, rgba(0, 150, 69, 0.035) 48px, rgba(0, 150, 69, 0.035) 53px, transparent 53px, transparent 100px), repeating-linear-gradient(0deg, transparent, transparent 58px, rgba(212, 46, 18, 0.03) 58px, rgba(212, 46, 18, 0.03) 63px, transparent 63px, transparent 120px);">
+<!-- Mobile iOS Status Bar & Dynamic Island -->
+<header class="w-full pt-3 pb-1 px-7 flex items-center justify-between z-30 shrink-0 select-none">
+<!-- Time -->
+<div class="text-[14px] font-semibold tracking-tight text-slate-800 font-sans pl-1">09:41</div>
+<!-- Dynamic Island Pill -->
+<div class="w-24 h-5 bg-black rounded-full mx-auto shadow-inner flex items-center justify-end pr-2.5">
+<div class="w-2.5 h-2.5 rounded-full bg-[#111827] border border-slate-700/40"></div>
+</div>
+<!-- Status Icons: 5G, Wi-Fi, Battery -->
+<div class="flex items-center space-x-1.5 text-slate-800 pr-1">
+<!-- 5G / Signal Bars -->
+<svg class="w-4 h-3 text-slate-800 fill-current" viewBox="0 0 17 12">
+<rect height="3" rx="0.6" width="2.5" x="0" y="9"></rect>
+<rect height="6" rx="0.6" width="2.5" x="4" y="6"></rect>
+<rect height="9" rx="0.6" width="2.5" x="8" y="3"></rect>
+<rect height="12" rx="0.6" width="2.5" x="12" y="0"></rect>
+</svg>
+<!-- Wi-Fi -->
+<svg class="w-3.5 h-3 text-slate-800 fill-current" viewBox="0 0 16 12">
+<path d="M8 9.5a1.5 1.5 0 100 3 1.5 1.5 0 000-3zM2.8 5.8a7.4 7.4 0 0110.4 0 .8.8 0 001.1-1.1A9 9 0 001.7 4.7a.8.8 0 001.1 1.1zM5.3 8.3a3.8 3.8 0 015.4 0 .8.8 0 101.1-1.1 5.4 5.4 0 00-7.6 0 .8.8 0 101.1 1.1z"></path>
+</svg>
+<!-- Battery -->
+<div class="w-5 h-2.5 border border-slate-700 rounded-sm p-0.5 flex items-center relative">
+<div class="h-full bg-slate-800 rounded-2xs w-full"></div>
+<div class="w-0.5 h-1 bg-slate-700 absolute -right-1 rounded-r-xs"></div>
+</div>
+</div>
+</header>
+<!-- App Header Bar -->
+<div class="px-5 pt-1 pb-2 flex items-center justify-between shrink-0 z-20">
+<div class="flex items-center space-x-2">
+<div class="w-7 h-7 rounded-lg bg-red-600 flex items-center justify-center text-white font-bold text-xs shadow-sm">
+        MRT
+      </div>
+<div>
+<h1 class="text-xs font-bold uppercase tracking-wider text-slate-900 leading-none">Fleet Diagnostic</h1>
+<p class="text-[10px] text-slate-500 font-mono mt-0.5">C151 • Unit 011/012 • NSL</p>
+</div>
+</div>
+<div class="flex items-center space-x-1.5 bg-emerald-50 text-emerald-700 border border-emerald-300 px-2 py-0.5 rounded-full text-[10px] font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+<span class="">LIVE</span>
+</div>
+</div>
+<!-- Main Viewport Body: Fits train graphic + controls natively -->
+<main class="w-full px-3.5 flex-1 flex flex-col justify-between items-center relative z-10 gap-2.5 min-h-0 pb-1">
 <!-- Main Pixel Art Stage: Deep Twilight Sky + Detailed HDB Blocks + Close-up Kawasaki C151 Carriage -->
-<div class="w-full relative rounded-2xl overflow-hidden border-2 border-slate-300 shadow-[0_14px_35px_rgba(15,23,42,0.22)] bg-[#070E18]">
-<svg class="w-full h-auto block select-none" viewbox="0 0 460 360" xmlns="http://www.w3.org/2000/svg">
+<div class="w-full relative rounded-2xl overflow-hidden border-2 border-slate-300 shadow-[0_14px_35px_rgba(15,23,42,0.22)] bg-[#070E18] flex-1 flex items-center justify-center min-h-[200px]">
+<svg class="w-full h-auto block select-none" viewBox="0 0 460 360" xmlns="http://www.w3.org/2000/svg">
 <defs>
 <!-- Crisp Twilight / Night Sky Gradient (Deep Navy to Slate Blue) -->
-<lineargradient id="nightSkyGrad" x1="0%" x2="0%" y1="0%" y2="100%"><stop class="" offset="0%" stop-color="#38BDF8"></stop><stop class="" offset="45%" stop-color="#7DD3FC"></stop><stop class="" offset="80%" stop-color="#BAE6FD"></stop><stop class="" offset="100%" stop-color="#E0F2FE"></stop></lineargradient>
+<linearGradient id="nightSkyGrad" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop class="" offset="0%" stop-color="#38BDF8"></stop>
+<stop class="" offset="45%" stop-color="#7DD3FC"></stop>
+<stop class="" offset="80%" stop-color="#BAE6FD"></stop>
+<stop class="" offset="100%" stop-color="#E0F2FE"></stop>
+</linearGradient>
 <!-- Concrete Viaduct Gradient (Singapore MRT NSL/EWL elevation) -->
-<lineargradient id="viaductGrad" x1="0%" x2="0%" y1="0%" y2="100%">
+<linearGradient id="viaductGrad" x1="0%" x2="0%" y1="0%" y2="100%">
 <stop offset="0%" stop-color="#64748B"></stop>
 <stop offset="25%" stop-color="#475569"></stop>
 <stop offset="75%" stop-color="#334155"></stop>
 <stop offset="100%" stop-color="#1E293B"></stop>
-</lineargradient>
+</linearGradient>
 </defs>
-<!-- ============================================== -->
-<!-- 1. CLEAR CRISP TWILIGHT / NIGHT SKY            -->
-<!-- ============================================== -->
-<rect fill="url(#nightSkyGrad)" height="250" width="460"></rect><image class="" height="242" href="https://lh3.googleusercontent.com/aida-public/AB6AXuAfAfsXK60QSO2o3FGYtUKGO3x-ofnrrTZbyryDceyuvq01y4EqBtLSg9xVi0W-PWQjDPmaXjilbwGdcqH-2GVSc22etRXJa4a_WT5Ql03cGWrHCqAtezPpFxBETcAQlPr8wGdCMF_4LqMUnWrITapIpxLVH6fgcszcf6sW0Mys1FzTi6mgL-eN5eR-I0wQG89niIncX3Aj-wSFObhwkVLdC6VPxrB7K0I2QXnB2t9xZ2-p5LDW2vZJe5B90Tmxe_YWRg" opacity="0.88" preserveaspectratio="xMidYMid slice" style="mix-blend-mode: multiply; filter: saturate(1.1) brightness(0.95);" width="460" x="0" y="0"/><rect fill="#0284C7" height="242" opacity="0.12" style="mix-blend-mode: color-burn;" width="460"></rect>
+<!-- 1. CLEAR CRISP SKY BACKGROUND & DAYLIGHT HDB PATTERN -->
+<rect fill="url(#nightSkyGrad)" height="250" width="460"></rect>
+<image class="" height="242" href="https://lh3.googleusercontent.com/aida-public/AB6AXuAfAfsXK60QSO2o3FGYtUKGO3x-ofnrrTZbyryDceyuvq01y4EqBtLSg9xVi0W-PWQjDPmaXjilbwGdcqH-2GVSc22etRXJa4a_WT5Ql03cGWrHCqAtezPpFxBETcAQlPr8wGdCMF_4LqMUnWrITapIpxLVH6fgcszcf6sW0Mys1FzTi6mgL-eN5eR-I0wQG89niIncX3Aj-wSFObhwkVLdC6VPxrB7K0I2QXnB2t9xZ2-p5LDW2vZJe5B90Tmxe_YWRg" opacity="0.88" preserveAspectRatio="xMidYMid slice" style="mix-blend-mode: multiply; filter: saturate(1.1) brightness(0.95);" width="460" x="0" y="0"></image>
+<rect fill="#0284C7" height="242" opacity="0.12" style="mix-blend-mode: color-burn;" width="460"></rect>
 <!-- Pixel Shooting Star Streaks -->
 <g opacity="0.85">
 <line stroke="#FFFFFF" stroke-linecap="square" stroke-width="1.5" x1="340" x2="368" y1="28" y2="20"></line>
@@ -193,7 +226,7 @@
 <line stroke="#FFFFFF" stroke-linecap="square" stroke-width="1.5" x1="50" x2="82" y1="46" y2="38"></line>
 <line stroke="#60A5FA" stroke-width="1" x1="42" x2="50" y1="48" y2="46"></line>
 </g>
-<!-- Subtle Twinkling Night Stars -->
+<!-- Twinkling Night Stars -->
 <rect class="twinkle-fast" fill="#F8FAFC" height="2" width="2" x="24" y="22"></rect>
 <rect fill="#93C5FD" height="1.5" width="1.5" x="84" y="16"></rect>
 <rect class="twinkle-slow" fill="#FFFFFF" height="2" width="2" x="142" y="32"></rect>
@@ -204,12 +237,6 @@
 <rect fill="#93C5FD" height="1.5" width="1.5" x="18" y="70"></rect>
 <rect fill="#E2E8F0" height="2" width="2" x="175" y="52"></rect>
 <rect class="twinkle-fast" fill="#FFFFFF" height="1.5" width="1.5" x="312" y="48"></rect>
-<!-- ============================================== -->
-<!-- 2. PROMINENT SINGAPORE HDB APARTMENT BLOCKS    -->
-<!-- Authentic features: lift lobbies, parapets,   -->
-<!-- water tank crowns, color accent stripes,       -->
-<!-- external common corridor balconies & windows   -->
-<!-- ============================================== -->
 <!-- Overhead Power Catenary Wire & Support Pole -->
 <line stroke="#3B4E68" stroke-width="1.2" x1="0" x2="460" y1="126" y2="126"></line>
 <line stroke="#243447" stroke-width="1" x1="0" x2="460" y1="134" y2="134"></line>
@@ -226,140 +253,93 @@
 <circle cx="5" cy="6" fill="none" opacity="0.8" r="4.5" stroke="#10B981" stroke-width="0.8"></circle>
 <circle cx="5" cy="17" fill="#7F1D1D" r="2.8"></circle>
 </g>
-<!-- ============================================== -->
-<!-- 3. MRT TRAIN ZOOMED-IN CARRIAGE (KAWASAKI C151)-->
-<!-- Framing includes:                              -->
-<!-- - Chassis & Body (Clickable: SHM Bogie)        -->
-<!-- - ONE prominent Bi-Parting Door (Clickable: Door)-->
-<!-- - Saloon Window with Fan Vent (Clickable: ACV) -->
-<!-- - Elevated Viaduct & Track (Clickable: Rail)   -->
-<!-- ============================================== -->
+<!-- MRT TRAIN ZOOMED-IN CARRIAGE (KAWASAKI C151) -->
 <g id="mrt-train-zoomed">
 <!-- INTERACTIVE PART: TRAIN CAR BODY & CHASSIS (SHM VIBRATION) -->
 <g class="pixel-hotspot hotspot-shm group" id="part-shm" onclick="triggerSubsystem('shm')">
-<!-- Train Car Body Roof Line -->
 <rect fill="#94A3B8" height="6" width="460" x="0" y="138"></rect>
 <rect fill="#CBD5E1" height="4" width="460" x="0" y="144"></rect>
-<!-- Main Upper Carriage Silver/White Body -->
 <rect fill="#E2E8F0" height="74" width="460" x="0" y="148"></rect>
-<!-- Charcoal Window Ribbon Across Carriage -->
 <rect fill="#1E293B" height="36" width="460" x="0" y="156"></rect>
-<!-- Iconic Kawasaki C151 SMRT Bold Red Band -->
+<!-- SMRT Bold Red Band -->
 <rect fill="#E11D2A" height="12" width="460" x="0" y="192"></rect>
-<!-- Lower Carriage Skirt (Dark Grey Metallic) -->
 <rect fill="#64748B" height="18" width="460" x="0" y="204"></rect>
 <rect fill="#334155" height="4" width="460" x="0" y="218"></rect>
-<!-- Side Saloon Windows (Left decorative non-clickable framing) -->
 <rect fill="#090E17" height="30" stroke="#334155" stroke-width="1.5" width="44" x="0" y="159"></rect>
 <rect fill="#111B27" height="24" width="38" x="0" y="162"></rect>
-<!-- Front Cab / Far Right Car Divider Skirt Accent -->
 <rect fill="#090E17" height="30" stroke="#334155" stroke-width="1.5" width="48" x="414" y="159"></rect>
 <rect fill="#111B27" height="24" width="42" x="417" y="162"></rect>
-<!-- Undercarriage Bogie & Wheelsets (Left unit) -->
+<!-- Undercarriage Bogie & Wheelsets (Left) -->
 <g id="bogie-unit-left">
 <rect fill="#0F172A" height="10" stroke="#1E293B" stroke-width="1.5" width="92" x="22" y="222"></rect>
 <rect fill="#475569" height="5" width="32" x="52" y="219"></rect>
-<!-- Wheel 1 -->
 <rect fill="#1E293B" height="18" stroke="#0F172A" stroke-width="2" width="20" x="26" y="226"></rect>
 <rect fill="#475569" height="10" width="12" x="30" y="230"></rect>
 <rect fill="#CBD5E1" height="4" width="4" x="34" y="233"></rect>
-<!-- Wheel 2 -->
 <rect fill="#1E293B" height="18" stroke="#0F172A" stroke-width="2" width="20" x="84" y="226"></rect>
 <rect fill="#475569" height="10" width="12" x="88" y="230"></rect>
 <rect fill="#CBD5E1" height="4" width="4" x="92" y="233"></rect>
 </g>
-<!-- Central Equipment Box / Traction Inverter / Battery Underslung -->
 <rect fill="#1E293B" height="14" stroke="#0F172A" stroke-width="1.5" width="168" x="146" y="222"></rect>
 <line stroke="#475569" stroke-dasharray="6 3" stroke-width="2" x1="156" x2="304" y1="228" y2="228"></line>
 <line stroke="#334155" stroke-width="1.5" x1="156" x2="304" y1="232" y2="232"></line>
-<!-- Undercarriage Bogie & Wheelsets (Right unit) -->
+<!-- Undercarriage Bogie & Wheelsets (Right) -->
 <g id="bogie-unit-right">
 <rect fill="#0F172A" height="10" stroke="#1E293B" stroke-width="1.5" width="92" x="346" y="222"></rect>
 <rect fill="#475569" height="5" width="32" x="376" y="219"></rect>
-<!-- Wheel 3 -->
 <rect fill="#1E293B" height="18" stroke="#0F172A" stroke-width="2" width="20" x="350" y="226"></rect>
 <rect fill="#475569" height="10" width="12" x="354" y="230"></rect>
 <rect fill="#CBD5E1" height="4" width="4" x="358" y="233"></rect>
-<!-- Wheel 4 -->
 <rect fill="#1E293B" height="18" stroke="#0F172A" stroke-width="2" width="20" x="408" y="226"></rect>
 <rect fill="#475569" height="10" width="12" x="412" y="230"></rect>
 <rect fill="#CBD5E1" height="4" width="4" x="416" y="233"></rect>
 </g>
-<!-- SHM Active Highlight Ring across train body -->
 <rect class="hotspot-highlight-rect pointer-events-none transition-all duration-300" fill="rgba(250,158,13,0.22)" height="88" opacity="0" stroke="#FA9E0D" stroke-dasharray="6 3" stroke-width="3" width="456" x="2" y="140"></rect>
 </g>
-<!-- ============================================== -->
-<!-- INTERACTIVE PART: THE SINGLE PROMINENT DOOR SET-->
-<!-- EXACTLY ONE BI-PARTING PASSENGER DOOR BAY      -->
-<!-- ============================================== -->
+<!-- INTERACTIVE PART: THE SINGLE PROMINENT DOOR SET -->
 <g class="pixel-hotspot hotspot-door group" id="part-door" onclick="triggerSubsystem('door')">
-<!-- Outer Door Pocket Surround & Rubber Frame -->
 <rect fill="#1E293B" height="74" stroke="#0F172A" stroke-width="2" width="76" x="80" y="148"></rect>
-<!-- Door Recess Well -->
 <rect fill="#CBD5E1" height="70" width="72" x="82" y="150"></rect>
-<!-- Left Door Leaf -->
 <rect fill="#E2E8F0" height="68" stroke="#94A3B8" stroke-width="1" width="34" x="83" y="151"></rect>
-<!-- Right Door Leaf -->
 <rect fill="#E2E8F0" height="68" stroke="#94A3B8" stroke-width="1" width="34" x="119" y="151"></rect>
-<!-- Red Stripe Running across Door Leaves -->
 <rect fill="#E11D2A" height="12" width="70" x="83" y="192"></rect>
-<!-- Left Door Window with Glass Sheen -->
 <rect fill="#090E17" height="30" stroke="#334155" stroke-width="1.5" width="22" x="89" y="158"></rect>
 <rect fill="#0F172A" height="26" width="18" x="91" y="160"></rect>
 <line opacity="0.6" stroke="#F43F5E" stroke-width="1.5" x1="93" x2="105" y1="162" y2="182"></line>
-<!-- Right Door Window with Glass Sheen -->
 <rect fill="#090E17" height="30" stroke="#334155" stroke-width="1.5" width="22" x="125" y="158"></rect>
 <rect fill="#0F172A" height="26" width="18" x="127" y="160"></rect>
 <line opacity="0.6" stroke="#F43F5E" stroke-width="1.5" x1="129" x2="141" y1="162" y2="182"></line>
-<!-- Center Rubber Seal & Split Line -->
 <line stroke="#0F172A" stroke-width="2.5" x1="118" x2="118" y1="150" y2="220"></line>
-<!-- Bi-Parting Door Grab Handles -->
 <rect fill="#475569" height="10" width="2.5" x="113" y="186"></rect>
 <rect fill="#475569" height="10" width="2.5" x="120.5" y="186"></rect>
-<!-- Door Threshold Kickplate -->
 <rect fill="#334155" height="3" width="72" x="82" y="218"></rect>
-<!-- Interactive Pulsing Dashed Border Indicator -->
 <rect class="hotspot-highlight-rect transition-all duration-300 pointer-events-none" fill="rgba(212,46,18,0.22)" height="76" opacity="0.3" stroke="#D42E12" stroke-dasharray="6 3" stroke-width="2.5" width="78" x="79" y="147"></rect>
 </g>
-<!-- ============================================== -->
 <!-- INTERACTIVE PART: SALOON WINDOW & ACV FAN VENT -->
-<!-- Prominent ventilation grille & fan icon        -->
-<!-- ============================================== -->
 <g class="pixel-hotspot hotspot-acv group" id="part-acv" onclick="triggerSubsystem('acv')">
-<!-- Large Saloon Window Frame -->
 <rect fill="#090E17" height="36" stroke="#334155" stroke-width="2" width="124" x="220" y="156"></rect>
 <rect fill="#0A1828" height="30" width="118" x="223" y="159"></rect>
-<!-- Air Con / Ventilation Louvred Grille Pattern -->
 <g opacity="0.85">
 <line stroke="#38BDF8" stroke-dasharray="3 2" stroke-width="1.5" x1="230" x2="282" y1="165" y2="165"></line>
 <line stroke="#38BDF8" stroke-dasharray="3 2" stroke-width="1.5" x1="230" x2="282" y1="171" y2="171"></line>
 <line stroke="#38BDF8" stroke-dasharray="3 2" stroke-width="1.5" x1="230" x2="282" y1="177" y2="177"></line>
 <line stroke="#38BDF8" stroke-dasharray="3 2" stroke-width="1.5" x1="230" x2="282" y1="183" y2="183"></line>
 </g>
-<!-- Pixel Fan / Asterisk Ventilation Unit Icon (No words/text) -->
 <g transform="translate(306, 174)">
 <circle cx="0" cy="0" fill="#041F38" r="11" stroke="#0284C7" stroke-width="1.5"></circle>
 <circle cx="0" cy="0" fill="#0284C7" opacity="0.3" r="13"></circle>
-<!-- Blades -->
 <line stroke="#38BDF8" stroke-width="2.5" x1="-8" x2="8" y1="0" y2="0"></line>
 <line stroke="#38BDF8" stroke-width="2.5" x1="0" x2="0" y1="-8" y2="8"></line>
 <line stroke="#38BDF8" stroke-width="2" x1="-6" x2="6" y1="-6" y2="6"></line>
 <line stroke="#38BDF8" stroke-width="2" x1="-6" x2="6" y1="6" y2="-6"></line>
-<!-- Center Rotor Core -->
 <circle cx="0" cy="0" fill="#E0F2FE" r="2.5"></circle>
 </g>
-<!-- Top Roof Louvred ACV Cowling on Carbody Roof -->
 <rect fill="#334155" height="10" stroke="#1E293B" stroke-width="1.5" width="108" x="228" y="128"></rect>
 <line stroke="#38BDF8" stroke-dasharray="4 2" stroke-width="1.8" x1="234" x2="330" y1="133" y2="133"></line>
-<!-- Highlighting Dashed Bounding Box -->
 <rect class="hotspot-highlight-rect transition-all duration-300 pointer-events-none" fill="rgba(0,94,196,0.22)" height="40" opacity="0.3" stroke="#005EC4" stroke-dasharray="6 3" stroke-width="2.5" width="128" x="218" y="154"></rect>
 </g>
-<!-- ============================================== -->
-<!-- INTERACTIVE PART: TRACK & CONCRETE VIADUCT     -->
-<!-- (Singapore MRT Elevated Viaduct NSL / EWL)     -->
-<!-- ============================================== -->
+<!-- INTERACTIVE PART: TRACK & CONCRETE VIADUCT -->
 <g class="pixel-hotspot hotspot-rail group" id="part-rail" onclick="triggerSubsystem('rail')">
-<!-- Viaduct Parapet Handrails & Stanchions -->
 <line stroke="#64748B" stroke-width="1.8" x1="0" x2="460" y1="240" y2="240"></line>
 <line stroke="#475569" stroke-width="1.2" x1="0" x2="460" y1="246" y2="246"></line>
 <g stroke="#64748B" stroke-width="1.5">
@@ -375,91 +355,55 @@
 <line x1="380" x2="380" y1="240" y2="248"></line>
 <line x1="420" x2="420" y1="240" y2="248"></line>
 </g>
-<!-- 3rd Rail Power Conductor (Amber) -->
 <rect fill="#D97706" height="3" opacity="0.95" width="460" x="0" y="243"></rect>
-<!-- Main Running Steel Rail -->
 <rect fill="#94A3B8" height="5" stroke="#475569" stroke-width="1" width="460" x="0" y="246"></rect>
 <rect fill="#F1F5F9" height="1.8" width="460" x="0" y="247"></rect>
-<!-- Concrete Sleepers / Plinths -->
 <rect fill="#334155" height="7" width="460" x="0" y="251"></rect>
-<!-- Diagnostic Rail Wear Wave Graphic (Corrugation) -->
 <path d="M 10 248 Q 25 245 40 248 T 70 248 T 100 248 T 130 248 T 160 248 T 190 248 T 220 248 T 250 248 T 280 248 T 310 248 T 340 248 T 370 248 T 400 248 T 430 248 T 450 248" fill="none" opacity="0.9" stroke="#10B981" stroke-width="1.8"></path>
-<!-- Solid Concrete Elevated Viaduct Beam Girder -->
 <polygon fill="url(#viaductGrad)" points="0,258 460,258 460,292 0,292"></polygon>
 <line stroke="#94A3B8" stroke-width="1.5" x1="0" x2="460" y1="259" y2="259"></line>
 <line stroke="#1E293B" stroke-width="1.5" x1="0" x2="460" y1="276" y2="276"></line>
-<!-- Concrete Elevated Support Pillars (Piers) extending downwards -->
-<!-- Left Pillar -->
+<!-- Concrete Support Pillars -->
 <g>
 <polygon fill="#334155" points="58,292 118,292 112,360 64,360" stroke="#1E293B" stroke-width="1.5"></polygon>
 <polygon fill="#475569" points="66,292 110,292 106,360 70,360"></polygon>
 <line stroke="#1E293B" stroke-width="1.5" x1="88" x2="88" y1="292" y2="360"></line>
 </g>
-<!-- Right Pillar -->
 <g>
 <polygon fill="#334155" points="268,292 328,292 322,360 274,360" stroke="#1E293B" stroke-width="1.5"></polygon>
 <polygon fill="#475569" points="276,292 320,292 316,360 280,360"></polygon>
 <line stroke="#1E293B" stroke-width="1.5" x1="298" x2="298" y1="292" y2="360"></line>
 </g>
-<!-- Track Rail Highlight Bar -->
 <rect class="hotspot-highlight-rect transition-all duration-300 pointer-events-none" fill="rgba(0,150,69,0.22)" height="42" opacity="0.3" stroke="#009645" stroke-dasharray="6 3" stroke-width="2.5" width="460" x="0" y="244"></rect>
 </g>
 </g>
 </svg>
 </div>
-<!-- Subsystem Selector Grid Buttons (All 4 buttons visible with MRT line styling and ultra prominent selection state) -->
-<div class="grid grid-cols-4 gap-1.5 w-full mt-3 font-mono text-[10px]" id="subsystemButtonsContainer">
+<!-- Subsystem Selector Grid Buttons (All 4 buttons visible with MRT line styling) -->
+<div class="grid grid-cols-2 gap-2.5 w-full font-mono flex-1" id="subsystemButtonsContainer">
 <!-- EW RAIL Button -->
-<button class="subsystem-btn btn-rail py-2 px-1 text-center rounded-xl border-2 border-emerald-500/50 bg-slate-900/90 text-slate-200 flex flex-col items-center justify-center cursor-pointer shadow-md" id="btn-rail" onclick="triggerSubsystem('rail')" style='font-family: Cabin, "Trebuchet MS", "Segoe UI", sans-serif;' type="button">
-<div class="active-badge hidden absolute -top-1.5 right-1 px-1 py-0.2 text-[8px] font-black rounded-full bg-[#009645] text-white shadow uppercase tracking-tighter">
-<span class="inline-block w-1.5 h-1.5 rounded-full bg-white mr-0.5 badge-pulse"></span>ACTIVE
-    </div>
-<div class="pill-tag flex items-center justify-center px-2 py-0.5 rounded-full bg-[#009645] text-white font-bold text-[11px] tracking-wide shadow-sm border border-emerald-300/60 transition-transform duration-200">
-<span class="text-[9px] mr-1 opacity-90">EW</span><span>RAIL</span>
-</div>
-<span class="text-[9px] text-emerald-400 block truncate mt-1 font-semibold tracking-tight">Corrugation</span>
-</button>
+<button class="subsystem-btn btn-rail py-4 px-3 min-h-[92px] text-center rounded-2xl border-2 border-emerald-500/50 bg-slate-900/90 text-slate-200 flex flex-col items-center justify-center cursor-pointer shadow-md" id="btn-rail" onclick="triggerSubsystem('rail')" style="font-family: Cabin, &quot;Trebuchet MS&quot;, &quot;Segoe UI&quot;, sans-serif;" type="button"><div class="active-badge hidden absolute -top-1.5 right-1 px-1.5 py-0.5 text-[9px] font-black rounded-full bg-[#009645] text-white shadow uppercase tracking-tighter"><span class="inline-block w-1.5 h-1.5 rounded-full bg-white mr-1 badge-pulse"></span>ACTIVE</div><div class="pill-tag flex items-center justify-center px-4 py-1.5 rounded-full bg-[#009645] text-white font-bold text-sm tracking-wide shadow-sm border border-emerald-300/60 transition-transform duration-200"><span class="text-xs mr-2 opacity-90">EW</span><span class="">RAIL</span></div><span class="text-xs sm:text-[13px] text-emerald-400 block truncate mt-2 font-semibold tracking-tight">Corrugation wear</span></button>
 <!-- CC SHM Button -->
-<button class="subsystem-btn btn-shm py-2 px-1 text-center rounded-xl border-2 border-amber-500/50 bg-slate-900/90 text-slate-200 flex flex-col items-center justify-center cursor-pointer shadow-md" id="btn-shm" onclick="triggerSubsystem('shm')" style='font-family: Cabin, "Trebuchet MS", "Segoe UI", sans-serif;' type="button">
-<div class="active-badge hidden absolute -top-1.5 right-1 px-1 py-0.2 text-[8px] font-black rounded-full bg-[#FA9E0D] text-slate-950 shadow uppercase tracking-tighter">
-<span class="inline-block w-1.5 h-1.5 rounded-full bg-slate-950 mr-0.5 badge-pulse"></span>ACTIVE
-    </div>
-<div class="pill-tag flex items-center justify-center px-2 py-0.5 rounded-full bg-[#FA9E0D] text-slate-950 font-black text-[11px] tracking-wide shadow-sm border border-amber-200/70 transition-transform duration-200">
-<span class="text-[9px] mr-1 opacity-80">CC</span><span>SHM</span>
-</div>
-<span class="text-[9px] text-amber-400 block truncate mt-1 font-semibold tracking-tight">Vibration</span>
-</button>
+<button class="subsystem-btn btn-shm py-4 px-3 min-h-[92px] text-center rounded-2xl border-2 border-amber-500/50 bg-slate-900/90 text-slate-200 flex flex-col items-center justify-center cursor-pointer shadow-md" id="btn-shm" onclick="triggerSubsystem('shm')" style="font-family: Cabin, &quot;Trebuchet MS&quot;, &quot;Segoe UI&quot;, sans-serif;" type="button"><div class="active-badge hidden absolute -top-1.5 right-1 px-1.5 py-0.5 text-[9px] font-black rounded-full bg-[#FA9E0D] text-slate-950 shadow uppercase tracking-tighter"><span class="inline-block w-1.5 h-1.5 rounded-full bg-slate-950 mr-1 badge-pulse"></span>ACTIVE</div><div class="pill-tag flex items-center justify-center px-4 py-1.5 rounded-full bg-[#FA9E0D] text-slate-950 font-black text-sm tracking-wide shadow-sm border border-amber-200/70 transition-transform duration-200"><span class="text-xs mr-2 opacity-80">CC</span><span class="">SHM</span></div><span class="text-xs sm:text-[13px] text-amber-400 block truncate mt-2 font-semibold tracking-tight">Vibration &amp; Bogie</span></button>
 <!-- DT ACV Button -->
-<button class="subsystem-btn btn-acv py-2 px-1 text-center rounded-xl border-2 border-sky-500/50 bg-slate-900/90 text-slate-200 flex flex-col items-center justify-center cursor-pointer shadow-md" id="btn-acv" onclick="triggerSubsystem('acv')" style='font-family: Cabin, "Trebuchet MS", "Segoe UI", sans-serif;' type="button">
-<div class="active-badge hidden absolute -top-1.5 right-1 px-1 py-0.2 text-[8px] font-black rounded-full bg-[#005EC4] text-white shadow uppercase tracking-tighter">
-<span class="inline-block w-1.5 h-1.5 rounded-full bg-white mr-0.5 badge-pulse"></span>ACTIVE
-    </div>
-<div class="pill-tag flex items-center justify-center px-2 py-0.5 rounded-full bg-[#005EC4] text-white font-bold text-[11px] tracking-wide shadow-sm border border-sky-300/60 transition-transform duration-200">
-<span class="text-[9px] mr-1 opacity-90">DT</span><span>ACV</span>
-</div>
-<span class="text-[9px] text-sky-400 block truncate mt-1 font-semibold tracking-tight">Vent / Fan</span>
-</button>
+<button class="subsystem-btn btn-acv py-4 px-3 min-h-[92px] text-center rounded-2xl border-2 border-sky-500/50 bg-slate-900/90 text-slate-200 flex flex-col items-center justify-center cursor-pointer shadow-md" id="btn-acv" onclick="triggerSubsystem('acv')" style="font-family: Cabin, &quot;Trebuchet MS&quot;, &quot;Segoe UI&quot;, sans-serif;" type="button"><div class="active-badge hidden absolute -top-1.5 right-1 px-1.5 py-0.5 text-[9px] font-black rounded-full bg-[#005EC4] text-white shadow uppercase tracking-tighter"><span class="inline-block w-1.5 h-1.5 rounded-full bg-white mr-1 badge-pulse"></span>ACTIVE</div><div class="pill-tag flex items-center justify-center px-4 py-1.5 rounded-full bg-[#005EC4] text-white font-bold text-sm tracking-wide shadow-sm border border-sky-300/60 transition-transform duration-200"><span class="text-xs mr-2 opacity-90">DT</span><span class="">ACV</span></div><span class="text-xs sm:text-[13px] text-sky-400 block truncate mt-2 font-semibold tracking-tight">Vent / Saloon Fan</span></button>
 <!-- NS DOOR Button -->
-<button class="subsystem-btn btn-door py-2 px-1 text-center rounded-xl border-2 border-rose-500/50 bg-slate-900/90 text-slate-200 flex flex-col items-center justify-center cursor-pointer shadow-md" id="btn-door" onclick="triggerSubsystem('door')" style='font-family: Cabin, "Trebuchet MS", "Segoe UI", sans-serif;' type="button">
-<div class="active-badge hidden absolute -top-1.5 right-1 px-1 py-0.2 text-[8px] font-black rounded-full bg-[#D42E12] text-white shadow uppercase tracking-tighter">
-<span class="inline-block w-1.5 h-1.5 rounded-full bg-white mr-0.5 badge-pulse"></span>ACTIVE
-    </div>
-<div class="pill-tag flex items-center justify-center px-2 py-0.5 rounded-full bg-[#D42E12] text-white font-bold text-[11px] tracking-wide shadow-sm border border-rose-300/60 transition-transform duration-200">
-<span class="text-[9px] mr-1 opacity-90">NS</span><span>DOOR</span>
+<button class="subsystem-btn btn-door py-4 px-3 min-h-[92px] text-center rounded-2xl border-2 border-rose-500/50 bg-slate-900/90 text-slate-200 flex flex-col items-center justify-center cursor-pointer shadow-md" id="btn-door" onclick="triggerSubsystem('door')" style="font-family: Cabin, &quot;Trebuchet MS&quot;, &quot;Segoe UI&quot;, sans-serif;" type="button"><div class="active-badge hidden absolute -top-1.5 right-1 px-1.5 py-0.5 text-[9px] font-black rounded-full bg-[#D42E12] text-white shadow uppercase tracking-tighter"><span class="inline-block w-1.5 h-1.5 rounded-full bg-white mr-1 badge-pulse"></span>ACTIVE</div><div class="pill-tag flex items-center justify-center px-4 py-1.5 rounded-full bg-[#D42E12] text-white font-bold text-sm tracking-wide shadow-sm border border-rose-300/60 transition-transform duration-200"><span class="text-xs mr-2 opacity-90">NS</span><span class="">DOOR</span></div><span class="text-xs sm:text-[13px] text-rose-400 block truncate mt-2 font-semibold tracking-tight">Actuator Current</span></button>
 </div>
-<span class="text-[9px] text-rose-400 block truncate mt-1 font-semibold tracking-tight">Actuator</span>
-</button>
-</div>
-<!-- Clean Drag & Drop / Click to Ingest Instruction Prompt -->
-<div class="mt-3.5 text-[10px] text-slate-700 font-semibold flex items-center justify-center space-x-1.5 font-mono text-center bg-white/80 backdrop-blur-sm px-3.5 py-2 rounded-full border border-slate-300/80 shadow-sm cursor-pointer hover:border-slate-400 transition-colors" onclick="document.getElementById('subsystemFileInput').click()">
-<svg class="w-3.5 h-3.5 text-slate-600 shrink-0" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<!-- Drag & Drop / File Ingestion Card -->
+<div class="w-full text-xs text-slate-700 font-semibold flex items-center justify-center space-x-2 font-mono text-center bg-white/90 backdrop-blur-sm px-3 py-3 rounded-2xl border-2 border-slate-300 shadow cursor-pointer hover:border-slate-400 transition-colors shrink-0" onclick="document.getElementById('subsystemFileInput').click()">
+<svg class="w-3.5 h-3.5 text-slate-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 <path d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
 </svg>
-<span>Click part to import or drag &amp; drop .CSV, .DAT, .H5 files</span>
+<span class="">Click part to import or drag &amp; drop .CSV, .DAT, .H5 files</span>
 </div>
 </main>
+<!-- iOS Home Safe Area Indicator Bar -->
+<footer class="w-full pb-3 pt-1.5 flex flex-col items-center justify-center shrink-0 z-20">
+<div class="w-32 h-1 bg-slate-800/70 rounded-full"></div>
+</footer>
 <!-- Ingest Status Notification Toast & Diagnostic Banner -->
-<div class="fixed top-5 inset-x-3 max-w-sm mx-auto bg-slate-900/95 border-2 border-emerald-500 text-white px-3.5 py-3 rounded-xl shadow-2xl backdrop-blur-md transition-all duration-300 -translate-y-24 opacity-0 pointer-events-none z-50 flex items-start space-x-3 font-mono text-xs" id="toast">
+<div class="absolute top-14 inset-x-3.5 max-w-sm mx-auto bg-slate-900/95 border-2 border-emerald-500 text-white px-3.5 py-3 rounded-xl shadow-2xl backdrop-blur-md transition-all duration-300 -translate-y-28 opacity-0 pointer-events-none z-50 flex items-start space-x-3 font-mono text-xs" id="toast">
 <div class="w-3 h-3 rounded-full bg-emerald-400 shrink-0 mt-0.5 animate-ping" id="toastDotPing"></div>
 <div class="flex-1 min-w-0">
 <div class="flex items-center space-x-1.5 mb-1">
@@ -467,6 +411,7 @@
 <span class="text-[10px] font-bold text-emerald-300 uppercase tracking-wide" id="toastStatus">READY FOR DIAGNOSTICS</span>
 </div>
 <p class="text-[11px] text-slate-200 break-words leading-tight" id="toastMsg">File loaded successfully.</p>
+</div>
 </div>
 </div>
 <script>
@@ -586,12 +531,10 @@
         const badge = btn ? btn.querySelector('.active-badge') : null;
 
         if (k === key) {
-          // Highlight active button and part
           if (el) el.classList.add('is-selected');
           if (btn) btn.classList.add('is-active');
           if (badge) badge.classList.remove('hidden');
         } else {
-          // Reset unselected
           if (el) el.classList.remove('is-selected');
           if (btn) btn.classList.remove('is-active');
           if (badge) badge.classList.add('hidden');
@@ -603,7 +546,6 @@
       currentSelected = key;
       selectSubsystemVisuals(key);
 
-      // Trigger real file import picker
       const fileInput = document.getElementById('subsystemFileInput');
       fileInput.value = '';
       isFileDialogOpen = true;
@@ -629,17 +571,13 @@
 
     const fileInputEl = document.getElementById('subsystemFileInput');
 
-    // Requirement 2: File cancellation unselect
-    // Native 'cancel' event for modern browsers
     fileInputEl.addEventListener('cancel', () => {
       isFileDialogOpen = false;
       clearAllSelectionVisuals();
     });
 
-    // Fallback window focus check for older/cross-browser support
     window.addEventListener('focus', () => {
       if (isFileDialogOpen) {
-        // Small timeout to allow change event to fire first if file was picked
         setTimeout(() => {
           if (isFileDialogOpen) {
             if (!fileInputEl.files || fileInputEl.files.length === 0) {
@@ -670,27 +608,26 @@
       const toastMsg = document.getElementById('toastMsg');
       const toastDotPing = document.getElementById('toastDotPing');
 
-      // Update styling based on selected MRT line color
       toastBadge.textContent = data.code;
       toastBadge.style.backgroundColor = data.badgeBg;
       toastBadge.style.color = data.badgeText || '#FFFFFF';
       toast.style.borderColor = data.color;
       toastDotPing.style.backgroundColor = data.color;
 
-      // Descriptive prompt requirement: "[NS DOOR] File uploaded: door_actuator_telemetry.dat - Status: Ready for diagnostics"
       toastMsg.innerHTML = `<span class="font-semibold text-white">File imported:</span> <span class="text-amber-200 underline">${fileName}</span> &mdash; Telemetry synced for ${data.title}.`;
 
-      toast.classList.remove('-translate-y-24', 'opacity-0', 'pointer-events-none');
+      toast.classList.remove('-translate-y-28', 'opacity-0', 'pointer-events-none');
       toast.classList.add('translate-y-0', 'opacity-100');
 
       if (window.toastTimer) clearTimeout(window.toastTimer);
       window.toastTimer = setTimeout(() => {
         toast.classList.remove('translate-y-0', 'opacity-100');
-        toast.classList.add('-translate-y-24', 'opacity-0', 'pointer-events-none');
+        toast.classList.add('-translate-y-28', 'opacity-0', 'pointer-events-none');
       }, 4800);
     }
 
-    // Initialize synchronization listeners
     initHoverListeners();
-  </script>
+</script>
+
+
 </body></html>
