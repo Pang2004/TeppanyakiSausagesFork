@@ -16,7 +16,7 @@ frontend/dist/
 !.env.example
 
 # Generated data and experiment artifacts
-outputs/
+_temp/
 backend/uploads/
 backend/cache/
 backend/artifacts/checkpoints/

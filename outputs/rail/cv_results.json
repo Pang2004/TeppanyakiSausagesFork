@@ -1,0 +1,130 @@
+[
+  {
+    "name": "dummy_normal",
+    "macro_f1_mean": 0.30830155956772143,
+    "macro_f1_std": 0.0015869277142342556,
+    "per_class_f1_mean": {
+      "Normal": 0.9249046787031646,
+      "Side I": 0.0,
+      "Side II": 0.0
+    },
+    "confusion_matrix": [
+      [
+        702,
+        0,
+        0
+      ],
+      [
+        42,
+        0,
+        0
+      ],
+      [
+        72,
+        0,
+        0
+      ]
+    ],
+    "labels": [
+      "Normal",
+      "Side I",
+      "Side II"
+    ]
+  },
+  {
+    "name": "balanced_logistic_regression",
+    "macro_f1_mean": 0.6909665152408521,
+    "macro_f1_std": 0.10002776194627643,
+    "per_class_f1_mean": {
+      "Normal": 0.9554103682333785,
+      "Side I": 0.4377777777777778,
+      "Side II": 0.6797113997113997
+    },
+    "confusion_matrix": [
+      [
+        675,
+        17,
+        10
+      ],
+      [
+        17,
+        19,
+        6
+      ],
+      [
+        19,
+        6,
+        47
+      ]
+    ],
+    "labels": [
+      "Normal",
+      "Side I",
+      "Side II"
+    ]
+  },
+  {
+    "name": "balanced_rbf_svm",
+    "macro_f1_mean": 0.5820147113132784,
+    "macro_f1_std": 0.0850836435238109,
+    "per_class_f1_mean": {
+      "Normal": 0.952903200798902,
+      "Side I": 0.06666666666666667,
+      "Side II": 0.7264742664742664
+    },
+    "confusion_matrix": [
+      [
+        695,
+        2,
+        5
+      ],
+      [
+        38,
+        2,
+        2
+      ],
+      [
+        24,
+        1,
+        47
+      ]
+    ],
+    "labels": [
+      "Normal",
+      "Side I",
+      "Side II"
+    ]
+  },
+  {
+    "name": "balanced_extra_trees",
+    "macro_f1_mean": 0.48024026708351875,
+    "macro_f1_std": 0.0948246230610612,
+    "per_class_f1_mean": {
+      "Normal": 0.9417790023087573,
+      "Side I": 0.0,
+      "Side II": 0.49894179894179896
+    },
+    "confusion_matrix": [
+      [
+        702,
+        0,
+        0
+      ],
+      [
+        42,
+        0,
+        0
+      ],
+      [
+        45,
+        0,
+        27
+      ]
+    ],
+    "labels": [
+      "Normal",
+      "Side I",
+      "Side II"
+    ]
+  }
+]

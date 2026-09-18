@@ -1,0 +1,344 @@
+[
+  {
+    "start_time": "2023-7-5-0-0-0-0",
+    "end_time": "2023-7-5-0-0-3-760",
+    "prediction": "Normal",
+    "confidence": 0.995846026725117,
+    "operation": "Close",
+    "boundary_reason": "gap",
+    "quality_flags": []
+  },
+  {
+    "start_time": "2023-7-5-0-0-15-5",
+    "end_time": "2023-7-5-0-0-18-765",
+    "prediction": "Normal",
+    "confidence": 0.9948410751949331,
+    "operation": "Close",
+    "boundary_reason": "gap",
+    "quality_flags": []
+  },
+  {
+    "start_time": "2023-7-5-0-1-2-40",
+    "end_time": "2023-7-5-0-1-4-840",
+    "prediction": "Normal",
+    "confidence": 0.9896379163684426,
+    "operation": "Open",
+    "boundary_reason": "gap",
+    "quality_flags": []
+  },
+  {
+    "start_time": "2023-7-5-0-1-58-995",
+    "end_time": "2023-7-5-0-2-1-775",
+    "prediction": "Normal",
+    "confidence": 0.9787960256963969,
+    "operation": "Open",
+    "boundary_reason": "gap",
+    "quality_flags": []
+  },
+  {
+    "start_time": "2023-7-5-0-2-14-551",
+    "end_time": "2023-7-5-0-2-18-51",
+    "prediction": "Normal",
+    "confidence": 0.8288173704688249,
+    "operation": "Close",
+    "boundary_reason": "gap",
+    "quality_flags": []
+  },
+  {
+    "start_time": "2023-7-5-0-2-39-840",
+    "end_time": "2023-7-5-0-2-43-540",
+    "prediction": "Normal",
+    "confidence": 0.9987235184858168,
+    "operation": "Close",
+    "boundary_reason": "gap",
+    "quality_flags": []
+  },
+  {
+    "start_time": "2023-7-5-0-3-21-783",
+    "end_time": "2023-7-5-0-3-24-623",
+    "prediction": "Normal",
+    "confidence": 0.994642294989629,
+    "operation": "Open",
+    "boundary_reason": "gap",
+    "quality_flags": []
+  },
+  {
+    "start_time": "2023-7-5-0-3-43-861",
+    "end_time": "2023-7-5-0-3-47-281",
+    "prediction": "Normal",
+    "confidence": 0.9842834537714129,
+    "operation": "Close",
+    "boundary_reason": "gap",
+    "quality_flags": []
+  },
+  {
+    "start_time": "2023-7-5-0-4-35-655",
+    "end_time": "2023-7-5-0-4-38-415",
+    "prediction": "Normal",
+    "confidence": 0.9834640485592177,
+    "operation": "Open",
+    "boundary_reason": "gap",
+    "quality_flags": []
+  },
+  {
+    "start_time": "2023-7-5-0-5-5-733",
+    "end_time": "2023-7-5-0-5-8-453",
+    "prediction": "Normal",
+    "confidence": 0.9826070234010543,
+    "operation": "Open",
+    "boundary_reason": "gap",
+    "quality_flags": []
+  },
+  {
+    "start_time": "2023-7-5-0-5-46-252",
+    "end_time": "2023-7-5-0-5-49-992",
+    "prediction": "Abnormal resistance",
+    "confidence": 0.9965579414410745,
+    "operation": "Close",
+    "boundary_reason": "gap",
+    "quality_flags": []
+  },
+  {
+    "start_time": "2023-7-5-0-6-32-903",
+    "end_time": "2023-7-5-0-6-35-603",
+    "prediction": "Normal",
+    "confidence": 0.9989893920301613,
+    "operation": "Open",
+    "boundary_reason": "gap",
+    "quality_flags": []
+  },
+  {
+    "start_time": "2023-7-5-0-7-9-567",
+    "end_time": "2023-7-5-0-7-13-247",
+    "prediction": "Normal",
+    "confidence": 0.7389735474778794,
+    "operation": "Close",
+    "boundary_reason": "gap",
+    "quality_flags": []
+  },
+  {
+    "start_time": "2023-7-5-0-7-51-134",
+    "end_time": "2023-7-5-0-7-53-994",
+    "prediction": "Normal",
+    "confidence": 0.9919602786594492,
+    "operation": "Open",
+    "boundary_reason": "gap",
+    "quality_flags": []
+  },
+  {
+    "start_time": "2023-7-5-0-8-31-83",
+    "end_time": "2023-7-5-0-8-33-923",
+    "prediction": "Normal",
+    "confidence": 0.9889462415112097,
+    "operation": "Open",
+    "boundary_reason": "gap",
+    "quality_flags": []
+  },
+  {
+    "start_time": "2023-7-5-0-9-18-243",
+    "end_time": "2023-7-5-0-9-21-63",
+    "prediction": "Normal",
+    "confidence": 0.9818178268969188,
+    "operation": "Open",
+    "boundary_reason": "gap",
+    "quality_flags": []
+  },
+  {
+    "start_time": "2023-7-5-0-10-4-45",
+    "end_time": "2023-7-5-0-10-7-525",
+    "prediction": "Normal",
+    "confidence": 0.8823976188283638,
+    "operation": "Close",
+    "boundary_reason": "gap",
+    "quality_flags": []
+  },
+  {
+    "start_time": "2023-7-5-0-10-26-701",
+    "end_time": "2023-7-5-0-10-29-541",
+    "prediction": "Normal",
+    "confidence": 0.9905537049040729,
+    "operation": "Open",
+    "boundary_reason": "gap",
+    "quality_flags": []
+  },
+  {
+    "start_time": "2023-7-5-0-11-17-664",
+    "end_time": "2023-7-5-0-11-20-504",
+    "prediction": "Abnormal resistance",
+    "confidence": 0.9999815988370558,
+    "operation": "Open",
+    "boundary_reason": "gap",
+    "quality_flags": []
+  },
+  {
+    "start_time": "2023-7-5-0-12-4-550",
+    "end_time": "2023-7-5-0-12-7-370",
+    "prediction": "Abnormal resistance",
+    "confidence": 0.9964695908548423,
+    "operation": "Open",
+    "boundary_reason": "gap",
+    "quality_flags": []
+  },
+  {
+    "start_time": "2023-7-5-0-12-35-402",
+    "end_time": "2023-7-5-0-12-38-942",
+    "prediction": "Normal",
+    "confidence": 0.8170794946614929,
+    "operation": "Close",
+    "boundary_reason": "gap",
+    "quality_flags": []
+  },
+  {
+    "start_time": "2023-7-5-0-13-17-531",
+    "end_time": "2023-7-5-0-13-21-231",
+    "prediction": "Normal",
+    "confidence": 0.9857748769341684,
+    "operation": "Close",
+    "boundary_reason": "gap",
+    "quality_flags": []
+  },
+  {
+    "start_time": "2023-7-5-0-14-5-850",
+    "end_time": "2023-7-5-0-14-9-570",
+    "prediction": "Abnormal resistance",
+    "confidence": 0.9981562549951554,
+    "operation": "Close",
+    "boundary_reason": "gap",
+    "quality_flags": []
+  },
+  {
+    "start_time": "2023-7-5-0-14-30-754",
+    "end_time": "2023-7-5-0-14-34-534",
+    "prediction": "Normal",
+    "confidence": 0.9876063656512543,
+    "operation": "Close",
+    "boundary_reason": "gap",
+    "quality_flags": []
+  },
+  {
+    "start_time": "2023-7-5-0-15-27-662",
+    "end_time": "2023-7-5-0-15-31-102",
+    "prediction": "Normal",
+    "confidence": 0.9994793377808552,
+    "operation": "Close",
+    "boundary_reason": "gap",
+    "quality_flags": []
+  },
+  {
+    "start_time": "2023-7-5-0-16-20-947",
+    "end_time": "2023-7-5-0-16-24-727",
+    "prediction": "Normal",
+    "confidence": 0.9943618131767269,
+    "operation": "Close",
+    "boundary_reason": "gap",
+    "quality_flags": []
+  },
+  {
+    "start_time": "2023-7-5-0-17-9-362",
+    "end_time": "2023-7-5-0-17-12-202",
+    "prediction": "Normal",
+    "confidence": 0.9922660852102139,
+    "operation": "Open",
+    "boundary_reason": "gap",
+    "quality_flags": []
+  },
+  {
+    "start_time": "2023-7-5-0-18-7-558",
+    "end_time": "2023-7-5-0-18-10-238",
+    "prediction": "Normal",
+    "confidence": 0.9889154375296457,
+    "operation": "Open",
+    "boundary_reason": "gap",
+    "quality_flags": []
+  },
+  {
+    "start_time": "2023-7-5-0-18-36-685",
+    "end_time": "2023-7-5-0-18-39-465",
+    "prediction": "Normal",
+    "confidence": 0.9841439858080343,
+    "operation": "Open",
+    "boundary_reason": "gap",
+    "quality_flags": []
+  },
+  {
+    "start_time": "2023-7-5-0-19-1-786",
+    "end_time": "2023-7-5-0-19-5-546",
+    "prediction": "Normal",
+    "confidence": 0.9899784216877396,
+    "operation": "Close",
+    "boundary_reason": "gap",
+    "quality_flags": []
+  },
+  {
+    "start_time": "2023-7-5-0-19-40-436",
+    "end_time": "2023-7-5-0-19-44-176",
+    "prediction": "Abnormal resistance",
+    "confidence": 0.9957230046196792,
+    "operation": "Close",
+    "boundary_reason": "gap",
+    "quality_flags": []
+  },
+  {
+    "start_time": "2023-7-5-0-20-21-300",
+    "end_time": "2023-7-5-0-20-25-0",
+    "prediction": "Normal",
+    "confidence": 0.982207433739469,
+    "operation": "Close",
+    "boundary_reason": "gap",
+    "quality_flags": []
+  },
+  {
+    "start_time": "2023-7-5-0-20-55-731",
+    "end_time": "2023-7-5-0-20-59-411",
+    "prediction": "Normal",
+    "confidence": 0.7100900127378035,
+    "operation": "Open",
+    "boundary_reason": "gap",
+    "quality_flags": []
+  },
+  {
+    "start_time": "2023-7-5-0-21-25-504",
+    "end_time": "2023-7-5-0-21-29-284",
+    "prediction": "Abnormal resistance",
+    "confidence": 0.9994918237452179,
+    "operation": "Close",
+    "boundary_reason": "gap",
+    "quality_flags": []
+  },
+  {
+    "start_time": "2023-7-5-0-22-17-683",
+    "end_time": "2023-7-5-0-22-20-363",
+    "prediction": "Normal",
+    "confidence": 0.9758101631341265,
+    "operation": "Open",
+    "boundary_reason": "gap",
+    "quality_flags": []
+  },
+  {
+    "start_time": "2023-7-5-0-22-38-967",
+    "end_time": "2023-7-5-0-22-41-787",
+    "prediction": "Abnormal resistance",
+    "confidence": 0.996937125214294,
+    "operation": "Open",
+    "boundary_reason": "gap",
+    "quality_flags": []
+  },
+  {
+    "start_time": "2023-7-5-0-22-52-897",
+    "end_time": "2023-7-5-0-22-56-377",
+    "prediction": "Normal",
+    "confidence": 0.9608894702537302,
+    "operation": "Close",
+    "boundary_reason": "gap",
+    "quality_flags": []
+  },
+  {
+    "start_time": "2023-7-5-0-23-45-804",
+    "end_time": "2023-7-5-0-23-49-544",
+    "prediction": "Abnormal resistance",
+    "confidence": 0.9982687464107257,
+    "operation": "Close",
+    "boundary_reason": "end_of_stream",
+    "quality_flags": []
+  }
+]
