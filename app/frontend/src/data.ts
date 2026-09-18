@@ -142,6 +142,13 @@ export function exportResults(results: DiagnosticResult[], subsystem: Subsystem)
   return header + '\n' + rows.map(row => row.map(quote).join(',') + '\n').join('');
 }
 
+/** Official single-stream Door submission schema; batch exports retain file_id. */
+export function exportDoorSubmission(result: DoorResult): string {
+  const quote = (value: string) => `"${value.replaceAll('"', '""')}"`;
+  return 'start_time,end_time,prediction\n' + result.cycles.map(c =>
+    [c.start_time, c.end_time, c.prediction].map(quote).join(',') + '\n').join('');
+}
+
 export function doorTimestamp(value: string): number {
   const parts = /^(\d{4})-(\d{1,2})-(\d{1,2})-(\d{1,2})-(\d{1,2})-(\d{1,2})-(\d{1,3})$/.exec(value.trim());
   if (!parts) return Date.parse(value);

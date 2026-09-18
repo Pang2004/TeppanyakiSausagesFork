@@ -59,3 +59,8 @@ it('formats official Door timestamps and measures durations across midnight', as
   expect(doorDuration({ start_time: '2023-7-5-0-0-0-0', end_time: '2023-7-5-0-0-3-760' })).toBe('3.760 s');
   expect(doorDuration({ start_time: '2023-7-5-23-59-59-900', end_time: '2023-7-6-0-0-0-100' })).toBe('0.200 s');
 });
+
+it('exports only the selected Door stream using the official schema', async () => {
+  const { exportDoorSubmission } = await import('./data');
+  expect(exportDoorSubmission({ subsystem: 'door', model_version: 'v1', file_id: 'Test.csv', cycles: [{ start_time: '2023-7-5-0-0-0-0', end_time: '2023-7-5-0-0-3-760', prediction: 'Normal', operation: 'Close', confidence: .9, quality_flags: [], boundary_reason: 'test' }] })).toBe('start_time,end_time,prediction\n"2023-7-5-0-0-0-0","2023-7-5-0-0-3-760","Normal"\n');
+});

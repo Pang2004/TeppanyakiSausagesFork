@@ -1,6 +1,6 @@
 # Subtab integration verification
 
-The supplied references (root `code.html`/`screen.png` for Door, `LTAhack_ACV_UI`, `LTAhack_SHMUI`) were reviewed and adapted into React. All four tabs use the same charcoal/yellow exit component, with the appropriate line badge and a direct link to the main page. Door retains its carriage/window/operation-list visual; ACV retains ranked carriage cards; SHM retains the carriage, damage gauge and diagnostic cards.
+The supplied Door, ACV and SHM design references were reviewed and adapted into React. The reference files have since been removed; runtime assets remain bundled in the frontend. All four tabs use the same charcoal/yellow exit component, with the appropriate line badge and a direct link to the main page. Door retains its carriage/window/operation-list visual; ACV retains ranked carriage cards; SHM retains the carriage, damage gauge and diagnostic cards.
 
 Real-output corrections: ACV accepts XLSX, renders all model-returned cars (eight in the supplied test workbook), and shows scores rather than fabricated probabilities. SHM renders damage and cycle/stress diagnostics instead of invented remaining life, safety status or feature contributions. Door displays the official non-zero-padded timestamps as clocks and correctly computes millisecond durations. Unavailable diagnostics and empty/error/offline states are explicit.
 

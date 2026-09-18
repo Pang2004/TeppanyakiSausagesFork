@@ -1,4 +1,4 @@
-# Fleet Diagnostic — Home + Rail
+# Fleet Diagnostic — Four Subsystems
 
 React + TypeScript frontend and FastAPI backend for all four diagnostic models. Home links to Rail, Door, ACV and SHM. The supplied designs are adapted to desktop/mobile, with a shared Exit to Main Page control and real model outputs.
 
@@ -31,7 +31,7 @@ Open **http://localhost:8000** on the computer. On a phone connected to the same
 
 The production build is served by Python; a second Node server is not needed. `/`, `/rail`, `/door`, `/acv` and `/shm` support direct reloads. Internet access is not needed after dependencies are installed and the frontend is built: fonts and the supplied background image are bundled locally.
 
-This is a local/LAN application without accounts. It is not deployed to a public website. The same frontend/backend can be hosted later with appropriate deployment configuration.
+This app has no accounts. It is prepared for a public Cloud Run demo but has not been deployed. See [deployment instructions](DEPLOYMENT.md) and the included Dockerfile/Makefile. The container uses a 30 MiB upload limit.
 
 ## Use Rail
 
@@ -78,9 +78,9 @@ API endpoints:
 
 Each tab has its own batch, selection, readiness and results. Direct URLs `/door`, `/acv` and `/shm` work on refresh. The exit control always returns to `/`.
 
-- **Door:** CSV current streams; select an Open/Close operation to inspect its classification, start/end clock times and duration. Exports include `file_id,start_time,end_time,prediction` to disambiguate multiple uploaded streams; this batch export has an extra source column compared with the official single-stream Door submission format.
-- **ACV:** XLSX workbooks, including folder selection. All returned cars appear in ranked order with actual temperature/coverage/pressure diagnostics. Scores are not presented as probabilities; missing measurements show “Not available”. No work order is dispatched.
-- **SHM:** CSV stress histories. Displays actual fatigue damage, cycle count, equivalent stress amplitude and maximum cycle range. Damage is not converted to remaining life. The display bar saturates at its reference of 1; the numeric output/export is never clipped.
+- **Door:** Use **Download selected stream submission CSV** for the official three-column submission without `file_id`. The existing download remains a multi-stream batch export. CSV current streams; select an Open/Close operation to inspect its classification, start/end clock times and duration. Exports include `file_id,start_time,end_time,prediction` to disambiguate multiple uploaded streams; this batch export has an extra source column compared with the official single-stream Door submission format.
+- **ACV:** XLSX workbooks, including folder selection. All returned cars appear in ranked order with actual temperature and coverage diagnostics. Scores are not presented as probabilities; missing measurements show “Not available”. No work order is dispatched.
+- **SHM:** CSV stress histories. Displays actual fatigue damage, cycle count, equivalent stress amplitude and maximum cycle range. Damage is not converted to remaining life. The battery built into the train displays D × 100% and saturates at 100%; the numeric output/export is never clipped.
 
 Additional multipart endpoints: `POST /api/predict/door`, `/api/predict/acv`, `/api/predict/shm`. Each accepts a `file` field. `/api/health` reports separate readiness flags under `subsystems`. Optional server artifact overrides: `DOOR_MODEL_PATH`, `ACV_MODEL_PATH`, `SHM_MODEL_PATH`.
 

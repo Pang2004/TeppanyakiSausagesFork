@@ -1,0 +1,17 @@
+{
+  "source": "browser submission download",
+  "inputs": [
+    "acv_test_case.xlsx"
+  ],
+  "health": {
+    "status": "ready",
+    "subsystems": {
+      "rail": true,
+      "door": true,
+      "acv": true,
+      "shm": true
+    },
+    "model_version": "rail-pipeline-v3",
+    "maximum_file_bytes": 67108864
+  }
+}

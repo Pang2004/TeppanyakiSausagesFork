@@ -1,0 +1,32 @@
+{
+  "source": "browser submission download",
+  "inputs": [
+    "test01.csv",
+    "test02.csv",
+    "test03.csv",
+    "test04.csv",
+    "test05.csv",
+    "test06.csv",
+    "test07.csv",
+    "test08.csv",
+    "test09.csv",
+    "test10.csv",
+    "test11.csv",
+    "test12.csv",
+    "test13.csv",
+    "test14.csv",
+    "test15.csv",
+    "test16.csv"
+  ],
+  "health": {
+    "status": "ready",
+    "subsystems": {
+      "rail": true,
+      "door": true,
+      "acv": true,
+      "shm": true
+    },
+    "model_version": "rail-pipeline-v3",
+    "maximum_file_bytes": 67108864
+  }
+}

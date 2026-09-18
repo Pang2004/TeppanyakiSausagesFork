@@ -1,0 +1,19 @@
+# Keep source, lockfiles, trained models and predictions.zip tracked.
+.venv/
+venv/
+node_modules/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+*.tsbuildinfo
+app/frontend/dist/
+test-results/
+playwright-report/
+app/exports/
+.env
+.env.*
+!.env.example
+.DS_Store
+.idea/
+.vscode/

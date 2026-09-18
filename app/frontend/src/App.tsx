@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Link, Navigate, Route, Routes, useNavigate } from 'react-router-dom';
-import { DEFAULT_LIMIT, droppedFiles, type Health, type RailLabel, type Subsystem, modules, resultLabel, resultTone, exportResults } from './data';
+import { DEFAULT_LIMIT, droppedFiles, type Health, type RailLabel, type Subsystem, modules, resultLabel, resultTone, exportDoorSubmission, exportResults } from './data';
 import { RailArtwork } from './RailArtwork';
 import { DoorView, ACVView, SHMView } from './SubsystemViews';
 import { TrainArtwork } from './TrainArtwork';
@@ -112,6 +112,13 @@ function ResultsPanel({ batch }: { batch: Batch }) {
   const successful = batch.records.flatMap(row => row.result ? [row.result] : []);
   const incomplete = batch.records.length - successful.length;
   const retryable = batch.records.some(row => ['failed', 'stopped'].includes(row.status));
+  const selectedResult = batch.records.find(row => row.id === batch.selected)?.result;
+  const downloadDoorSubmission = () => {
+    if (selectedResult?.subsystem !== 'door') return;
+    const url = URL.createObjectURL(new Blob([exportDoorSubmission(selectedResult)], { type: 'text/csv;charset=utf-8' }));
+    const anchor = document.createElement('a'); anchor.href = url; anchor.download = 'door_predictions.csv'; anchor.click();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  };
   const download = () => {
     const url = URL.createObjectURL(new Blob([exportResults(successful, batch.subsystem)], { type: 'text/csv;charset=utf-8' }));
     const anchor = document.createElement('a'); anchor.href = url; anchor.download = `${batch.subsystem}_predictions.csv`; anchor.click();
@@ -123,6 +130,7 @@ function ResultsPanel({ batch }: { batch: Batch }) {
       {batch.subsystem === 'rail' && <div className="result-counts">{(['Normal', 'Side I', 'Side II'] as RailLabel[]).map(label => <span key={label}>{label}<b>{successful.filter(row => row.subsystem === 'rail' && row.prediction === label).length}</b></span>)}</div>}
       <ul className="recording-list" aria-label="Recording results">{batch.records.map(row => <li key={row.id}><button className={`recording-row ${batch.selected === row.id ? 'selected' : ''}`} aria-pressed={batch.selected === row.id} onClick={() => batch.setSelected(row.id)}><Icon name="file" /><span className="recording-name"><strong title={row.name}>{row.name}</strong><span className={row.error ? 'error-text' : ''}>{row.error ?? (row.status === 'completed' ? 'Analysis complete' : row.status === 'uploading' ? `Uploading ${Math.round(row.progress * 100)}%` : row.status === 'analysing' ? 'Analysing…' : 'Queued')}</span></span><span className={`row-status ${row.result ? resultTone(row.result) : 'waiting'}`}>{(row.result ? resultLabel(row.result) : undefined) ?? (row.status === 'failed' ? 'Error' : row.status === 'stopped' ? 'Stopped' : '···')}</span></button></li>)}</ul>
       <div className="result-actions">{retryable && <button className="secondary-button" disabled={batch.busy} onClick={batch.retry}>Retry failed / stopped files</button>}<button className="primary-button download-button" disabled={!successful.length} onClick={download}><Icon name="download" />{incomplete ? 'Download partial CSV' : 'Download predictions CSV'}</button></div>
+      {batch.subsystem === 'door' && <><button className="secondary-button" disabled={selectedResult?.subsystem !== 'door'} onClick={downloadDoorSubmission}>Download selected stream submission CSV</button><p className="export-note">Submission format: start_time, end_time, prediction. Includes only the selected completed stream.</p></>}
       <p className="export-note" role="status">{successful.length} of {batch.records.length} predictions available.{incomplete ? ` ${incomplete} unfinished or failed recording(s) are omitted from the download. Select a row for details.` : (batch.subsystem === 'door' ? ' Export contains one row per operation, including its source filename.' : batch.subsystem === 'acv' ? ' Export format: file_id, ranked_cars.' : ' Export format: file_id, prediction.')}</p>
     </>}
   </section>;

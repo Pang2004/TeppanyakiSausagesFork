@@ -1,0 +1,17 @@
+**
+!Dockerfile
+!requirements.txt
+!backend/
+!backend/**
+!frontend/
+!frontend/**
+frontend/node_modules
+frontend/dist
+frontend/test-results
+frontend/playwright-report
+frontend/e2e
+frontend/*.tsbuildinfo
+**/__pycache__
+**/*.pyc
+**/.env*
+backend/artifacts/rail_pipeline_baseline_v2.joblib

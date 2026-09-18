@@ -32,7 +32,6 @@ Optional_Items/
   ACV/
   Rail Corrugation/
   SHM/                      Each has methodology, code/<subsystem>_dev and reports
-  UI_References/            Original HTML designs and screenshots
   write_up.md
 PS3/                        Original supplied data/reference material; development only
 scripts/                    Development launcher and submission packager
@@ -85,6 +84,8 @@ TeppanyakiSausages/
   demo_video.mp4            Only when supplied
 ```
 
-Use `--team-name` if the registered spelling differs. Existing output folders are not overwritten. Only app exports are packaged by default; old CLI-generated predictions remain development evidence. The packaging status explicitly reports missing predictions/video. A package made now is an incremental Rail demo, **not the final four-subsystem submission**: Door, ACV and SHM must be connected to this same app, their test predictions exported through it, and an end-to-end demo of at most three minutes recorded.
+Use `--team-name` if the registered spelling differs. Existing output folders are not overwritten. Only app exports are packaged by default; old CLI-generated predictions remain development evidence. The packaging status explicitly reports missing predictions/video. All four subsystems are integrated. Run `make predictions` against the local app, then `make package` to validate all exports and refresh the team folder/archive. Supply `VIDEO=/path/to/demo.mp4` when available; the required video is at most three minutes.
 
 The original [PS3 specification](PS3/01_Problem_Statement_3_Specifications.md) is authoritative.
+
+Deployment preparation: see [app/DEPLOYMENT.md](app/DEPLOYMENT.md). The packaged team folder contains standalone GitHub setup instructions. UI reference files have been removed; the runtime assets remain bundled under the frontend.
