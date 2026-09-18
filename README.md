@@ -21,7 +21,7 @@ PS3/
 └── 04_Example_Submission/    # Required prediction CSV schemas
 ```
 
-Do not rename, reformat, or duplicate the supplied datasets. They remain tracked for this sprint. Generated features, temporary uploads, caches, checkpoints, and local prediction outputs should not be committed.
+Do not rename, reformat, or duplicate the supplied datasets. They remain tracked for this sprint. Generated prediction files, validation reports, diagnostics, and feature tables under `outputs/` are committed so every teammate and the final packaging workflow use the same results. Temporary uploads, caches, and checkpoints remain untracked.
 
 ## Python Environment
 
@@ -72,7 +72,7 @@ backend/
     └── shm/
 frontend/                     # Vite React + TypeScript dashboard
 tests/                        # Model, API, and submission-contract tests
-outputs/                      # Generated locally; not committed
+outputs/                      # Generated model deliverables; committed and kept current
 ```
 
 Every subsystem will expose the same batch interface:
@@ -94,7 +94,7 @@ The app will call `POST /api/predict/{subsystem}` with one uploaded file. The re
 | SHM owner | Stress features and MAPE-focused regression | Damage result card |
 | ACV owner / integration lead | Per-car anomaly ranking | FastAPI/React shell and ranked-car view |
 
-Subsystem owners should follow the detailed [`backend/models/rail/PLAN.md`](backend/models/rail/PLAN.md), [`backend/models/door/PLAN.md`](backend/models/door/PLAN.md), and [`backend/models/shm/PLAN.md`](backend/models/shm/PLAN.md), which define their data interpretation, validation, model comparison, interfaces, and submission checks.
+Subsystem owners should follow the detailed [`backend/models/rail/PLAN.md`](backend/models/rail/PLAN.md), [`backend/models/door/PLAN.md`](backend/models/door/PLAN.md), [`backend/models/shm/PLAN.md`](backend/models/shm/PLAN.md), and [`backend/models/acv/PLAN.md`](backend/models/acv/PLAN.md), which define their data interpretation, validation, model comparison, interfaces, and submission checks.
 
 Work in parallel, but freeze the shared request/response contract before model development. Each owner is responsible for training, validation, the prediction adapter, and their result component. Prioritize a complete baseline over prolonged tuning.
 

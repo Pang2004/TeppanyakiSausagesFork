@@ -16,6 +16,7 @@ frontend/dist/
 !.env.example
 
 # Generated data and experiment artifacts
+# `outputs/` is intentionally tracked for shared validation and final packaging.
 _temp/
 backend/uploads/
 backend/cache/
