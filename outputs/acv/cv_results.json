@@ -1,0 +1,346 @@
+{
+  "validation_protocol": "file-level evaluation of a fixed unsupervised ranker",
+  "case_count": 6,
+  "cases": [
+    {
+      "file_id": "acv_case_01.xlsx",
+      "faulty_car": "01",
+      "schema": "compact_temperature",
+      "fixed_order_ranking": [
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "06",
+        "07",
+        "08"
+      ],
+      "fixed_order_score": 1.0,
+      "fixed_order_rank": 1,
+      "hottest_median_ranking": [
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "06",
+        "07",
+        "08"
+      ],
+      "hottest_median_score": 1.0,
+      "hottest_median_rank": 1,
+      "temperature_ranking": [
+        "01",
+        "02",
+        "03",
+        "08",
+        "04",
+        "07",
+        "05",
+        "06"
+      ],
+      "temperature_score": 1.0,
+      "temperature_rank": 1,
+      "hybrid_ranking": [
+        "01",
+        "02",
+        "03",
+        "08",
+        "04",
+        "07",
+        "05",
+        "06"
+      ],
+      "hybrid_score": 1.0,
+      "hybrid_rank": 1
+    },
+    {
+      "file_id": "acv_case_02.xlsx",
+      "faulty_car": "02",
+      "schema": "compact_temperature",
+      "fixed_order_ranking": [
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "06",
+        "07",
+        "08"
+      ],
+      "fixed_order_score": 0.875,
+      "fixed_order_rank": 2,
+      "hottest_median_ranking": [
+        "01",
+        "05",
+        "08",
+        "03",
+        "04",
+        "06",
+        "07",
+        "02"
+      ],
+      "hottest_median_score": 0.125,
+      "hottest_median_rank": 8,
+      "temperature_ranking": [
+        "02",
+        "03",
+        "07",
+        "01",
+        "08",
+        "04",
+        "06",
+        "05"
+      ],
+      "temperature_score": 1.0,
+      "temperature_rank": 1,
+      "hybrid_ranking": [
+        "02",
+        "03",
+        "07",
+        "01",
+        "08",
+        "04",
+        "06",
+        "05"
+      ],
+      "hybrid_score": 1.0,
+      "hybrid_rank": 1
+    },
+    {
+      "file_id": "acv_case_03.xlsx",
+      "faulty_car": "03",
+      "schema": "compact_temperature",
+      "fixed_order_ranking": [
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "06",
+        "07",
+        "08"
+      ],
+      "fixed_order_score": 0.75,
+      "fixed_order_rank": 3,
+      "hottest_median_ranking": [
+        "03",
+        "04",
+        "05",
+        "01",
+        "06",
+        "07",
+        "02",
+        "08"
+      ],
+      "hottest_median_score": 1.0,
+      "hottest_median_rank": 1,
+      "temperature_ranking": [
+        "03",
+        "04",
+        "02",
+        "01",
+        "08",
+        "07",
+        "05",
+        "06"
+      ],
+      "temperature_score": 1.0,
+      "temperature_rank": 1,
+      "hybrid_ranking": [
+        "03",
+        "04",
+        "02",
+        "01",
+        "08",
+        "07",
+        "05",
+        "06"
+      ],
+      "hybrid_score": 1.0,
+      "hybrid_rank": 1
+    },
+    {
+      "file_id": "acv_case_04.xlsx",
+      "faulty_car": "01",
+      "schema": "rich_pressure",
+      "fixed_order_ranking": [
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "06",
+        "07",
+        "08"
+      ],
+      "fixed_order_score": 1.0,
+      "fixed_order_rank": 1,
+      "hottest_median_ranking": [
+        "02",
+        "04",
+        "01",
+        "03",
+        "05",
+        "06",
+        "07",
+        "08"
+      ],
+      "hottest_median_score": 0.75,
+      "hottest_median_rank": 3,
+      "temperature_ranking": [
+        "04",
+        "01",
+        "02",
+        "03",
+        "05",
+        "06",
+        "07",
+        "08"
+      ],
+      "temperature_score": 0.875,
+      "temperature_rank": 2,
+      "hybrid_ranking": [
+        "01",
+        "04",
+        "03",
+        "02",
+        "05",
+        "06",
+        "07",
+        "08"
+      ],
+      "hybrid_score": 1.0,
+      "hybrid_rank": 1
+    },
+    {
+      "file_id": "acv_case_05.xlsx",
+      "faulty_car": "04",
+      "schema": "compact_temperature",
+      "fixed_order_ranking": [
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "06",
+        "07",
+        "08"
+      ],
+      "fixed_order_score": 0.625,
+      "fixed_order_rank": 4,
+      "hottest_median_ranking": [
+        "04",
+        "02",
+        "03",
+        "06",
+        "07",
+        "01",
+        "08",
+        "05"
+      ],
+      "hottest_median_score": 1.0,
+      "hottest_median_rank": 1,
+      "temperature_ranking": [
+        "04",
+        "02",
+        "01",
+        "07",
+        "06",
+        "03",
+        "08",
+        "05"
+      ],
+      "temperature_score": 1.0,
+      "temperature_rank": 1,
+      "hybrid_ranking": [
+        "04",
+        "02",
+        "01",
+        "07",
+        "06",
+        "03",
+        "08",
+        "05"
+      ],
+      "hybrid_score": 1.0,
+      "hybrid_rank": 1
+    },
+    {
+      "file_id": "acv_case_06.xlsx",
+      "faulty_car": "06",
+      "schema": "compact_temperature",
+      "fixed_order_ranking": [
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "06",
+        "07",
+        "08"
+      ],
+      "fixed_order_score": 0.375,
+      "fixed_order_rank": 6,
+      "hottest_median_ranking": [
+        "06",
+        "04",
+        "08",
+        "03",
+        "02",
+        "05",
+        "01",
+        "07"
+      ],
+      "hottest_median_score": 1.0,
+      "hottest_median_rank": 1,
+      "temperature_ranking": [
+        "06",
+        "08",
+        "04",
+        "02",
+        "03",
+        "05",
+        "01",
+        "07"
+      ],
+      "temperature_score": 1.0,
+      "temperature_rank": 1,
+      "hybrid_ranking": [
+        "06",
+        "08",
+        "04",
+        "02",
+        "03",
+        "05",
+        "01",
+        "07"
+      ],
+      "hybrid_score": 1.0,
+      "hybrid_rank": 1
+    }
+  ],
+  "fixed_order": {
+    "mean_rank_decay_score": 0.7708333333333334,
+    "top_1_accuracy": 0.3333333333333333,
+    "mean_true_car_rank": 2.8333333333333335
+  },
+  "hottest_median": {
+    "mean_rank_decay_score": 0.8125,
+    "top_1_accuracy": 0.6666666666666666,
+    "mean_true_car_rank": 2.5
+  },
+  "temperature": {
+    "mean_rank_decay_score": 0.9791666666666666,
+    "top_1_accuracy": 0.8333333333333334,
+    "mean_true_car_rank": 1.1666666666666667
+  },
+  "hybrid": {
+    "mean_rank_decay_score": 1.0,
+    "top_1_accuracy": 1.0,
+    "mean_true_car_rank": 1.0
+  },
+  "selected_model": "hybrid_temperature_pressure_ranker",
+  "rich_schema_case_count": 1
+}

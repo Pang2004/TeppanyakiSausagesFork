@@ -1,0 +1,124 @@
+[
+  {
+    "file_id": "acv_test_case.xlsx",
+    "ranked_cars": [
+      "01",
+      "04",
+      "03",
+      "08",
+      "07",
+      "02",
+      "06",
+      "05"
+    ],
+    "car_scores": {
+      "08": 0.5852272727272727,
+      "01": 1.0,
+      "04": 0.7613636363636364,
+      "02": 0.4318181818181818,
+      "07": 0.5113636363636364,
+      "06": 0.375,
+      "03": 0.6647727272727273,
+      "05": 0.17045454545454544
+    },
+    "diagnostics": {
+      "08": {
+        "combined_score": 0.5852272727272727,
+        "temperature_score": 0.5852272727272727,
+        "pressure_score": null,
+        "temperature_coverage": 0.867209865668355,
+        "cabin_temperature_median": 24.0,
+        "temperature_relative_mean": 0.004316912138141189,
+        "temperature_relative_q90": 0.5,
+        "temperature_fraction_above_1_00": 0.00025393600812595224,
+        "pressure_mismatch": null,
+        "raw_zero_temperature_fraction": 0.0
+      },
+      "01": {
+        "combined_score": 1.0,
+        "temperature_score": 1.0,
+        "pressure_score": null,
+        "temperature_coverage": 0.8667694340453644,
+        "cabin_temperature_median": 24.5,
+        "temperature_relative_mean": 0.10457952235772358,
+        "temperature_relative_q90": 1.0,
+        "temperature_fraction_above_1_00": 0.027439024390243903,
+        "pressure_mismatch": null,
+        "raw_zero_temperature_fraction": 0.0
+      },
+      "04": {
+        "combined_score": 0.7613636363636364,
+        "temperature_score": 0.7613636363636364,
+        "pressure_score": null,
+        "temperature_coverage": 0.8646773838361594,
+        "cabin_temperature_median": 24.0,
+        "temperature_relative_mean": 0.06242837132306125,
+        "temperature_relative_q90": 0.5,
+        "temperature_fraction_above_1_00": 0.016681522984846556,
+        "pressure_mismatch": null,
+        "raw_zero_temperature_fraction": 0.0020920502092050207
+      },
+      "02": {
+        "combined_score": 0.4318181818181818,
+        "temperature_score": 0.4318181818181818,
+        "pressure_score": null,
+        "temperature_coverage": 0.8666593261396168,
+        "cabin_temperature_median": 24.0,
+        "temperature_relative_mean": -0.05262990725447846,
+        "temperature_relative_q90": 0.5,
+        "temperature_fraction_above_1_00": 0.0033032651505526616,
+        "pressure_mismatch": null,
+        "raw_zero_temperature_fraction": 0.0
+      },
+      "07": {
+        "combined_score": 0.5113636363636364,
+        "temperature_score": 0.5113636363636364,
+        "pressure_score": null,
+        "temperature_coverage": 0.867209865668355,
+        "cabin_temperature_median": 24.0,
+        "temperature_relative_mean": 0.012569832402234637,
+        "temperature_relative_q90": 0.5,
+        "temperature_fraction_above_1_00": 0.0006348400203148807,
+        "pressure_mismatch": null,
+        "raw_zero_temperature_fraction": 0.00022021581149526536
+      },
+      "06": {
+        "combined_score": 0.375,
+        "temperature_score": 0.375,
+        "pressure_score": null,
+        "temperature_coverage": 0.8670997577626074,
+        "cabin_temperature_median": 24.0,
+        "temperature_relative_mean": -0.00819047619047619,
+        "temperature_relative_q90": 0.5,
+        "temperature_fraction_above_1_00": 0.00012698412698412698,
+        "pressure_mismatch": null,
+        "raw_zero_temperature_fraction": 0.00011010790574763268
+      },
+      "03": {
+        "combined_score": 0.6647727272727273,
+        "temperature_score": 0.6647727272727273,
+        "pressure_score": null,
+        "temperature_coverage": 0.8667694340453644,
+        "cabin_temperature_median": 24.0,
+        "temperature_relative_mean": 0.06018165650406504,
+        "temperature_relative_q90": 0.5,
+        "temperature_fraction_above_1_00": 0.0036839430894308944,
+        "pressure_mismatch": null,
+        "raw_zero_temperature_fraction": 0.00011010790574763268
+      },
+      "05": {
+        "combined_score": 0.17045454545454544,
+        "temperature_score": 0.17045454545454544,
+        "pressure_score": null,
+        "temperature_coverage": 0.867209865668355,
+        "cabin_temperature_median": 24.0,
+        "temperature_relative_mean": -0.08360843067546977,
+        "temperature_relative_q90": 0.25,
+        "temperature_fraction_above_1_00": 0.0,
+        "pressure_mismatch": null,
+        "raw_zero_temperature_fraction": 0.00022021581149526536
+      }
+    },
+    "schema": "compact_temperature"
+  }
+]
